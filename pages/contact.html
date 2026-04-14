@@ -1,9 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Contact</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Studio M</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Contact Page</h1>
+  <div class="dot-bg" id="dotContainer"></div>
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <section class="fade-up" style="padding-top: 120px;">
+      <div class="container">
+        <h1 class="section-title">Let's Talk</h1>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
+          <div>
+            <p style="color: #ccc; margin-bottom: 30px;">Have a project in mind? We'd love to hear from you. Fill out the form and we'll get back to you within 24 hours.</p>
+            <form id="contactForm" style="display: flex; flex-direction: column; gap: 20px;">
+              <input type="text" placeholder="Your Name" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 14px 20px; color: white;">
+              <input type="email" placeholder="Email Address" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 14px 20px; color: white;">
+              <textarea rows="5" placeholder="Your Message" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 28px; padding: 14px 20px; color: white; resize: vertical;"></textarea>
+              <button type="submit" class="btn-primary" style="width: fit-content;">Send Message →</button>
+            </form>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border-radius: 32px; padding: 30px; backdrop-filter: blur(8px);">
+            <h3 style="color: var(--neon); margin-bottom: 20px;">Contact Info</h3>
+            <p style="margin-bottom: 15px;">📧 hello@studiom.com</p>
+            <p style="margin-bottom: 15px;">📞 +1 (800) 123-4567</p>
+            <p>📍 123 Creative Ave, Design District, NY 10001</p>
+            <div class="social-icons" style="margin-top: 30px; display: flex; gap: 20px;">
+              <a href="#">📘</a> <a href="#">🐦</a> <a href="#">📸</a> <a href="#">🔗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="script.js"></script>
 </body>
 </html>

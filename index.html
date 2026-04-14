@@ -2,25 +2,177 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Studio M | Creative Digital Agency</title>
+
+  <!-- CSS LINK (MAKE SURE THIS PATH IS CORRECT) -->
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+  <!-- Animated background -->
+  <div class="dot-bg" id="dotContainer"></div>
+
+  <!-- NAVBAR (FIXED - NO MORE FETCH) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h2 style="color: var(--neon); font-size: 1.5rem; margin: 0;">My Website</h2>
+
+      <div class="nav-links">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#services">Services</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#reviews">Reviews</a>
+      </div>
+    </div>
+  </nav>
 
   <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
 
-    <button onclick="showAlert()">Click Me</button>
+    <!-- HERO -->
+    <section id="home" class="fade-up">
+      <div class="container">
+        <div class="hero-grid">
+
+          <div class="hero-left">
+            <h1>Welcome to the Portfolio</h1>
+            <div class="subhead">Empowering Ideas Through Creative Digital Solutions</div>
+            <p>We blend innovation, design, and cutting-edge technology to craft digital experiences that elevate brands and engage users worldwide.</p>
+
+            <div class="btn-group">
+              <a href="#projects" class="btn-primary">View Projects</a>
+              <a href="#services" class="btn-secondary">Explore Services</a>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="circular-glow"></div>
+            <img class="hero-img parallax-img"
+                 src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=600&fit=crop"
+                 alt="creative professional">
+
+            <div class="floating-badge">✨ 10 Years Experience</div>
+          </div>
+
+        </div>
+
+        <div class="trusted-section">
+          <div class="trusted-title">Trusted by leading creators</div>
+
+          <div class="brand-strip">
+            <span>◉ Adobe</span>
+            <span>◉ Spotify</span>
+            <span>◉ Figma</span>
+            <span>◉ Airbnb</span>
+            <span>◉ Stripe</span>
+          </div>
+
+          <div class="home-mini-stats">
+            <div class="mini-stat"><h4>500+</h4><p>Projects Shipped</p></div>
+            <div class="mini-stat"><h4>35+</h4><p>Global Awards</p></div>
+            <div class="mini-stat"><h4>100%</h4><p>Client Satisfaction</p></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="fade-up">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🎨</div>
+            <h3>UI/UX Design</h3>
+            <p>Intuitive interfaces, user-centered design & seamless experiences.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">💻</div>
+            <h3>Web Development</h3>
+            <p>High-performance, responsive websites & web apps.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">✨</div>
+            <h3>3D Design</h3>
+            <p>Immersive 3D visualizations & product renders.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🎬</div>
+            <h3>Motion Graphics</h3>
+            <p>Captivating animations & storytelling through motion.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="fade-up">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&h=500&fit=crop">
+            <div class="project-overlay"><span>Brand Identity</span></div>
+          </div>
+
+          <div class="project-card">
+            <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&h=500&fit=crop">
+            <div class="project-overlay"><span>Web Platform</span></div>
+          </div>
+
+          <div class="project-card">
+            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=500&fit=crop">
+            <div class="project-overlay"><span>3D Campaign</span></div>
+          </div>
+
+          <div class="project-card">
+            <img src="https://images.unsplash.com/photo-1581291518855-4e27b48ff24e?w=600&h=500&fit=crop">
+            <div class="project-overlay"><span>Motion Reel</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="fade-up">
+      <div class="container">
+        <h2 class="section-title">Client Reviews</h2>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-text">“Absolutely transformed our digital presence. Their UI/UX expertise increased conversions by 40%.”</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-text">“The team’s 3D designs and motion graphics blew us away. Professional, fast, and visionary.”</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-text">“Working with this studio felt like a true partnership. They care about details and delivery.”</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+  <!-- FOOTER (FIXED) -->
+  <footer>
+    <p>&copy; 2026 Frontend Project</p>
+  </footer>
 
-  <script src="assets/js/script.js"></script>
+  <!-- JS -->
+  <script src="myfolder/script.js"></script>
+
 </body>
 </html>
