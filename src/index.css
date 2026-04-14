@@ -477,6 +477,26 @@ html.light .dark-mode-toggle:hover {
 /* Extra small devices - 320px and below */
 @media (max-width: 320px) {
   .social-bar,
+  .name-tag,
+  .social-bar .sidebar-line,
+  .social-bar .sidebar-dash,
+  .social-bar .social-icon,
+  .name-tag .sidebar-text {
+    display: none !important;
+  }
+}
+
+/* Ensure nested elements inherit sidebar color properly */
+.sidebar .sidebar-text,
+.sidebar .sidebar-line,
+.sidebar .sidebar-dash,
+.sidebar .social-icon {
+  color: inherit !important;
+}
+
+/* Unified visibility at 480px */
+@media (max-width: 480px) {
+  .social-bar, 
   .name-tag {
     display: none !important;
   }
