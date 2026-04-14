@@ -3,24 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
+  <title>Frontend Enhancement</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+<header class="navbar">
+  <div class="logo">Gwen UI</div>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+  <nav id="navMenu" class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+<section id="home" class="hero">
+  <h1>Frontend Enhancement Project</h1>
+  <p>Modern UI • Responsive Design • Interactive Features</p>
+  <button onclick="openModal()">Learn More</button>
+</section>
 
-  <script src="assets/js/script.js"></script>
+<section id="features" class="features">
+  <div class="card">⚡ Fast UI</div>
+  <div class="card">📱 Responsive Design</div>
+  <div class="card">✨ Smooth Animations</div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+
+  <form onsubmit="return validateForm()">
+    <input type="text" id="name" placeholder="Enter your name">
+    <input type="email" id="email" placeholder="Enter your email">
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="error"></p>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span onclick="closeModal()" class="close">&times;</span>
+    <h2>About This Project</h2>
+    <p>This project demonstrates UI/UX improvement, responsiveness, and JavaScript interactivity.</p>
+  </div>
+</div>
+
+<script src="assets/js/script.js"></script>
 </body>
 </html>
