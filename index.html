@@ -1,26 +1,1035 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DevBranch Academy — Learn. Build. Merge.</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-50: #edfff3;
+    --green-100: #c3f5d5;
+    --green-300: #4ade80;
+    --green-400: #22c55e;
+    --green-500: #16a34a;
+    --green-600: #15803d;
+    --green-700: #166534;
+    --green-900: #052e12;
+    --sky-50: #f0f9ff;
+    --sky-100: #bae6fd;
+    --sky-300: #7dd3fc;
+    --sky-400: #38bdf8;
+    --sky-500: #0ea5e9;
+    --sky-600: #0284c7;
+    --sky-700: #0369a1;
+    --sky-900: #0c2a3e;
+    --dark: #07120e;
+    --dark2: #0c1f17;
+    --dark3: #112b20;
+    --text-muted: #8aad98;
+    --white: #ffffff;
+    --card-bg: #0f2419;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--green-600); border-radius: 4px; }
+
+  /* ── GRID NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(34,197,94,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,197,94,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(7,18,14,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(34,197,94,0.12);
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green-400);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--sky-400); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--green-400);
+    color: var(--green-900) !important;
+    padding: 9px 22px;
+    border-radius: 8px;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--green-300) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 60px 100px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(34,197,94,0.12) 0%, rgba(14,165,233,0.07) 40%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.25);
+    color: var(--green-300);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--green-400);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    max-width: 900px;
+    margin: 0 auto 24px;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  h1 .accent-green { color: var(--green-400); }
+  h1 .accent-sky { color: var(--sky-400); }
+
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto 44px;
+    font-weight: 400;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--green-400);
+    color: var(--green-900);
+    padding: 14px 32px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--green-300);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(56,189,248,0.4);
+    background: rgba(14,165,233,0.08);
+    transform: translateY(-2px);
+  }
+
+  /* ── TERMINAL CARD ── */
+  .terminal-wrap {
+    margin-top: 70px;
+    animation: fadeUp 0.8s ease 0.4s both;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .terminal {
+    background: var(--dark2);
+    border: 1px solid rgba(34,197,94,0.18);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 12px 18px;
+    background: rgba(34,197,94,0.05);
+    border-bottom: 1px solid rgba(34,197,94,0.1);
+  }
+
+  .terminal-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  .terminal-bar span {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .terminal-body {
+    padding: 22px 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .t-dim { color: #4a7060; }
+  .t-green { color: var(--green-400); }
+  .t-sky { color: var(--sky-400); }
+  .t-white { color: var(--white); }
+  .t-yellow { color: #fbbf24; }
+  .t-cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--green-400);
+    animation: blink 1.1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(34,197,94,0.1);
+    border-bottom: 1px solid rgba(34,197,94,0.1);
+    background: rgba(15,36,25,0.5);
+    padding: 0;
+  }
+
+  .stat-item {
+    flex: 1;
+    min-width: 150px;
+    padding: 30px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(34,197,94,0.08);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--green-400);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  .section-pad { padding: 100px 60px; }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--sky-400);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 56px;
+  }
+
+  /* ── FEATURES ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(34,197,94,0.1);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green-500), var(--sky-500));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(34,197,94,0.3);
+    transform: translateY(-4px);
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 46px; height: 46px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    font-size: 22px;
+  }
+
+  .icon-green { background: rgba(34,197,94,0.12); }
+  .icon-sky { background: rgba(14,165,233,0.12); }
+  .icon-amber { background: rgba(251,191,36,0.12); }
+  .icon-purple { background: rgba(168,85,247,0.12); }
+
+  .feature-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── WORKFLOW ── */
+  .workflow-section {
+    background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 50%, var(--dark) 100%);
+  }
+
+  .workflow-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .workflow-step {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .workflow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 52px;
+    bottom: -40px;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(34,197,94,0.3), rgba(14,165,233,0.1));
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    background: var(--card-bg);
+    border: 1px solid rgba(34,197,94,0.25);
+    color: var(--green-400);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+
+  .step-content p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.7;
+  }
+
+  .code-snippet {
+    background: var(--dark2);
+    border: 1px solid rgba(34,197,94,0.12);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--green-300);
+    display: inline-block;
+  }
+
+  .code-snippet .prompt { color: var(--sky-400); margin-right: 8px; }
+
+  /* ── CURRICULUM GRID ── */
+  .curriculum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .curriculum-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(14,165,233,0.12);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .curriculum-card:hover {
+    border-color: rgba(14,165,233,0.35);
+    transform: translateY(-3px);
+  }
+
+  .curriculum-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .curriculum-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--sky-400);
+    background: rgba(14,165,233,0.1);
+    border: 1px solid rgba(14,165,233,0.2);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .curriculum-pts {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .curriculum-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+
+  .curriculum-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .curriculum-list li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .curriculum-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 7px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--green-500);
+  }
+
+  /* ── BONUS SECTION ── */
+  .bonus-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .bonus-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(34,197,94,0.07);
+    border: 1px solid rgba(34,197,94,0.18);
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    color: var(--green-300);
+    font-weight: 500;
+  }
+
+  .bonus-pill .star {
+    font-size: 14px;
+    color: var(--sky-400);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(34,197,94,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 50%, rgba(14,165,233,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-box {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border: 1px solid rgba(34,197,94,0.18);
+    border-radius: 24px;
+    padding: 60px;
+  }
+
+  .cta-box h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 16px;
+  }
+
+  .cta-box p {
+    color: var(--text-muted);
+    font-size: 17px;
+    margin-bottom: 36px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 12px;
+    max-width: 420px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .cta-input {
+    flex: 1;
+    min-width: 200px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 13px 18px;
+    font-size: 14px;
+    color: var(--white);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .cta-input::placeholder { color: #4a7060; }
+  .cta-input:focus { border-color: rgba(34,197,94,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 40px 60px;
+    border-top: 1px solid rgba(34,197,94,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--green-400); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 80px; }
+    .section-pad { padding: 70px 24px; }
+    .cta-section { padding: 70px 24px; }
+    .cta-box { padding: 36px 24px; }
+    footer { padding: 30px 24px; flex-direction: column; align-items: flex-start; }
+    .stats-bar { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(34,197,94,0.08); }
+    .stat-item:last-child { border-bottom: none; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Dev<span>Branch</span>_</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#curriculum">Curriculum</a></li>
+    <li><a href="#enroll" class="nav-cta">Enroll Now →</a></li>
+  </ul>
+</nav>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">✦ Now enrolling — Batch 2025</div>
+  <h1>
+    Learn to build.<br/>
+    <span class="accent-green">Branch.</span>
+    <span class="accent-sky"> Merge.</span> Ship.
+  </h1>
+  <p class="hero-sub">
+    A hands-on developer training program where students collaborate using real Git workflows, build production-grade UIs, and level up their frontend skills.
+  </p>
+  <div class="hero-actions">
+    <a href="#enroll" class="btn-primary">Start Learning → </a>
+    <a href="#workflow" class="btn-secondary">See the Workflow</a>
+  </div>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+  <div class="terminal-wrap">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span>bash — devbranch-academy</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-dim">~</span> <span class="t-sky">$</span> <span class="t-white">git clone</span> <span class="t-yellow">https://github.com/devbranch/frontend-project</span></div>
+        <div><span class="t-green">✓</span> <span class="t-dim">Cloning into 'frontend-project'...</span></div>
+        <div><span class="t-dim">~</span> <span class="t-sky">$</span> <span class="t-white">git checkout -b</span> <span class="t-green">feature/dela-cruz-ui-redesign</span></div>
+        <div><span class="t-green">✓</span> <span class="t-dim">Switched to a new branch</span></div>
+        <div><span class="t-dim">~</span> <span class="t-sky">$</span> <span class="t-white">git commit -m</span> <span class="t-yellow">"feat: added responsive navbar + animations"</span></div>
+        <div><span class="t-green">✓</span> <span class="t-dim">1 file changed, 48 insertions(+)</span></div>
+        <div><span class="t-dim">~</span> <span class="t-sky">$</span> <span class="t-white">git push origin</span> <span class="t-green">feature/dela-cruz-ui-redesign</span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number">6</span>
+    <span class="stat-label">Learning Milestones</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">100</span>
+    <span class="stat-label">Points to Earn</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">3+</span>
+    <span class="stat-label">Required Improvements</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">1</span>
+    <span class="stat-label">PR per Student</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">∞</span>
+    <span class="stat-label">Commits You Can Make</span>
+  </div>
+</div>
 
-  <script src="assets/js/script.js"></script>
+<!-- FEATURES -->
+<section class="section-pad" id="features">
+  <span class="section-tag">Why DevBranch</span>
+  <h2>Real-world dev skills.<br/>Real Git. Real projects.</h2>
+  <p class="section-desc">No toy examples. You'll simulate actual team development with branching strategies, pull requests, and code reviews.</p>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon icon-green">🌿</div>
+      <h3>Git Branching Mastery</h3>
+      <p>Create, manage, and merge branches using industry-standard workflows. Learn to name branches correctly and keep commits meaningful.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon icon-sky">🎨</div>
+      <h3>UI/UX Enhancement</h3>
+      <p>Improve real layouts with better spacing, responsive design, typography, and polished animations that delight users.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon icon-amber">⚡</div>
+      <h3>Functional Components</h3>
+      <p>Add modals, dropdowns, form validation, and navigation improvements. Build interactive UI features from scratch.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon icon-purple">🔀</div>
+      <h3>Pull Requests & Reviews</h3>
+      <p>Open PRs to main, write summaries, attach before/after screenshots, and get feedback from peers just like a real dev team.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon icon-sky">📦</div>
+      <h3>Code Optimization</h3>
+      <p>Clean and organize HTML, CSS, and JS. Reduce redundancy, improve performance, and write readable, maintainable code.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon icon-green">📝</div>
+      <h3>Technical Documentation</h3>
+      <p>Write clear READMEs, document your features, tools used, and challenges encountered — a skill every dev needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="section-pad workflow-section" id="workflow">
+  <span class="section-tag">How It Works</span>
+  <h2>Six steps to a<br/><span style="color:var(--green-400)">merged</span> pull request.</h2>
+  <p class="section-desc">Follow the same workflow used by professional engineering teams around the world.</p>
+
+  <div class="workflow-container">
+    <div class="workflow-step reveal">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Clone the Repository</h3>
+        <p>Start by cloning the central repo to your local machine. This gives you the base project you'll be enhancing.</p>
+        <div class="code-snippet"><span class="prompt">$</span>git clone &lt;repo-url&gt; && cd &lt;repo-name&gt;</div>
+      </div>
+    </div>
+    <div class="workflow-step reveal">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Create Your Feature Branch</h3>
+        <p>Each student creates their own branch using their last name. Never work directly on main.</p>
+        <div class="code-snippet"><span class="prompt">$</span>git checkout -b feature/&lt;lastname&gt;-frontend-enhancement</div>
+      </div>
+    </div>
+    <div class="workflow-step reveal">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Implement 3+ Frontend Improvements</h3>
+        <p>Choose from UI/UX improvements, functional enhancements, or code optimization. Aim to impress — quality beats quantity.</p>
+      </div>
+    </div>
+    <div class="workflow-step reveal">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Commit with Proper Messages</h3>
+        <p>Follow conventional commit style. Keep each commit focused and meaningful — no "update file" commits allowed.</p>
+        <div class="code-snippet"><span class="prompt">$</span>git commit -m "feat: improved navbar responsiveness"</div>
+      </div>
+    </div>
+    <div class="workflow-step reveal">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h3>Push Your Branch</h3>
+        <p>Push your feature branch to the remote repository so it's visible to your team and instructors.</p>
+        <div class="code-snippet"><span class="prompt">$</span>git push origin feature/&lt;branch-name&gt;</div>
+      </div>
+    </div>
+    <div class="workflow-step reveal">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <h3>Open a Pull Request</h3>
+        <p>Submit a PR to main with a summary of changes, before/after screenshots, and a list of features added. This is your final deliverable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="section-pad" id="curriculum">
+  <span class="section-tag">Grading Rubric</span>
+  <h2>What gets you<br/><span style="color:var(--sky-400)">100 points.</span></h2>
+  <p class="section-desc">Every criterion is designed to simulate real-world expectations from a tech employer.</p>
+
+  <div class="curriculum-grid">
+    <div class="curriculum-card reveal">
+      <div class="curriculum-header">
+        <span class="curriculum-label">Git Skills</span>
+        <span class="curriculum-pts">25 pts</span>
+      </div>
+      <h3>Branching, Commits & PR</h3>
+      <ul class="curriculum-list">
+        <li>Correct branch naming format</li>
+        <li>Meaningful commit messages</li>
+        <li>Pull request submitted to main</li>
+        <li>No direct pushes to main</li>
+      </ul>
+    </div>
+    <div class="curriculum-card reveal">
+      <div class="curriculum-header">
+        <span class="curriculum-label">Design</span>
+        <span class="curriculum-pts">25 pts</span>
+      </div>
+      <h3>UI/UX Improvements</h3>
+      <ul class="curriculum-list">
+        <li>Improved spacing and alignment</li>
+        <li>Responsive / mobile-friendly</li>
+        <li>Enhanced typography & colors</li>
+        <li>Animations or transitions</li>
+      </ul>
+    </div>
+    <div class="curriculum-card reveal">
+      <div class="curriculum-header">
+        <span class="curriculum-label">Functionality</span>
+        <span class="curriculum-pts">20 pts</span>
+      </div>
+      <h3>Functional Enhancements</h3>
+      <ul class="curriculum-list">
+        <li>Interactive components (modal, dropdown)</li>
+        <li>Improved navigation</li>
+        <li>Form validation</li>
+        <li>Loading / feedback indicators</li>
+      </ul>
+    </div>
+    <div class="curriculum-card reveal">
+      <div class="curriculum-header">
+        <span class="curriculum-label">Code Quality</span>
+        <span class="curriculum-pts">15 pts</span>
+      </div>
+      <h3>Organization & Performance</h3>
+      <ul class="curriculum-list">
+        <li>Clean, readable code</li>
+        <li>Reduced redundant CSS/JS</li>
+        <li>Performance basics applied</li>
+      </ul>
+    </div>
+    <div class="curriculum-card reveal">
+      <div class="curriculum-header">
+        <span class="curriculum-label">Documentation</span>
+        <span class="curriculum-pts">15 pts</span>
+      </div>
+      <h3>README & Written Docs</h3>
+      <ul class="curriculum-list">
+        <li>Features added clearly listed</li>
+        <li>Tools used documented</li>
+        <li>Challenges encountered noted</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top: 56px;">
+    <span class="section-tag">Bonus Challenges</span>
+    <h2 style="margin-bottom: 28px;">Go beyond the rubric.</h2>
+    <div class="bonus-row">
+      <div class="bonus-pill"><span class="star">★</span> Dark Mode Toggle</div>
+      <div class="bonus-pill"><span class="star">★</span> API Integration (Weather, Quotes)</div>
+      <div class="bonus-pill"><span class="star">★</span> React or Vue Framework</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="enroll">
+  <div class="cta-bg"></div>
+  <div class="cta-box reveal">
+    <span class="section-tag" style="display:block; text-align:center; margin-bottom:12px;">Ready to start?</span>
+    <h2>Push your first branch<br/><span style="color:var(--green-400)">today.</span></h2>
+    <p>Join the program and start building. Every commit is a step forward.</p>
+    <div class="cta-form">
+      <input class="cta-input" type="email" placeholder="your@email.com" />
+      <a href="#" class="btn-primary">Enroll →</a>
+    </div>
+    <p style="margin-top:20px; font-size:13px; color:#4a7060; margin-bottom:0;">No spam. No cost to apply. Just code.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">// DevBranch_Academy © 2025 — Built with &lt;/&gt; and ☕</span>
+  <ul class="footer-links">
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (i * 0.06) + 's';
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
