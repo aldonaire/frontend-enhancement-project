@@ -1,26 +1,1206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DevBranch Academy — Git Branching Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --font-body: 'Manrope', sans-serif;
+    --font-display: 'Syne', sans-serif;
+    --font-code: 'Space Mono', monospace;
+    --navy:       #05101f;
+    --navy-2:     #0b1d35;
+    --navy-3:     #0f2244;
+    --blue:       #1a4fa0;
+    --blue-light: #2d6fd4;
+    --blue-glow:  #4490f0;
+    --gold:       #d4a017;
+    --gold-light: #f5d87a;
+    --gold-dim:   #8a6510;
+    --white:      #ffffff;
+    --off-white:  #e8edf5;
+    --muted:      #7b90b2;
+    --border:     rgba(26,79,160,0.25);
+    --gold-border:rgba(212,160,23,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+  /* ─── CANVAS ─── */
+  #hero-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(5,16,31,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo .dot-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .nav-logo .dot-row { display: flex; gap: 3px; }
+  .nav-logo .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  .nav-logo .dot:nth-child(2) { animation-delay: 0.3s; }
+  .nav-logo .dot-row:nth-child(2) .dot { animation-delay: 0.6s; }
+  .nav-logo .dot-row:nth-child(2) .dot:nth-child(2) { animation-delay: 0.9s; }
+  @keyframes pulse-dot {
+    0%,100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--gold);
+    transition: width 0.25s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 9px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    overflow: hidden;
+  }
+  .hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,79,160,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,79,160,0.07) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 0;
+  }
+  .hero-glow-1 {
+    position: absolute;
+    top: 10%; left: -10%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,79,160,0.18) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-glow-2 {
+    position: absolute;
+    bottom: 0; right: -5%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,160,23,0.10) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212,160,23,0.1);
+    border: 1px solid var(--gold-border);
+    color: var(--gold);
+    font-family: var(--font-code);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 1.5px;
+    margin-bottom: 28px;
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero-badge .blink {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+    animation: fadeInUp 0.7s 0.1s ease both;
+  }
+  .hero-title .line-gold { color: var(--gold); display: block; }
+  .hero-title .line-white { color: var(--white); display: block; }
+  .hero-subtitle {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 500px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+    animation: fadeInUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,160,23,0.3); }
+  .btn-outline {
+    background: transparent;
+    color: var(--blue-glow);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(68,144,240,0.4);
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--blue-glow); background: rgba(68,144,240,0.08); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    animation: fadeInUp 0.7s 0.4s ease both;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .section-title span { color: var(--gold); }
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 60px;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── WORKFLOW ─── */
+  #workflow { background: var(--navy-2); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2px;
+    position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 48px; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+    z-index: 0;
+  }
+  .step-card {
+    position: relative;
+    z-index: 1;
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 24px 28px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .step-card:hover { border-color: var(--gold-border); transform: translateY(-4px); background: var(--navy-3); }
+  .step-card.featured { border-color: var(--gold); background: rgba(212,160,23,0.05); }
+  .step-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 auto 20px;
+  }
+  .step-num.blue-num { background: var(--blue); color: var(--gold-light); border: 2px solid rgba(45,111,212,0.4); }
+  .step-num.gold-num { background: var(--gold); color: var(--navy); }
+  .step-num.green-num { background: rgba(74,222,128,0.15); color: #4ade80; border: 2px solid rgba(74,222,128,0.3); }
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .step-code {
+    margin-top: 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    background: rgba(26,79,160,0.15);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: var(--blue-glow);
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  /* ─── ENHANCEMENTS ─── */
+  #enhancements { background: var(--navy); }
+  .enhance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .enhance-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    background: var(--navy-2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .enhance-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .enhance-card.ui::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .enhance-card.func::before { background: linear-gradient(90deg, var(--blue), var(--blue-glow)); }
+  .enhance-card.opt::before { background: linear-gradient(90deg, #4ade80, #86efac); }
+  .enhance-card:hover { transform: translateY(-5px); border-color: var(--gold-border); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .enhance-icon {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .icon-gold { background: rgba(212,160,23,0.12); }
+  .icon-blue { background: rgba(26,79,160,0.2); }
+  .icon-green { background: rgba(74,222,128,0.1); }
+  .enhance-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .enhance-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .enhance-list li {
+    font-size: 13.5px;
+    color: var(--muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .enhance-list li::before {
+    content: '▸';
+    color: var(--gold);
+    font-size: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .enhance-card.func .enhance-list li::before { color: var(--blue-glow); }
+  .enhance-card.opt .enhance-list li::before { color: #4ade80; }
+
+  /* ─── RUBRIC ─── */
+  #rubric { background: var(--navy-2); }
+  .rubric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .rubric-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: all 0.3s;
+  }
+  .rubric-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+  .rubric-pts {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 46px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .rubric-pts span { font-size: 18px; color: var(--gold-dim); }
+  .rubric-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .progress-bar {
+    height: 5px;
+    background: rgba(26,79,160,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    width: 0%;
+    transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .rubric-desc { font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+
+  /* ─── BONUS ─── */
+  #bonus { background: var(--navy); }
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .bonus-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 28px;
+    background: var(--navy-2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  .bonus-card::after {
+    content: 'OPTIONAL';
+    position: absolute;
+    top: 16px; right: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .bonus-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(212,160,23,0.1); }
+  .bonus-emoji {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(212,160,23,0.3));
+  }
+  .bonus-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .bonus-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .bonus-tag {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .tag-gold { background: rgba(212,160,23,0.12); color: var(--gold); border: 1px solid var(--gold-border); }
+  .tag-blue { background: rgba(26,79,160,0.15); color: var(--blue-glow); border: 1px solid rgba(68,144,240,0.25); }
+  .tag-green { background: rgba(74,222,128,0.08); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+
+  /* ─── FILE STRUCTURE ─── */
+  #structure { background: var(--navy-2); }
+  .file-tree {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    max-width: 640px;
+    line-height: 2;
+  }
+  .file-tree .folder { color: var(--gold); }
+  .file-tree .file { color: var(--blue-glow); }
+  .file-tree .ext-css { color: #f472b6; }
+  .file-tree .ext-js { color: #facc15; }
+  .file-tree .ext-html { color: var(--blue-glow); }
+  .file-tree .ext-md { color: #a78bfa; }
+  .file-tree .root { color: var(--off-white); font-weight: 700; }
+  .file-tree .tree-line { color: var(--muted); user-select: none; }
+  .file-tree .comment { color: #3a5070; font-size: 11px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 60px 48px 40px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--white);
+  }
+  .footer-brand span { color: var(--gold); }
+  .footer-tagline { font-size: 14px; color: var(--muted); margin-top: 8px; max-width: 260px; }
+  .footer-links { display: flex; gap: 48px; flex-wrap: wrap; }
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copy { font-size: 12px; color: var(--muted); }
+  .footer-copy span { color: var(--gold-dim); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    #hero { padding: 100px 24px 60px; }
+    .enhance-grid { grid-template-columns: 1fr; }
+    .bonus-grid { grid-template-columns: 1fr; }
+    footer { padding: 48px 24px 32px; }
+    .footer-top { flex-direction: column; }
+  }
+
+  /* ─── TYPING CURSOR ─── */
+  .typed-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 0.85em;
+    background: var(--gold);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink-cursor 0.75s step-end infinite;
+  }
+  @keyframes blink-cursor { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* ─── COMMIT TICKER ─── */
+  .commit-ticker {
+    margin-top: 48px;
+    overflow: hidden;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .commit-track {
+    display: flex;
+    gap: 48px;
+    animation: ticker 18s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .commit-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .commit-item .hash { color: var(--gold); }
+  .commit-item .msg { color: var(--blue-glow); }
+</style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">
+    <div class="dot-cluster">
+      <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+      <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+    </div>
+    Dev<span>Branch</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#enhancements">Enhancements</a></li>
+    <li><a href="#rubric">Rubric</a></li>
+    <li><a href="#bonus">Bonus</a></li>
+    <li><a href="#structure">Files</a></li>
+  </ul>
+  <a href="#workflow" class="nav-cta">Get Started →</a>
+</nav>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <canvas id="hero-canvas"></canvas>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="blink"></div>
+      FRONTEND ENHANCEMENT PROJECT
+    </div>
+    <h1 class="hero-title">
+      <span class="line-white">Master Git</span>
+      <span class="line-gold" id="typed-line">Branching<span class="typed-cursor"></span></span>
+    </h1>
+    <p class="hero-subtitle">
+      Collaborate like a real developer — fork, branch, enhance, and ship your UI improvements via pull requests. Learn version control the way it's done in the industry.
+    </p>
+    <div class="hero-actions">
+      <a href="#workflow" class="btn-primary">Start the Project →</a>
+      <a href="docs/student-guide.md" class="btn-outline">📄 Student Guide</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">100</span>
+        <span class="stat-label">Total Points</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">7</span>
+        <span class="stat-label">Git Steps</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Enhancements</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Bonus Tasks</span>
+      </div>
+    </div>
+  </div>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+  <!-- Commit ticker -->
+  <div class="commit-ticker" style="position:absolute; bottom:0; left:0; right:0;">
+    <div class="commit-track" id="ticker">
+      <span class="commit-item"><span class="hash">a3f2c1d</span> <span class="msg">feat: improved navbar responsiveness</span></span>
+      <span class="commit-item"><span class="hash">b9e4a2f</span> <span class="msg">style: enhanced typography and color palette</span></span>
+      <span class="commit-item"><span class="hash">c7d1e3b</span> <span class="msg">feat: added modal component with animation</span></span>
+      <span class="commit-item"><span class="hash">d5f8c4a</span> <span class="msg">fix: resolved merge conflict in styles.css</span></span>
+      <span class="commit-item"><span class="hash">e2a6b9c</span> <span class="msg">refactor: cleaned and organized JS code</span></span>
+      <span class="commit-item"><span class="hash">f1d3e7b</span> <span class="msg">feat: add dark mode toggle functionality</span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="commit-item"><span class="hash">a3f2c1d</span> <span class="msg">feat: improved navbar responsiveness</span></span>
+      <span class="commit-item"><span class="hash">b9e4a2f</span> <span class="msg">style: enhanced typography and color palette</span></span>
+      <span class="commit-item"><span class="hash">c7d1e3b</span> <span class="msg">feat: added modal component with animation</span></span>
+      <span class="commit-item"><span class="hash">d5f8c4a</span> <span class="msg">fix: resolved merge conflict in styles.css</span></span>
+      <span class="commit-item"><span class="hash">e2a6b9c</span> <span class="msg">refactor: cleaned and organized JS code</span></span>
+      <span class="commit-item"><span class="hash">f1d3e7b</span> <span class="msg">feat: add dark mode toggle functionality</span></span>
+    </div>
+  </div>
+</section>
 
-  <script src="assets/js/script.js"></script>
+<!-- ─── WORKFLOW ─── -->
+<section id="workflow">
+  <div class="reveal">
+    <p class="section-label">// step-by-step</p>
+    <h2 class="section-title">The Git <span>Workflow</span></h2>
+    <p class="section-sub">Follow these 7 steps to complete the project from fork to pull request.</p>
+  </div>
+  <div class="steps-grid reveal">
+    <div class="step-card">
+      <div class="step-num blue-num">01</div>
+      <div class="step-title">Fork Repo</div>
+      <div class="step-desc">Go to GitHub and fork the central repository to your account.</div>
+      <div class="step-code">Click Fork (top-right)<br>→ Creates your copy</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num blue-num">02</div>
+      <div class="step-title">Clone Fork</div>
+      <div class="step-desc">Download your forked repo to your local machine.</div>
+      <div class="step-code">git clone https://github.com/<br>theirusername/project.git</div>
+    </div>
+    <div class="step-card featured">
+      <div class="step-num gold-num">03</div>
+      <div class="step-title">Create Branch</div>
+      <div class="step-desc">Make a personal feature branch with your last name.</div>
+      <div class="step-code">git checkout -b feature/<br>&lt;lastname&gt;-frontend</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num blue-num">04</div>
+      <div class="step-title">Enhance UI</div>
+      <div class="step-desc">Implement at least 3 improvements to the frontend.</div>
+      <div class="step-code">// Layout, animations,<br>// components, validation</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num blue-num">05</div>
+      <div class="step-title">Commit</div>
+      <div class="step-desc">Write meaningful commit messages for every change.</div>
+      <div class="step-code">git add .<br>git commit -m "feat: ..."</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num blue-num">06</div>
+      <div class="step-title">Push Branch</div>
+      <div class="step-desc">Push your local branch up to your GitHub fork.</div>
+      <div class="step-code">git push origin<br>feature/branch-name</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num green-num">07</div>
+      <div class="step-title">Pull Request</div>
+      <div class="step-desc">Open a PR from your branch to the instructor's main branch.</div>
+      <div class="step-code">Compare &amp; pull request<br>→ base: main ✓</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ENHANCEMENTS ─── -->
+<section id="enhancements">
+  <div class="reveal">
+    <p class="section-label">// requirements</p>
+    <h2 class="section-title">Required <span>Enhancements</span></h2>
+    <p class="section-sub">Implement at least 3 improvements — mix and match from any category below.</p>
+  </div>
+  <div class="enhance-grid reveal">
+    <div class="enhance-card ui">
+      <div class="enhance-icon icon-gold">🎨</div>
+      <div class="enhance-title">UI / UX Improvements</div>
+      <ul class="enhance-list">
+        <li>Improve layout spacing and alignment</li>
+        <li>Add responsive design (mobile-friendly)</li>
+        <li>Enhance typography and color palette</li>
+        <li>Add animations or transitions</li>
+      </ul>
+    </div>
+    <div class="enhance-card func">
+      <div class="enhance-icon icon-blue">⚙️</div>
+      <div class="enhance-title">Functional Enhancements</div>
+      <ul class="enhance-list">
+        <li>Add interactive component (modal, dropdown)</li>
+        <li>Improve navigation (navbar, sidebar)</li>
+        <li>Implement form validation</li>
+        <li>Improve loading or feedback indicators</li>
+      </ul>
+    </div>
+    <div class="enhance-card opt">
+      <div class="enhance-icon icon-green">⚡</div>
+      <div class="enhance-title">Optimization</div>
+      <ul class="enhance-list">
+        <li>Clean and organize your code structure</li>
+        <li>Reduce redundant CSS and JS</li>
+        <li>Improve basic performance metrics</li>
+        <li>Improve file and folder organization</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RUBRIC ─── -->
+<section id="rubric">
+  <div class="reveal">
+    <p class="section-label">// grading</p>
+    <h2 class="section-title">Grading <span>Rubric</span></h2>
+    <p class="section-sub">100 points total. Each category is graded based on quality, not just completion.</p>
+  </div>
+  <div class="rubric-grid reveal" id="rubric-grid">
+    <div class="rubric-card">
+      <div class="rubric-pts">25<span>pts</span></div>
+      <div class="rubric-name">Git Usage</div>
+      <div class="progress-bar"><div class="progress-fill" data-width="100"></div></div>
+      <div class="rubric-desc">Branching, meaningful commits, pull request creation and format.</div>
+    </div>
+    <div class="rubric-card">
+      <div class="rubric-pts">25<span>pts</span></div>
+      <div class="rubric-name">UI/UX Improvements</div>
+      <div class="progress-bar"><div class="progress-fill" data-width="100"></div></div>
+      <div class="rubric-desc">Visual quality, responsiveness, and design improvements.</div>
+    </div>
+    <div class="rubric-card">
+      <div class="rubric-pts">20<span>pts</span></div>
+      <div class="rubric-name">Functionality</div>
+      <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+      <div class="rubric-desc">New interactive components and working enhancements.</div>
+    </div>
+    <div class="rubric-card">
+      <div class="rubric-pts">15<span>pts</span></div>
+      <div class="rubric-name">Code Quality</div>
+      <div class="progress-bar"><div class="progress-fill" data-width="60"></div></div>
+      <div class="rubric-desc">Clean, organized, readable, and non-redundant code.</div>
+    </div>
+    <div class="rubric-card">
+      <div class="rubric-pts">15<span>pts</span></div>
+      <div class="rubric-name">Documentation</div>
+      <div class="progress-bar"><div class="progress-fill" data-width="60"></div></div>
+      <div class="rubric-desc">README update or separate doc: features, tools, challenges.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BONUS ─── -->
+<section id="bonus">
+  <div class="reveal">
+    <p class="section-label">// optional</p>
+    <h2 class="section-title">Bonus <span>Challenges</span></h2>
+    <p class="section-sub">Go above and beyond for extra credit. These are optional but highly encouraged.</p>
+  </div>
+  <div class="bonus-grid reveal">
+    <div class="bonus-card">
+      <span class="bonus-emoji">🌙</span>
+      <div class="bonus-title">Dark Mode Toggle</div>
+      <div class="bonus-desc">Implement a light/dark theme switch with CSS variables and localStorage persistence.</div>
+      <span class="bonus-tag tag-gold">CSS Variables</span>
+    </div>
+    <div class="bonus-card">
+      <span class="bonus-emoji">🔌</span>
+      <div class="bonus-title">API Integration</div>
+      <div class="bonus-desc">Connect a public API like weather, quotes, or news to add live dynamic content.</div>
+      <span class="bonus-tag tag-blue">fetch() / REST</span>
+    </div>
+    <div class="bonus-card">
+      <span class="bonus-emoji">⚛️</span>
+      <div class="bonus-title">Frontend Framework</div>
+      <div class="bonus-desc">Rebuild part of the UI using React or Vue for component-based architecture.</div>
+      <span class="bonus-tag tag-green">React / Vue</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FILE STRUCTURE ─── -->
+<section id="structure">
+  <div class="reveal">
+    <p class="section-label">// project files</p>
+    <h2 class="section-title">File <span>Structure</span></h2>
+    <p class="section-sub">Keep your project organized according to this folder layout.</p>
+  </div>
+  <div class="file-tree reveal">
+    <span class="root">📁 frontend-enhancement-project/</span><br>
+    <span class="tree-line">├── </span><span class="folder">assets/</span><br>
+    <span class="tree-line">│   ├── </span><span class="folder">css/</span><br>
+    <span class="tree-line">│   │   └── </span><span class="ext-css">styles.css</span>   <span class="comment">/* all your styles */</span><br>
+    <span class="tree-line">│   └── </span><span class="folder">js/</span><br>
+    <span class="tree-line">│       └── </span><span class="ext-js">script.js</span>    <span class="comment">/* interactivity */</span><br>
+    <span class="tree-line">├── </span><span class="folder">components/</span><br>
+    <span class="tree-line">│   ├── </span><span class="ext-html">footer.html</span>  <span class="comment">/* reusable footer */</span><br>
+    <span class="tree-line">│   └── </span><span class="ext-html">navbar.html</span>  <span class="comment">/* reusable navbar */</span><br>
+    <span class="tree-line">├── </span><span class="folder">docs/</span><br>
+    <span class="tree-line">│   └── </span><span class="ext-md">student-guide.md</span><br>
+    <span class="tree-line">├── </span><span class="folder">pages/</span><br>
+    <span class="tree-line">│   ├── </span><span class="ext-html">about.html</span><br>
+    <span class="tree-line">│   └── </span><span class="ext-html">contact.html</span><br>
+    <span class="tree-line">├── </span><span class="ext-html">index.html</span>       <span class="comment">/* main entry point */</span><br>
+    <span class="tree-line">├── </span><span class="ext-md">MAIN-TASK.md</span>     <span class="comment">/* project brief */</span><br>
+    <span class="tree-line">└── </span><span class="ext-md">README.md</span>        <span class="comment">/* your documentation */</span>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Dev<span>Branch</span> Academy</div>
+      <div class="footer-tagline">Frontend Enhancement Using Git Branching — a real-world simulation for student developers.</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs/student-guide.md">Student Guide</a></li>
+          <li><a href="MAIN-TASK.md">Main Task</a></li>
+          <li><a href="README.md">README</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Components</h4>
+        <ul>
+          <li><a href="components/navbar.html">Navbar</a></li>
+          <li><a href="components/footer.html">Footer</a></li>
+          <li><a href="assets/css/styles.css">Styles</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 DevBranch Academy. Built for <span>Git learners</span> everywhere.</div>
+    <div class="footer-copy" style="font-family:'Space Mono',monospace;font-size:11px;">git branch: <span>main</span> · 100 pts available</div>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ─── -->
+<script>
+// ── 3D CANVAS BRANCH ANIMATION ──
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes = [], edges = [], frame = 0;
+
+  const GOLD = '#d4a017', BLUE = '#2d6fd4', GREEN = '#4ade80', MUTED = '#1a3560';
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function randomBranch() {
+    const startX = W * 0.55 + Math.random() * W * 0.4;
+    const startY = H * 0.1 + Math.random() * H * 0.8;
+    return { x: startX, y: startY };
+  }
+
+  function buildGraph() {
+    nodes = [];
+    edges = [];
+    const mainCount = 7;
+    const mainX = W * 0.68;
+    const mainSpacing = H / (mainCount + 1);
+    for (let i = 0; i < mainCount; i++) {
+      nodes.push({
+        id: i, x: mainX, y: mainSpacing * (i + 1),
+        vx: 0, vy: 0,
+        r: i === 0 || i === mainCount - 1 ? 9 : 7,
+        color: BLUE, branch: 'main',
+        pulse: Math.random() * Math.PI * 2,
+        opacity: 0, targetOpacity: 1,
+        born: i * 8
+      });
+      if (i > 0) edges.push({ from: i - 1, to: i, color: BLUE, opacity: 0, born: i * 8 });
+    }
+    const featureNodes = [
+      { from: 1, dx: 90, dy: -40, color: GOLD, branch: 'feature' },
+      { from: 1, dx: 90, dy:  40, color: GOLD, branch: 'feature' },
+      { from: 3, dx: 95, dy: -50, color: GOLD, branch: 'feature' },
+      { from: 4, dx: 85, dy:  55, color: GREEN, branch: 'hotfix' },
+    ];
+    featureNodes.forEach((fn, fi) => {
+      const parentNode = nodes[fn.from];
+      const nid = nodes.length;
+      const nx = parentNode.x + fn.dx;
+      const ny = parentNode.y + fn.dy;
+      nodes.push({
+        id: nid, x: nx, y: ny,
+        vx: 0, vy: 0, r: 6,
+        color: fn.color, branch: fn.branch,
+        pulse: Math.random() * Math.PI * 2,
+        opacity: 0, targetOpacity: 1,
+        born: fn.from * 8 + 15 + fi * 6
+      });
+      edges.push({ from: fn.from, to: nid, color: fn.color, opacity: 0, born: fn.from * 8 + 15 + fi * 6 });
+      // child node
+      const nid2 = nodes.length;
+      nodes.push({
+        id: nid2, x: nx + 60 + Math.random() * 30, y: ny + (Math.random() - 0.5) * 40,
+        vx: 0, vy: 0, r: 5,
+        color: fn.color, branch: fn.branch,
+        pulse: Math.random() * Math.PI * 2,
+        opacity: 0, targetOpacity: 1,
+        born: fn.from * 8 + 25 + fi * 6
+      });
+      edges.push({ from: nid, to: nid2, color: fn.color, opacity: 0, born: fn.from * 8 + 25 + fi * 6 });
+    });
+    // merge back
+    const mergeTargetIdx = 5;
+    const lastFeatureIdx = nodes.length - 3;
+    edges.push({ from: lastFeatureIdx, to: mergeTargetIdx, color: GREEN, opacity: 0, born: 80, dashed: true });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    frame++;
+
+    // update opacity
+    edges.forEach(e => {
+      if (frame >= e.born) e.opacity = Math.min(1, e.opacity + 0.03);
+    });
+    nodes.forEach(n => {
+      if (frame >= n.born) n.opacity = Math.min(1, n.opacity + 0.04);
+    });
+
+    // draw edges
+    edges.forEach(e => {
+      if (e.opacity <= 0) return;
+      const a = nodes[e.from], b = nodes[e.to];
+      ctx.save();
+      ctx.globalAlpha = e.opacity * 0.7;
+      ctx.strokeStyle = e.color;
+      ctx.lineWidth = 1.5;
+      if (e.dashed) ctx.setLineDash([5, 4]);
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      const cpx = (a.x + b.x) / 2;
+      const cpy = (a.y + b.y) / 2 + (b.x - a.x) * 0.15;
+      ctx.quadraticCurveTo(cpx, cpy, b.x, b.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    });
+
+    // draw nodes
+    nodes.forEach(n => {
+      if (n.opacity <= 0) return;
+      n.pulse += 0.035;
+      const pulse = Math.sin(n.pulse) * 0.4 + 0.6;
+      ctx.save();
+      ctx.globalAlpha = n.opacity;
+      // glow ring
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r + 6 + pulse * 4, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.globalAlpha = n.opacity * 0.08 * pulse;
+      ctx.fill();
+      // outer ring
+      ctx.globalAlpha = n.opacity * 0.3;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2);
+      ctx.strokeStyle = n.color;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      // core
+      ctx.globalAlpha = n.opacity;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color === GOLD ? '#0b1d35' : '#05101f';
+      ctx.fill();
+      ctx.strokeStyle = n.color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      // inner dot
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 0.35, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.globalAlpha = n.opacity * (0.6 + pulse * 0.4);
+      ctx.fill();
+      ctx.restore();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  buildGraph();
+  draw();
+  window.addEventListener('resize', () => { resize(); buildGraph(); frame = 0; });
+})();
+
+// ── TYPING ANIMATION ──
+(function() {
+  const words = ['Branching', 'Workflow', 'Collaboration', 'Pull Requests', 'Version Control'];
+  const el = document.getElementById('typed-line');
+  let wi = 0, ci = 0, deleting = false, pause = 0;
+  function type() {
+    const word = words[wi];
+    if (pause > 0) { pause--; setTimeout(type, 80); return; }
+    if (!deleting) {
+      el.innerHTML = word.slice(0, ci + 1) + '<span class="typed-cursor"></span>';
+      ci++;
+      if (ci === word.length) { pause = 28; deleting = true; }
+      setTimeout(type, 110);
+    } else {
+      el.innerHTML = word.slice(0, ci - 1) + '<span class="typed-cursor"></span>';
+      ci--;
+      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+      setTimeout(type, 55);
+    }
+  }
+  type();
+})();
+
+// ── SCROLL REVEAL ──
+(function() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // trigger progress bars
+        const bars = e.target.querySelectorAll('.progress-fill');
+        bars.forEach(bar => {
+          const w = bar.getAttribute('data-width');
+          setTimeout(() => { bar.style.width = w + '%'; }, 200);
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+// ── NAVBAR SCROLL STYLE ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.style.background = window.scrollY > 40
+    ? 'rgba(5,16,31,0.97)' : 'rgba(5,16,31,0.85)';
+});
+
+// ── CARD TILT ──
+document.querySelectorAll('.rubric-card, .bonus-card, .step-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width / 2;
+    const y = e.clientY - r.top - r.height / 2;
+    const rx = (-y / r.height) * 8;
+    const ry = (x / r.width) * 8;
+    card.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.transition = 'transform 0.4s ease';
+  });
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform 0.1s ease';
+  });
+});
+</script>
 </body>
 </html>
