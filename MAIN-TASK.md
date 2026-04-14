@@ -20,27 +20,28 @@ Resolve merge conflicts (basic level)
 
 ### Project Requirements
 
-#### Step 1: Clone the Repository
+#### Step 1: Fork the Repository 
 
-git clone <repo-url>
-cd <repo-name>
+1. Go to your repo on GitHub
+2. Click Fork (top-right)
+3. This creates:
 
-#### Step 2: Create a New Branch
+_theirusername/frontend-enhancement-project_
 
-Each student must create their own branch using this format:
+#### Step 2: Clone Their Fork
 
-git checkout -b feature/<lastname>-frontend-enhancement
+_git clone https://github.com/theirusername/frontend-enhancement-project.git
+cd frontend-enhancement-project_
 
-Example:
+#### Step 3: Create a Branch
 
-git checkout -b feature/donaire-ui-improvement
+_git checkout -b feature/<lastname>-frontend-enhancement_
 
-#### Step 3: Frontend Enhancements
-
+#### Step 4: Enhancements
 ##### Students must implement at least 3 improvements:
 
 ###### UI/UX Improvements (choose any)
-
+ 
 Improve layout (spacing, alignment)
 Add responsive design (mobile-friendly)
 Enhance typography and colors
@@ -59,24 +60,28 @@ Clean and organize code
 Reduce redundant CSS/JS
 Improve performance (basic)
 
-#### Step 4: Commit Changes Properly
+#### Step 5: Commit Changes Properly
 
 Students must follow proper commit messages:
 
-git add .
-git commit -m "feat: improved navbar responsiveness"
+_git add .
+git commit -m "feat: improved navbar responsiveness"_
 
-#### Step 5: Push Branch
+#### Step 6: Push Branch
 
-git push origin feature/<branch-name>
+_git push origin feature/'branch-name'_
 
-#### Step 6: Create Pull Request
+#### Step 7: Create Pull Request
 
-Submit a Pull Request (PR) to the main branch
-Include:
-Summary of changes
-Screenshots (before & after)
-List of features added
+1. Go to their fork on GitHub
+2. Click “Compare & pull request”
+3. Make sure:
+
+_base repository: aldonaire/frontend-enhancement-project
+base branch: main
+
+head repository: theirusername/frontend-enhancement-project
+compare: feature/<branch-name>_
 
 ### Deliverables
 
