@@ -1,10 +1,10 @@
 # Frontend Enhancement Project
 
-## 📌 Objective
+## Objective
 
 Enhance the frontend using Git branching.
 
-## 🚀 Instructions
+## Instructions
 
 1. Clone the repository
 2. Create a new branch:
@@ -13,13 +13,13 @@ Enhance the frontend using Git branching.
 4. Commit and push changes
 5. Submit a Pull Request
 
-## 💡 Suggested Improvements
+## Suggested Improvements
 
 - UI/UX enhancements
 - Responsive design
 - New components
 - Better styling
 
-## 📷 Submission
+## Submission
 
 Include screenshots and description in your PR.
