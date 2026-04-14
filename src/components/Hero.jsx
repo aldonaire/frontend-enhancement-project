@@ -42,16 +42,14 @@ function Hero() {
         </motion.p>
         
         <motion.button
+          className="explore-btn"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-          className="explore-btn"
+          transition={{ duration: 0.7, delay: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
           onClick={() => document.getElementById('destinations').scrollIntoView({ behavior: 'smooth' })}
-          style={{ marginTop: '2.5rem' }}
         >
-          EXPLORE JAPAN <span className="arrow">↓</span>
+          <span className="explore-btn__text">Explore Japan</span>
+          <span className="explore-btn__arrow">↓</span>
         </motion.button>
       </div>
     </section>
