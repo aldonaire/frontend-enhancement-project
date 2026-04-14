@@ -50,7 +50,7 @@ main > section {
 }
 
 .container {
-  width: min(100% - 2rem, 1000px);
+  width: min(100% - 2rem, 1100px);
   margin: 0 auto;
 }
 
@@ -154,7 +154,7 @@ main > section {
 }
 
 .section {
-  padding: 1.2rem 0 1.4rem;
+  padding: clamp(1rem, 2.2vw, 1.5rem) 0;
 }
 
 .section-full-bg {
@@ -517,7 +517,7 @@ h3 {
 .feature-image {
   display: block;
   width: 100%;
-  height: 210px;
+  height: clamp(180px, 24vw, 230px);
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 0.7rem;
@@ -639,7 +639,7 @@ h3 {
 .popular-image {
   display: block;
   width: 100%;
-  height: 220px;
+  height: clamp(190px, 25vw, 240px);
   object-fit: cover;
   background: color-mix(in srgb, var(--primary) 20%, var(--card));
 }
@@ -1258,6 +1258,98 @@ h3 {
 
   .bento-wide {
     grid-column: auto;
+  }
+}
+
+@media (max-width: 1100px) {
+  .popular-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .hero-core {
+    max-width: 100%;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+
+  .hero-core h1 {
+    font-size: clamp(2rem, 7.2vw, 3.8rem);
+  }
+
+  .hero-core .lead {
+    max-width: 100%;
+  }
+
+  .about-badges {
+    gap: 0.45rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: min(100% - 1.2rem, 100%);
+  }
+
+  .section-head {
+    margin-bottom: 0.95rem;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.35rem, 5.5vw, 2rem);
+  }
+
+  .contact-map {
+    min-height: 360px;
+  }
+
+  .map-frame {
+    min-height: 240px;
+  }
+
+  .about-cta {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .action-group {
+    width: 100%;
+    gap: 0.55rem;
+  }
+
+  .action-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-form .btn,
+  .contact-map .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .quote-card .profile-row {
+    margin-top: -28px;
+  }
+
+  .profile-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .quote-actions {
+    flex-wrap: wrap;
+  }
+
+  .quote-actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
   }
 }
 
