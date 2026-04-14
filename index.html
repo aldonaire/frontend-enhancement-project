@@ -1,26 +1,1241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Frontend Enhancement — Git Branching Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Mono:wght@300;400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  /* ── RESET & BASE ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black:    #080808;
+    --black2:   #0e0e0e;
+    --black3:   #141414;
+    --black4:   #1c1c1c;
+    --black5:   #242424;
+    --gold:     #c9a84c;
+    --gold2:    #e8c96a;
+    --gold3:    #f5d98a;
+    --gold-dim: #c9a84c30;
+    --gold-mid: #c9a84c80;
+    --white:    #f5f0e8;
+    --white2:   #d4ceC4;
+    --white3:   #9a9488;
+    --serif:    'Cormorant Garamond', Georgia, serif;
+    --mono:     'DM Mono', monospace;
+    --sans:     'Barlow', sans-serif;
+    --nav-h:    64px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+  ::selection { background: var(--gold); color: var(--black); }
+
+  /* ── CURSOR ── */
+  #cursor {
+    position: fixed; top: 0; left: 0; width: 12px; height: 12px;
+    border: 1.5px solid var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.1s ease, opacity 0.2s;
+    mix-blend-mode: normal;
+  }
+  #cursor-trail {
+    position: fixed; top: 0; left: 0; width: 4px; height: 4px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.35s ease;
+    opacity: 0.5;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    border-bottom: 1px solid transparent;
+    transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(8,8,8,0.92);
+    border-color: var(--gold-dim);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 22px; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.5px; text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo span { font-size: 10px; color: var(--white3); font-family: var(--mono); letter-spacing: 1px; display: block; margin-top: -4px; }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--white2); text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--black); background: var(--gold);
+    padding: 9px 22px; border-radius: 2px;
+    text-decoration: none; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: all 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: var(--nav-h); left: 0; width: 100%;
+    background: rgba(8,8,8,0.98); padding: 24px 40px;
+    flex-direction: column; gap: 20px; border-bottom: 1px solid var(--gold-dim);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--white2); text-decoration: none; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding-top: var(--nav-h);
+  }
+  #canvas3d {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    z-index: 0; opacity: 0.85;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 900px; padding: 0 24px;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px; opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--gold-mid);
+  }
+  .hero-title {
+    font-family: var(--serif); font-size: clamp(52px, 8vw, 96px);
+    font-weight: 300; line-height: 1.05; color: var(--white);
+    margin-bottom: 8px; opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-title em { color: var(--gold); font-style: normal; }
+  .hero-subtitle {
+    font-family: var(--serif); font-size: clamp(20px, 3vw, 36px);
+    font-weight: 300; color: var(--white3); margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+  }
+  .hero-desc {
+    font-size: 14px; color: var(--white3); max-width: 520px;
+    margin: 0 auto 44px; line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.9s 0.9s forwards;
+  }
+  .hero-btns {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.9s 1.1s forwards;
+  }
+  .btn-primary {
+    padding: 14px 36px; background: var(--gold); color: var(--black);
+    font-family: var(--sans); font-size: 11px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: none; border-radius: 2px; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.25); }
+  .btn-secondary {
+    padding: 13px 36px; background: transparent;
+    border: 1px solid var(--gold-mid); color: var(--gold);
+    font-family: var(--sans); font-size: 11px; font-weight: 400;
+    letter-spacing: 2px; text-transform: uppercase;
+    border-radius: 2px; cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); background: var(--gold-dim); transform: translateY(-2px); }
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeIn 1s 1.5s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  .scroll-text { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; color: var(--white3); text-transform: uppercase; }
+  @keyframes scrollPulse { 0%,100%{ opacity:0.4; transform: scaleY(1); } 50%{ opacity:1; transform: scaleY(1.2); transform-origin: top; } }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--black2); border-top: 1px solid var(--gold-dim); border-bottom: 1px solid var(--gold-dim);
+    padding: 28px 40px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat-item {
+    text-align: center; padding: 8px 20px;
+    border-right: 1px solid var(--black5);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--gold); line-height: 1; }
+  .stat-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--white3); text-transform: uppercase; margin-top: 4px; }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 100px 40px; }
+  .section-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+  .section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold-mid); }
+  .section-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 16px; }
+  .section-title em { color: var(--gold); font-style: normal; }
+  .section-desc { font-size: 14px; color: var(--white3); line-height: 1.8; max-width: 520px; }
+
+  /* ── ABOUT / PILLARS ── */
+  #about { background: var(--black); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .pillars { display: flex; flex-direction: column; gap: 2px; margin-top: 48px; }
+  .pillar {
+    padding: 28px 32px; background: var(--black2);
+    border: 1px solid var(--black5); border-left: 3px solid var(--gold-dim);
+    cursor: pointer; transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .pillar::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--gold-dim), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .pillar:hover { border-left-color: var(--gold); transform: translateX(4px); }
+  .pillar:hover::before { opacity: 1; }
+  .pillar-head { display: flex; align-items: center; gap: 16px; }
+  .pillar-num { font-family: var(--mono); font-size: 11px; color: var(--gold); }
+  .pillar-name { font-size: 15px; font-weight: 500; color: var(--white); }
+  .pillar-badge { margin-left: auto; font-family: var(--mono); font-size: 9px; color: var(--gold); background: var(--gold-dim); padding: 3px 8px; border-radius: 2px; }
+  .pillar-body { font-size: 13px; color: var(--white3); line-height: 1.7; margin-top: 10px; display: none; }
+  .pillar.open .pillar-body { display: block; }
+  .pillar.open { border-left-color: var(--gold); background: var(--black3); }
+
+  .about-visual { position: relative; }
+  .about-diagram {
+    background: var(--black3); border: 1px solid var(--black5);
+    border-radius: 4px; padding: 32px;
+    font-family: var(--mono); font-size: 12px;
+    line-height: 2; color: var(--white3);
+  }
+  .about-diagram .line-gold { color: var(--gold); }
+  .about-diagram .line-green { color: #4caf80; }
+  .about-diagram .line-blue { color: #6c9ec4; }
+  .about-diagram .line-dim { color: var(--black5); }
+  .diagram-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 20px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--black5);
+  }
+  .d-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .typing-cursor { display: inline-block; width: 8px; height: 14px; background: var(--gold); animation: blink 1s infinite; vertical-align: middle; }
+  @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+
+  /* ── GIT WORKFLOW ── */
+  #workflow { background: var(--black2); }
+  .workflow-inner { max-width: 1200px; margin: 0 auto; }
+  .workflow-header { max-width: 600px; margin-bottom: 64px; }
+  .steps-track { position: relative; }
+  .steps-line {
+    position: absolute; top: 28px; left: 28px; right: 28px; height: 1px;
+    background: var(--black5); z-index: 0;
+  }
+  .steps-line-fill {
+    position: absolute; top: 28px; left: 28px; height: 1px;
+    background: var(--gold); z-index: 1;
+    transition: width 0.5s ease; width: 0%;
+  }
+  .steps-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; position: relative; z-index: 2; }
+  .step-node { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+  .step-circle {
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 2px solid var(--black5); background: var(--black2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; color: var(--white3);
+    transition: all 0.3s; margin-bottom: 12px; position: relative;
+  }
+  .step-node:hover .step-circle, .step-node.active .step-circle {
+    border-color: var(--gold); background: var(--gold-dim); color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,168,76,0.2);
+  }
+  .step-node.done .step-circle { border-color: var(--gold); background: var(--gold); color: var(--black); }
+  .step-node-label { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--white3); text-align: center; }
+  .step-node.active .step-node-label, .step-node.done .step-node-label { color: var(--gold); }
+  .step-detail {
+    background: var(--black3); border: 1px solid var(--black5);
+    border-top: 2px solid var(--gold); padding: 40px;
+    margin-top: 40px; border-radius: 0 0 4px 4px;
+    display: none;
+  }
+  .step-detail.visible { display: block; }
+  .step-detail-title { font-family: var(--serif); font-size: 28px; color: var(--white); margin-bottom: 12px; }
+  .step-detail-desc { font-size: 14px; color: var(--white3); line-height: 1.8; margin-bottom: 24px; }
+  .code-block {
+    background: var(--black); border: 1px solid var(--black5);
+    border-radius: 4px; padding: 20px 24px;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--white2); line-height: 1.8; overflow-x: auto;
+  }
+  .code-block .c-gold { color: var(--gold); }
+  .code-block .c-green { color: #4caf80; }
+  .code-block .c-blue { color: #6c9ec4; }
+  .code-block .c-dim { color: var(--white3); }
+
+  /* ── ENHANCEMENTS ── */
+  #enhancements { background: var(--black); }
+  .enhance-inner { max-width: 1200px; margin: 0 auto; }
+  .enhance-header { max-width: 600px; margin-bottom: 64px; }
+  .enhance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .enhance-card {
+    background: var(--black2); padding: 40px 32px;
+    border: 1px solid var(--black5); position: relative; overflow: hidden;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .enhance-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .enhance-card:hover { background: var(--black3); transform: translateY(-4px); }
+  .enhance-card:hover::after { transform: scaleX(1); }
+  .enhance-icon { font-size: 28px; margin-bottom: 20px; }
+  .enhance-num {
+    position: absolute; top: 24px; right: 24px;
+    font-family: var(--mono); font-size: 40px; font-weight: 300;
+    color: var(--black4); line-height: 1; pointer-events: none;
+  }
+  .enhance-title { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+  .enhance-desc { font-size: 13px; color: var(--white3); line-height: 1.7; margin-bottom: 20px; }
+  .enhance-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 1px;
+    background: var(--black5); color: var(--white3);
+    padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* ── RUBRIC ── */
+  #rubric { background: var(--black2); }
+  .rubric-inner { max-width: 1200px; margin: 0 auto; }
+  .rubric-header { max-width: 600px; margin-bottom: 64px; }
+  .rubric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .rubric-card {
+    background: var(--black3); padding: 36px 40px;
+    border: 1px solid var(--black5); display: flex; gap: 32px; align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .rubric-card:hover { background: var(--black4); }
+  .rubric-ring { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
+  .rubric-ring svg { transform: rotate(-90deg); }
+  .rubric-ring-num {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 18px; color: var(--gold);
+  }
+  .rubric-info-title { font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+  .rubric-info-pts { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px; }
+  .rubric-info-desc { font-size: 13px; color: var(--white3); line-height: 1.7; }
+  .rubric-total { margin-top: 40px; background: var(--black3); border: 1px solid var(--gold-dim); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .rubric-total-label { font-family: var(--mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--white3); }
+  .rubric-total-val { font-family: var(--serif); font-size: 48px; font-weight: 300; color: var(--gold); }
+  .rubric-bonus { margin-top: 2px; background: var(--black3); border: 1px solid var(--black5); padding: 28px 40px; }
+  .bonus-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .bonus-items { display: flex; gap: 16px; flex-wrap: wrap; }
+  .bonus-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--white3);
+  }
+  .bonus-item::before { content: '★'; color: var(--gold); font-size: 10px; }
+
+  /* ── DELIVERABLES ── */
+  #deliverables { background: var(--black); }
+  .deliverables-inner { max-width: 1200px; margin: 0 auto; }
+  .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; }
+  .deliv-card {
+    background: var(--black2); border: 1px solid var(--black5);
+    padding: 48px 40px; position: relative; overflow: hidden;
+  }
+  .deliv-card:hover .deliv-bg-num { opacity: 0.06; }
+  .deliv-bg-num {
+    position: absolute; bottom: -20px; right: 20px;
+    font-family: var(--serif); font-size: 120px; color: var(--gold);
+    opacity: 0.03; pointer-events: none; transition: opacity 0.3s; line-height: 1;
+  }
+  .deliv-icon { width: 48px; height: 48px; border: 1px solid var(--gold-mid); border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .deliv-title { font-size: 19px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+  .deliv-desc { font-size: 13px; color: var(--white3); line-height: 1.7; }
+  .deliv-list { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .deliv-list li { font-size: 13px; color: var(--white3); list-style: none; display: flex; align-items: flex-start; gap: 8px; }
+  .deliv-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--black2); }
+  .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group { position: relative; }
+  .form-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--white3); display: block; margin-bottom: 6px; }
+  .form-input, .form-textarea, .form-select {
+    width: 100%; background: var(--black3); border: 1px solid var(--black5);
+    color: var(--white); padding: 13px 16px; font-family: var(--sans);
+    font-size: 13px; border-radius: 2px; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold-dim);
+  }
+  .form-textarea { min-height: 120px; resize: vertical; }
+  .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a84c'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-msg { font-family: var(--mono); font-size: 10px; color: var(--gold); min-height: 16px; margin-top: -8px; opacity: 0; transition: opacity 0.2s; }
+  .form-msg.show { opacity: 1; }
+  .contact-info { padding-top: 8px; }
+  .contact-info-item { display: flex; gap: 16px; margin-bottom: 32px; }
+  .ci-icon { width: 40px; height: 40px; border: 1px solid var(--black5); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ci-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--white3); margin-bottom: 4px; }
+  .ci-val { font-size: 14px; color: var(--white); }
+  .rules-box { background: var(--black3); border: 1px solid var(--black5); border-left: 3px solid var(--gold); padding: 24px 28px; margin-top: 40px; }
+  .rules-title { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .rules-list { display: flex; flex-direction: column; gap: 8px; }
+  .rules-list li { font-size: 12px; color: var(--white3); list-style: none; display: flex; gap: 10px; }
+  .rules-list li::before { content: '✗'; color: #e04c4c; flex-shrink: 0; font-size: 11px; }
+  .rules-list li.ok::before { content: '✓'; color: #4caf80; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--black); border-top: 1px solid var(--gold-dim); padding: 56px 40px 32px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-brand { }
+  .footer-logo { font-family: var(--serif); font-size: 26px; color: var(--gold); margin-bottom: 12px; }
+  .footer-tagline { font-size: 12px; color: var(--white3); line-height: 1.8; max-width: 260px; }
+  .footer-col-title { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 12px; color: var(--white3); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid var(--black5); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-family: var(--mono); font-size: 10px; color: var(--white3); }
+  .footer-gold-bar { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin-bottom: 40px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .enhance-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 72px 24px; }
+    nav { padding: 0 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .steps-row { grid-template-columns: repeat(4, 1fr); }
+    .step-node:nth-child(n+5) { display: none; }
+    .steps-line, .steps-line-fill { display: none; }
+    .enhance-grid { grid-template-columns: 1fr; }
+    .rubric-grid, .deliverables-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    body { cursor: auto; }
+    #cursor, #cursor-trail { display: none; }
+  }
+  @media (max-width: 480px) {
+    .stats-bar { grid-template-columns: 1fr 1fr; padding: 20px 24px; }
+    .hero-title { font-size: 38px; }
+    .about-diagram { font-size: 10px; padding: 20px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    FE Project
+    <span>Git Branching</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#enhancements">Enhancements</a></li>
+    <li><a href="#rubric">Rubric</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://github.com" class="nav-cta" target="_blank">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    Fork on GitHub
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#workflow" onclick="closeMobile()">Workflow</a>
+  <a href="#enhancements" onclick="closeMobile()">Enhancements</a>
+  <a href="#rubric" onclick="closeMobile()">Rubric</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+<!-- HERO -->
+<section id="hero">
+  <canvas id="canvas3d"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">CS Department — 2025</div>
+    <h1 class="hero-title">Frontend<br/><em>Enhancement</em></h1>
+    <p class="hero-subtitle">Using Git Branching</p>
+    <p class="hero-desc">Simulate real-world development workflows using version control. Collaborate, branch, build, and push — the professional way.</p>
+    <div class="hero-btns">
+      <a href="#workflow" class="btn-primary">Start the Project</a>
+      <a href="#rubric" class="btn-secondary">View Rubric</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-text">Scroll</div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num" data-count="7">0</div>
+    <div class="stat-label">Git Steps</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num" data-count="3">0</div>
+    <div class="stat-label">Min Enhancements</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num" data-count="100">0</div>
+    <div class="stat-label">Total Points</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num" data-count="5">0</div>
+    <div class="stat-label">Bonus Challenges</div>
+  </div>
+</div>
 
-  <script src="assets/js/script.js"></script>
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label reveal">About the Project</div>
+      <h2 class="section-title reveal reveal-delay-1">Three Pillars of<br/><em>Enhancement</em></h2>
+      <p class="section-desc reveal reveal-delay-2">Students collaborate using Git by creating their own branches from a central repository — each enhancing the frontend with new features, improved UI/UX, or optimized design.</p>
+      <div class="pillars reveal reveal-delay-3">
+        <div class="pillar open" onclick="togglePillar(this)">
+          <div class="pillar-head">
+            <span class="pillar-num">01</span>
+            <span class="pillar-name">UI/UX Improvements</span>
+            <span class="pillar-badge">Required</span>
+          </div>
+          <div class="pillar-body">Improve layout, spacing, and alignment. Add responsive design for mobile. Enhance typography and color usage. Add meaningful animations or transitions that improve user experience.</div>
+        </div>
+        <div class="pillar" onclick="togglePillar(this)">
+          <div class="pillar-head">
+            <span class="pillar-num">02</span>
+            <span class="pillar-name">Functional Enhancements</span>
+            <span class="pillar-badge">Required</span>
+          </div>
+          <div class="pillar-body">Add interactive components like modals or dropdowns. Improve navigation with navbar or sidebar. Implement form validation and loading feedback indicators that guide the user.</div>
+        </div>
+        <div class="pillar" onclick="togglePillar(this)">
+          <div class="pillar-head">
+            <span class="pillar-num">03</span>
+            <span class="pillar-name">Code Optimization</span>
+            <span class="pillar-badge">Required</span>
+          </div>
+          <div class="pillar-body">Clean and organize your code. Reduce redundant CSS and JavaScript. Improve performance with basic optimizations. Keep your commits meaningful and your branch history clean.</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-diagram">
+        <div class="diagram-header">
+          <div class="d-dot" style="background:#e04c4c"></div>
+          <div class="d-dot" style="background:#e0a04c"></div>
+          <div class="d-dot" style="background:#4caf80"></div>
+          <span style="font-size:10px;color:var(--white3);margin-left:4px;">terminal</span>
+        </div>
+        <div class="line-dim"># Step-by-step Git workflow</div>
+        <br/>
+        <div><span class="line-gold">$</span> git clone <span class="line-blue">https://github.com/</span></div>
+        <div style="padding-left:16px" class="line-blue">theirusername/fe-project.git</div>
+        <br/>
+        <div><span class="line-gold">$</span> cd fe-project</div>
+        <div><span class="line-gold">$</span> git checkout -b <span class="line-green">feature/lastname-frontend</span></div>
+        <br/>
+        <div class="line-dim"># Make your enhancements...</div>
+        <br/>
+        <div><span class="line-gold">$</span> git add .</div>
+        <div><span class="line-gold">$</span> git commit -m <span class="line-green">"feat: improved navbar"</span></div>
+        <div><span class="line-gold">$</span> git push origin <span class="line-green">feature/lastname-frontend</span></div>
+        <br/>
+        <div class="line-green">✓ Branch pushed — open a Pull Request<span class="typing-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow">
+  <div class="workflow-inner">
+    <div class="workflow-header">
+      <div class="section-label reveal">Git Process</div>
+      <h2 class="section-title reveal reveal-delay-1">The <em>7-Step</em><br/>Workflow</h2>
+      <p class="section-desc reveal reveal-delay-2">Click each step to explore what's required and see the exact commands you'll need to execute.</p>
+    </div>
+    <div class="steps-track reveal">
+      <div class="steps-line"></div>
+      <div class="steps-line-fill" id="stepsLineFill"></div>
+      <div class="steps-row" id="stepsRow">
+        <div class="step-node done" data-step="0" onclick="selectStep(0)">
+          <div class="step-circle">01</div>
+          <div class="step-node-label">Fork</div>
+        </div>
+        <div class="step-node" data-step="1" onclick="selectStep(1)">
+          <div class="step-circle">02</div>
+          <div class="step-node-label">Clone</div>
+        </div>
+        <div class="step-node" data-step="2" onclick="selectStep(2)">
+          <div class="step-circle">03</div>
+          <div class="step-node-label">Branch</div>
+        </div>
+        <div class="step-node" data-step="3" onclick="selectStep(3)">
+          <div class="step-circle">04</div>
+          <div class="step-node-label">Enhance</div>
+        </div>
+        <div class="step-node" data-step="4" onclick="selectStep(4)">
+          <div class="step-circle">05</div>
+          <div class="step-node-label">Commit</div>
+        </div>
+        <div class="step-node" data-step="5" onclick="selectStep(5)">
+          <div class="step-circle">06</div>
+          <div class="step-node-label">Push</div>
+        </div>
+        <div class="step-node" data-step="6" onclick="selectStep(6)">
+          <div class="step-circle">07</div>
+          <div class="step-node-label">Pull Request</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-detail visible" id="stepDetail">
+      <div class="step-detail-title" id="stepTitle">Step 1 — Fork the Repository</div>
+      <div class="step-detail-desc" id="stepDesc">Go to the instructor's repository on GitHub and click the Fork button in the top-right corner. This creates a personal copy of the repository under your own GitHub account that you can modify freely.</div>
+      <div class="code-block" id="stepCode">
+        <span class="c-dim"># On GitHub.com</span><br/>
+        <span class="c-gold">1.</span> Navigate to <span class="c-blue">github.com/aldonaire/frontend-enhancement-project</span><br/>
+        <span class="c-gold">2.</span> Click the <span class="c-green">"Fork"</span> button (top-right corner)<br/>
+        <span class="c-gold">3.</span> Your fork: <span class="c-blue">github.com/yourusername/frontend-enhancement-project</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENHANCEMENTS -->
+<section id="enhancements">
+  <div class="enhance-inner">
+    <div class="enhance-header">
+      <div class="section-label reveal">What to Build</div>
+      <h2 class="section-title reveal reveal-delay-1">Required<br/><em>Enhancements</em></h2>
+      <p class="section-desc reveal reveal-delay-2">Implement at least 3 improvements across the following categories. Each card shows what's expected and the skills you'll demonstrate.</p>
+    </div>
+    <div class="enhance-grid">
+      <div class="enhance-card reveal">
+        <div class="enhance-num">01</div>
+        <div class="enhance-icon">⬡</div>
+        <div class="enhance-title">Improve Layout & Spacing</div>
+        <div class="enhance-desc">Refine alignment, margins, and grid structure. Create a consistent visual rhythm that guides the user's eye through the page naturally.</div>
+        <div class="enhance-tags"><span class="tag">CSS Grid</span><span class="tag">Flexbox</span><span class="tag">Spacing</span></div>
+      </div>
+      <div class="enhance-card reveal reveal-delay-1">
+        <div class="enhance-num">02</div>
+        <div class="enhance-icon">◈</div>
+        <div class="enhance-title">Responsive Design</div>
+        <div class="enhance-desc">Make the site fully mobile-friendly using media queries, fluid grids, and flexible images. Test on multiple screen sizes before pushing.</div>
+        <div class="enhance-tags"><span class="tag">Media Queries</span><span class="tag">Mobile-first</span><span class="tag">Viewport</span></div>
+      </div>
+      <div class="enhance-card reveal reveal-delay-2">
+        <div class="enhance-num">03</div>
+        <div class="enhance-icon">◇</div>
+        <div class="enhance-title">Typography & Colors</div>
+        <div class="enhance-desc">Upgrade font pairing, hierarchy, and color palette. Use CSS custom properties for a cohesive and maintainable design system.</div>
+        <div class="enhance-tags"><span class="tag">Google Fonts</span><span class="tag">CSS Variables</span><span class="tag">Contrast</span></div>
+      </div>
+      <div class="enhance-card reveal reveal-delay-1">
+        <div class="enhance-num">04</div>
+        <div class="enhance-icon">▣</div>
+        <div class="enhance-title">Animations & Transitions</div>
+        <div class="enhance-desc">Add purposeful CSS animations and JavaScript-driven transitions. Scroll reveals, hover states, and loading effects all count.</div>
+        <div class="enhance-tags"><span class="tag">@keyframes</span><span class="tag">Intersection Observer</span><span class="tag">Transform</span></div>
+      </div>
+      <div class="enhance-card reveal reveal-delay-2">
+        <div class="enhance-num">05</div>
+        <div class="enhance-icon">⬠</div>
+        <div class="enhance-title">Interactive Components</div>
+        <div class="enhance-desc">Build modals, dropdowns, tabs, or carousels with JavaScript. Handle open/close states, keyboard accessibility, and smooth transitions.</div>
+        <div class="enhance-tags"><span class="tag">JavaScript</span><span class="tag">DOM Events</span><span class="tag">Accessibility</span></div>
+      </div>
+      <div class="enhance-card reveal reveal-delay-3">
+        <div class="enhance-num">06</div>
+        <div class="enhance-icon">⬟</div>
+        <div class="enhance-title">Form Validation</div>
+        <div class="enhance-desc">Add real-time client-side form validation with helpful error messages. Use the Constraint Validation API or custom JavaScript logic.</div>
+        <div class="enhance-tags"><span class="tag">Form API</span><span class="tag">Regex</span><span class="tag">UX Feedback</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUBRIC -->
+<section id="rubric">
+  <div class="rubric-inner">
+    <div class="rubric-header">
+      <div class="section-label reveal">Grading</div>
+      <h2 class="section-title reveal reveal-delay-1">100-Point<br/><em>Rubric</em></h2>
+      <p class="section-desc reveal reveal-delay-2">Every area is evaluated holistically. Strong Git practices combined with polished UI/UX will earn full marks.</p>
+    </div>
+    <div class="rubric-grid">
+      <div class="rubric-card reveal">
+        <div class="rubric-ring">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#1c1c1c" stroke-width="5"/>
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#c9a84c" stroke-width="5"
+              stroke-dasharray="43.98 131.95" stroke-linecap="round"/>
+          </svg>
+          <div class="rubric-ring-num">25</div>
+        </div>
+        <div class="rubric-info">
+          <div class="rubric-info-title">Git Usage</div>
+          <div class="rubric-info-pts">25 POINTS</div>
+          <div class="rubric-info-desc">Proper branching, meaningful commit messages, and a well-formed pull request targeting the correct base branch.</div>
+        </div>
+      </div>
+      <div class="rubric-card reveal reveal-delay-1">
+        <div class="rubric-ring">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#1c1c1c" stroke-width="5"/>
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#c9a84c" stroke-width="5"
+              stroke-dasharray="43.98 131.95" stroke-linecap="round"/>
+          </svg>
+          <div class="rubric-ring-num">25</div>
+        </div>
+        <div class="rubric-info">
+          <div class="rubric-info-title">UI/UX Improvements</div>
+          <div class="rubric-info-pts">25 POINTS</div>
+          <div class="rubric-info-desc">Visual design quality, responsiveness, typography, color coherence, and meaningful animation additions.</div>
+        </div>
+      </div>
+      <div class="rubric-card reveal reveal-delay-2">
+        <div class="rubric-ring">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#1c1c1c" stroke-width="5"/>
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#c9a84c" stroke-width="5"
+              stroke-dasharray="35.19 140.74" stroke-linecap="round"/>
+          </svg>
+          <div class="rubric-ring-num">20</div>
+        </div>
+        <div class="rubric-info">
+          <div class="rubric-info-title">Functionality</div>
+          <div class="rubric-info-pts">20 POINTS</div>
+          <div class="rubric-info-desc">Interactive components work correctly, form validation is implemented, and navigation is improved without breaking existing features.</div>
+        </div>
+      </div>
+      <div class="rubric-card reveal reveal-delay-3">
+        <div class="rubric-ring">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#1c1c1c" stroke-width="5"/>
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#c9a84c" stroke-width="5"
+              stroke-dasharray="26.39 149.54" stroke-linecap="round"/>
+          </svg>
+          <div class="rubric-ring-num">15</div>
+        </div>
+        <div class="rubric-info">
+          <div class="rubric-info-title">Code Quality</div>
+          <div class="rubric-info-pts">15 POINTS</div>
+          <div class="rubric-info-desc">Clean, organized, and well-commented code. No redundant selectors or dead JavaScript. Logical file and folder structure.</div>
+        </div>
+      </div>
+    </div>
+    <div class="rubric-total reveal" style="margin-top:2px;">
+      <div>
+        <div class="rubric-total-label">Total Points Available</div>
+        <div style="font-size:12px;color:var(--white3);margin-top:4px;">Plus documentation bonus: 15 pts</div>
+      </div>
+      <div class="rubric-total-val">100</div>
+    </div>
+    <div class="rubric-bonus reveal">
+      <div class="bonus-label">Bonus Challenges (Optional)</div>
+      <div class="bonus-items">
+        <div class="bonus-item">Dark mode toggle</div>
+        <div class="bonus-item">API integration (weather, quotes)</div>
+        <div class="bonus-item">React or Vue framework</div>
+        <div class="bonus-item">Animated loading screen</div>
+        <div class="bonus-item">Accessibility (ARIA roles)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section id="deliverables">
+  <div class="deliverables-inner">
+    <div class="section-label reveal">What to Submit</div>
+    <h2 class="section-title reveal reveal-delay-1">Your <em>Deliverables</em></h2>
+    <p class="section-desc reveal reveal-delay-2">Three things must be submitted for a complete grade. Missing any one of them will reduce your score significantly.</p>
+    <div class="deliverables-grid">
+      <div class="deliv-card reveal">
+        <div class="deliv-bg-num">01</div>
+        <div class="deliv-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        </div>
+        <div class="deliv-title">GitHub Branch</div>
+        <div class="deliv-desc">Your feature branch must be pushed to your forked repository with all changes committed properly.</div>
+        <ul class="deliv-list">
+          <li>Branch named: <code style="font-family:var(--mono);font-size:11px;color:var(--gold)">feature/lastname-frontend-enhancement</code></li>
+          <li>All changes committed with meaningful messages</li>
+          <li>No direct pushes to <code style="font-family:var(--mono);font-size:11px;color:var(--gold)">main</code></li>
+        </ul>
+      </div>
+      <div class="deliv-card reveal reveal-delay-1">
+        <div class="deliv-bg-num">02</div>
+        <div class="deliv-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><path d="M18 15h-6l-4 4V9a3 3 0 0 1 3-3h7a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3z"/></svg>
+        </div>
+        <div class="deliv-title">Pull Request</div>
+        <div class="deliv-desc">Open a PR from your feature branch targeting the instructor's main branch. Fill in the PR description template.</div>
+        <ul class="deliv-list">
+          <li>Base: <code style="font-family:var(--mono);font-size:11px;color:var(--gold)">aldonaire/frontend-enhancement-project</code> → main</li>
+          <li>Head: your fork → feature branch</li>
+          <li>PR description must include what was changed</li>
+        </ul>
+      </div>
+      <div class="deliv-card reveal reveal-delay-2" style="grid-column: span 2;">
+        <div class="deliv-bg-num">03</div>
+        <div class="deliv-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="deliv-title">Documentation (README update or separate file)</div>
+        <div class="deliv-desc">A short written document covering your work. This is worth 15 points — don't skip it.</div>
+        <ul class="deliv-list" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;margin-top:16px;">
+          <li>Features added and what they do</li>
+          <li>Tools and libraries used</li>
+          <li>Challenges encountered</li>
+          <li>How you solved each challenge</li>
+          <li>Screenshots or a demo link (optional but great)</li>
+          <li>Time spent on the project</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-label reveal">Get in Touch</div>
+      <h2 class="section-title reveal reveal-delay-1">Have a<br/><em>Question?</em></h2>
+      <p class="section-desc reveal reveal-delay-2">Submit your questions, report a merge conflict, or reach out to your instructor directly using the form.</p>
+      <div class="contact-info reveal reveal-delay-3">
+        <div class="contact-info-item">
+          <div class="ci-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-val">instructor@university.edu</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Office Hours</div>
+            <div class="ci-val">Mon & Wed, 2:00 – 4:00 PM</div>
+          </div>
+        </div>
+        <div class="rules-box">
+          <div class="rules-title">Project Rules</div>
+          <ul class="rules-list">
+            <li>Push directly to <code style="font-family:var(--mono);font-size:10px">main</code> — always use a feature branch</li>
+            <li>Use vague commit messages like "update file"</li>
+            <li>Break existing functionality before pushing</li>
+            <li class="ok">Work only on your assigned branch</li>
+            <li class="ok">Test everything before pushing</li>
+            <li class="ok">Keep commits small and meaningful</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form reveal reveal-delay-1">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Juan" id="fname" oninput="validateField(this)"/>
+            <div class="form-msg" id="fname-msg">Name is required</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Dela Cruz" id="lname" oninput="validateField(this)"/>
+            <div class="form-msg" id="lname-msg">Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="you@school.edu" id="email" oninput="validateEmail(this)"/>
+          <div class="form-msg" id="email-msg">Please enter a valid email</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Branch Name</label>
+          <input type="text" class="form-input" placeholder="feature/lastname-frontend-enhancement" id="branch"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="category">
+            <option value="">Select a category</option>
+            <option>Git / Branching Issue</option>
+            <option>Merge Conflict</option>
+            <option>UI/UX Question</option>
+            <option>Pull Request Help</option>
+            <option>Grading Inquiry</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Describe your question or issue in detail..." id="message" oninput="validateField(this)"></textarea>
+          <div class="form-msg" id="message-msg">Message cannot be empty</div>
+        </div>
+        <button class="btn-primary" onclick="submitForm()" style="width:100%;justify-content:center;display:flex;align-items:center;gap:8px;">
+          Send Message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+        <div id="form-success" style="display:none;text-align:center;padding:20px;background:var(--black3);border:1px solid var(--gold-dim);border-radius:2px;font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:1px;">
+          ✓ Message sent successfully
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-gold-bar"></div>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">FE Project</div>
+        <p class="footer-tagline">A Git Branching project that simulates real-world frontend development workflows for CS students.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Navigate</div>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#workflow">Git Workflow</a></li>
+          <li><a href="#enhancements">Enhancements</a></li>
+          <li><a href="#rubric">Rubric</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Resources</div>
+        <ul>
+          <li><a href="https://docs.github.com" target="_blank">GitHub Docs</a></li>
+          <li><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></li>
+          <li><a href="https://css-tricks.com" target="_blank">CSS Tricks</a></li>
+          <li><a href="https://javascript.info" target="_blank">JavaScript.info</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Submit</div>
+        <ul>
+          <li><a href="https://github.com" target="_blank">Fork on GitHub</a></li>
+          <li><a href="#contact">Contact Instructor</a></li>
+          <li><a href="#deliverables">Deliverables</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Frontend Enhancement Project — CS Department</div>
+      <div class="footer-copy">Built with HTML · CSS · JavaScript</div>
+    </div>
+  </div>
+</footer>
+
+<!-- THREE.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ── THREE.JS HERO ── */
+(function() {
+  const canvas = document.getElementById('canvas3d');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, canvas.offsetWidth / canvas.offsetHeight, 0.1, 100);
+  camera.position.set(0, 0, 5);
+
+  const gold = new THREE.Color(0xc9a84c);
+  const goldDim = new THREE.Color(0x3a2f10);
+
+  /* Torus knot */
+  const knotGeo = new THREE.TorusKnotGeometry(1.2, 0.35, 160, 20, 2, 3);
+  const knotMat = new THREE.MeshStandardMaterial({
+    color: 0xc9a84c, metalness: 0.9, roughness: 0.2,
+    emissive: 0x3a2000, emissiveIntensity: 0.3
+  });
+  const knot = new THREE.Mesh(knotGeo, knotMat);
+  scene.add(knot);
+
+  /* Wireframe overlay */
+  const wireMat = new THREE.MeshBasicMaterial({ color: 0xc9a84c, wireframe: true, opacity: 0.08, transparent: true });
+  const wire = new THREE.Mesh(knotGeo, wireMat);
+  scene.add(wire);
+
+  /* Floating particles */
+  const partCount = 200;
+  const positions = new Float32Array(partCount * 3);
+  for (let i = 0; i < partCount; i++) {
+    positions[i*3]   = (Math.random() - 0.5) * 12;
+    positions[i*3+1] = (Math.random() - 0.5) * 12;
+    positions[i*3+2] = (Math.random() - 0.5) * 8;
+  }
+  const partGeo = new THREE.BufferGeometry();
+  partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const partMat = new THREE.PointsMaterial({ color: 0xc9a84c, size: 0.03, transparent: true, opacity: 0.5 });
+  const particles = new THREE.Points(partGeo, partMat);
+  scene.add(particles);
+
+  /* Lights */
+  const ambLight = new THREE.AmbientLight(0xffffff, 0.3);
+  scene.add(ambLight);
+  const goldLight = new THREE.PointLight(0xc9a84c, 3, 10);
+  goldLight.position.set(2, 2, 2);
+  scene.add(goldLight);
+  const whiteLight = new THREE.PointLight(0xffffff, 1, 8);
+  whiteLight.position.set(-2, -1, 3);
+  scene.add(whiteLight);
+
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  window.addEventListener('resize', () => {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  });
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.005;
+    knot.rotation.x += 0.004 + mouseY * 0.001;
+    knot.rotation.y += 0.006 + mouseX * 0.001;
+    wire.rotation.copy(knot.rotation);
+    particles.rotation.y = t * 0.1;
+    goldLight.position.x = Math.sin(t) * 3;
+    goldLight.position.y = Math.cos(t * 0.7) * 3;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+/* ── CURSOR ── */
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursor-trail');
+let cx = 0, cy = 0;
+document.addEventListener('mousemove', e => {
+  cx = e.clientX; cy = e.clientY;
+  cursor.style.transform = `translate(${cx - 6}px, ${cy - 6}px)`;
+  setTimeout(() => { trail.style.transform = `translate(${cx - 2}px, ${cy - 2}px)`; }, 80);
+});
+document.querySelectorAll('a, button, .pillar, .step-node, .enhance-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform += ' scale(2)');
+  el.addEventListener('mouseleave', () => {});
+});
+
+/* ── NAVBAR SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ── HAMBURGER ── */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('open');
+});
+function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ── COUNT UP STATS ── */
+const countEls = document.querySelectorAll('[data-count]');
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.count;
+    let current = 0;
+    const step = target / 40;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.round(current);
+      if (current >= target) clearInterval(timer);
+    }, 30);
+    countObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+countEls.forEach(el => countObs.observe(el));
+
+/* ── PILLAR TOGGLE ── */
+function togglePillar(el) {
+  document.querySelectorAll('.pillar').forEach(p => p.classList.remove('open'));
+  el.classList.add('open');
+}
+
+/* ── WORKFLOW STEPS ── */
+const stepData = [
+  {
+    title: 'Step 1 — Fork the Repository',
+    desc: 'Go to the instructor\'s repository on GitHub and click the Fork button in the top-right corner. This creates a personal copy under your own GitHub account.',
+    code: `<span class="c-dim"># On GitHub.com</span>\n<span class="c-gold">1.</span> Navigate to <span class="c-blue">github.com/aldonaire/frontend-enhancement-project</span>\n<span class="c-gold">2.</span> Click the <span class="c-green">"Fork"</span> button (top-right)\n<span class="c-gold">3.</span> Your fork: <span class="c-blue">github.com/yourusername/frontend-enhancement-project</span>`
+  },
+  {
+    title: 'Step 2 — Clone Your Fork',
+    desc: 'Clone your forked repository to your local machine so you can start working on the code.',
+    code: `<span class="c-gold">$</span> git clone <span class="c-blue">https://github.com/theirusername/frontend-enhancement-project.git</span>\n<span class="c-gold">$</span> cd frontend-enhancement-project`
+  },
+  {
+    title: 'Step 3 — Create a Branch',
+    desc: 'Create a new feature branch using your last name. Never work directly on main — this simulates real team workflows.',
+    code: `<span class="c-gold">$</span> git checkout -b <span class="c-green">feature/lastname-frontend-enhancement</span>\n<span class="c-dim"># Confirm your branch</span>\n<span class="c-gold">$</span> git branch\n<span class="c-green">* feature/lastname-frontend-enhancement</span>\n  main`
+  },
+  {
+    title: 'Step 4 — Make Enhancements',
+    desc: 'Implement at least 3 improvements. Edit the HTML, CSS, and JavaScript files. Focus on UI/UX, functionality, and clean code.',
+    code: `<span class="c-dim"># File structure to follow</span>\nassets/css/styles.css    <span class="c-dim">← your styles here</span>\nassets/js/script.js      <span class="c-dim">← your JS here</span>\ncomponents/navbar.html   <span class="c-dim">← navbar component</span>\ncomponents/footer.html   <span class="c-dim">← footer component</span>\npages/about.html\npages/contact.html\nindex.html`
+  },
+  {
+    title: 'Step 5 — Commit Changes',
+    desc: 'Stage and commit your work with a meaningful message. Use conventional commit prefixes: feat:, fix:, style:, docs:, refactor:',
+    code: `<span class="c-gold">$</span> git add .\n<span class="c-gold">$</span> git commit -m <span class="c-green">"feat: improved navbar responsiveness"</span>\n<span class="c-gold">$</span> git commit -m <span class="c-green">"style: updated color palette and typography"</span>\n<span class="c-gold">$</span> git commit -m <span class="c-green">"feat: added contact form validation"`
+  },
+  {
+    title: 'Step 6 — Push Your Branch',
+    desc: 'Push your feature branch to your forked repository on GitHub. Make sure to specify the correct remote branch name.',
+    code: `<span class="c-gold">$</span> git push origin <span class="c-green">feature/lastname-frontend-enhancement</span>\n\n<span class="c-dim"># Output should say:</span>\n<span class="c-green">Branch 'feature/lastname-frontend-enhancement'</span>\n<span class="c-green">set up to track remote branch.</span>`
+  },
+  {
+    title: 'Step 7 — Open a Pull Request',
+    desc: 'Go to your fork on GitHub and click "Compare & pull request". Make sure the base is the instructor\'s main branch and the head is your feature branch.',
+    code: `<span class="c-dim"># Pull Request settings</span>\n<span class="c-gold">base repository:</span>  <span class="c-blue">aldonaire/frontend-enhancement-project</span>\n<span class="c-gold">base branch:</span>      <span class="c-green">main</span>\n<span class="c-gold">head repository:</span>  <span class="c-blue">theirusername/frontend-enhancement-project</span>\n<span class="c-gold">compare:</span>          <span class="c-green">feature/lastname-frontend-enhancement</span>`
+  }
+];
+
+let activeStep = 0;
+function selectStep(i) {
+  activeStep = i;
+  const nodes = document.querySelectorAll('.step-node');
+  nodes.forEach((n, idx) => {
+    n.classList.remove('active', 'done');
+    if (idx < i) n.classList.add('done');
+    else if (idx === i) n.classList.add('active');
+  });
+  const fill = document.getElementById('stepsLineFill');
+  const pct = (i / 6) * 100;
+  fill.style.width = `calc(${pct}% + ${pct === 0 ? 0 : 28}px)`;
+  const d = stepData[i];
+  document.getElementById('stepTitle').textContent = d.title;
+  document.getElementById('stepDesc').textContent = d.desc;
+  document.getElementById('stepCode').innerHTML = d.code;
+  document.getElementById('stepDetail').classList.add('visible');
+}
+selectStep(0);
+
+/* ── FORM VALIDATION ── */
+function validateField(el) {
+  const msg = document.getElementById(el.id + '-msg');
+  if (!msg) return;
+  if (!el.value.trim()) { msg.classList.add('show'); }
+  else { msg.classList.remove('show'); }
+}
+function validateEmail(el) {
+  const msg = document.getElementById('email-msg');
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+  if (!el.value || !valid) { msg.classList.add('show'); }
+  else { msg.classList.remove('show'); }
+}
+function submitForm() {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  let ok = true;
+  if (!fname) { document.getElementById('fname-msg').classList.add('show'); ok = false; }
+  if (!lname) { document.getElementById('lname-msg').classList.add('show'); ok = false; }
+  if (!email || !emailValid) { document.getElementById('email-msg').classList.add('show'); ok = false; }
+  if (!message) { document.getElementById('message-msg').classList.add('show'); ok = false; }
+  if (!ok) return;
+  document.querySelector('.contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
 </body>
 </html>
