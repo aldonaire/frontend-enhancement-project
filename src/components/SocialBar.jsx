@@ -34,7 +34,7 @@ function SocialBar() {
   }, []);
 
   return (
-    <div className={`sidebar ${sidebarDark ? 'sidebar--dark' : 'sidebar--light'}`}>
+    <div className={`social-bar sidebar ${sidebarDark ? 'sidebar--dark' : 'sidebar--light'}`}>
       <div className="sidebar-line"></div>
       
       <a href="https://instagram.com" className="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -96,7 +96,7 @@ function NameTag() {
   }, []);
 
   return (
-    <div className={`sidebar ${sidebarDark ? 'sidebar--dark' : 'sidebar--light'}`}>
+    <div className={`name-tag sidebar ${sidebarDark ? 'sidebar--dark' : 'sidebar--light'}`}>
       <span className="sidebar-text">— charles</span>
     </div>
   );
