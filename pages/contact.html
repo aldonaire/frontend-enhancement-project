@@ -1,9 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Contact</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — CODE//RED</title>
+  <meta name="description" content="Get in touch with the CODE//RED project team." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 <body>
-  <h1>Contact Page</h1>
+
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="../index.html" class="nav-logo">CODE<span class="slash">//</span>RED</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="https://github.com" target="_blank" rel="noopener" class="nav-cta">Fork Repo</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="../index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://github.com" target="_blank">Fork Repo ↗</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--red);letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem;display:block;">// Get In Touch</span>
+    <h1>Let's <span style="color:var(--red);">Talk</span></h1>
+    <p>Questions about the project, requirements, or just want to share what you built? Reach out.</p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="section">
+  <div class="section-inner">
+    <div class="contact-grid">
+
+      <!-- LEFT: Info -->
+      <div class="reveal">
+        <p class="section-tag">Contact Info</p>
+        <h2 class="section-title" style="margin-bottom:2rem;">We're <span class="accent">here to help</span></h2>
+
+        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="width:44px;height:44px;background:var(--red-dim);border:1px solid var(--border-red);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">📧</div>
+            <div>
+              <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">Email</p>
+              <p style="font-size:0.875rem;color:var(--text-muted);">instructor@school.edu</p>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="width:44px;height:44px;background:var(--red-dim);border:1px solid var(--border-red);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">🐙</div>
+            <div>
+              <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">GitHub</p>
+              <p style="font-size:0.875rem;color:var(--text-muted);">github.com/aldonaire</p>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="width:44px;height:44px;background:var(--red-dim);border:1px solid var(--border-red);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">🕐</div>
+            <div>
+              <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">Office Hours</p>
+              <p style="font-size:0.875rem;color:var(--text-muted);">Monday – Friday, 9AM – 5PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick tips -->
+        <div style="margin-top:3rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;">Quick Reminders</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;">
+            <li style="font-size:0.8rem;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--red);flex-shrink:0;">›</span>
+              Always branch off from main, never push directly to it
+            </li>
+            <li style="font-size:0.8rem;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--red);flex-shrink:0;">›</span>
+              Use conventional commit messages: feat, fix, docs, style
+            </li>
+            <li style="font-size:0.8rem;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--red);flex-shrink:0;">›</span>
+              Test on mobile before submitting your PR
+            </li>
+            <li style="font-size:0.8rem;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--red);flex-shrink:0;">›</span>
+              Update your README — it's worth 15 points
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="reveal">
+        <p class="section-tag">Send a Message</p>
+        <h2 class="section-title" style="margin-bottom:2rem;">Drop us a <span class="accent">line</span></h2>
+
+        <form id="contact-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="name">Full Name *</label>
+            <input class="form-control" type="text" id="name" name="name" placeholder="Juan Dela Cruz" required />
+            <p class="form-error">Please enter your full name.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="juan@school.edu" required />
+            <p class="form-error">Please enter a valid email address.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="branch">Your Branch Name</label>
+            <input class="form-control" type="text" id="branch" name="branch" placeholder="feature/delacruz-frontend-enhancement" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject *</label>
+            <select class="form-control" id="subject" name="subject" required style="cursor:pointer;">
+              <option value="" disabled selected>Select a topic...</option>
+              <option value="question">General Question</option>
+              <option value="git">Git / GitHub Help</option>
+              <option value="grading">Grading Inquiry</option>
+              <option value="bug">Bug in Project</option>
+              <option value="other">Other</option>
+            </select>
+            <p class="form-error">Please select a subject.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Message *</label>
+            <textarea class="form-control" id="message" name="message" placeholder="Describe your question or concern in detail..." required></textarea>
+            <p class="form-error">Please write your message.</p>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:16px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:#e63232;letter-spacing:3px;">
+          CODE<span style="color:#fff;opacity:0.4;">//</span>RED
+        </div>
+        <p class="footer-brand-desc">A real-world Git & frontend simulation project for students.</p>
+      </div>
+      <div>
+        <p class="footer-heading">Navigation</p>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="../docs/student-guide.md">Student Guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Resources</p>
+        <ul class="footer-links">
+          <li><a href="https://git-scm.com/docs" target="_blank">Git Docs</a></li>
+          <li><a href="https://github.com" target="_blank">GitHub</a></li>
+          <li><a href="https://developer.mozilla.org" target="_blank">MDN Docs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 <span>CODE//RED</span> — Frontend Enhancement Project</p>
+      <p class="footer-copy" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#333;">
+        git commit -m <span style="color:#e63232;">"feat: shipped with pride"</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="../assets/js/script.js"></script>
 </body>
 </html>
