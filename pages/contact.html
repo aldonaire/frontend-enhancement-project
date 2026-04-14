@@ -1,9 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="light">
 <head>
-  <title>Contact</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — DevPath Academy</title>
+  <meta name="description" content="Get in touch with the DevPath Academy team." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <h1>Contact Page</h1>
+
+  <!-- ░░ NAVBAR ░░ -->
+  <div data-component="navbar" data-src="../components/navbar.html"></div>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         PAGE HERO
+    ═══════════════════════════════════════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="section__tag" style="display: inline-block; margin-bottom: 16px;">contact</div>
+        <h1 class="page-hero__title">
+          We'd love to hear<br>from you.
+        </h1>
+        <p class="page-hero__desc">
+          Have a question about courses, pricing, or a partnership?
+          Drop us a message — we'll get back within 24 hours.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="contact__grid">
+
+          <!-- Form -->
+          <div>
+            <h2 class="section__title" style="font-size: 22px; margin-bottom: 24px;">Send a message</h2>
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First name</label>
+                  <input type="text" id="firstName" name="firstName" placeholder="Juan" required />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last name</label>
+                  <input type="text" id="lastName" name="lastName" placeholder="dela Cruz" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="juan@example.com" required />
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject">
+                  <option value="">Select a topic…</option>
+                  <option>Course inquiry</option>
+                  <option>Billing &amp; pricing</option>
+                  <option>Technical support</option>
+                  <option>Partnership</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us how we can help…" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary" style="width: 100%; padding: 13px;">
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <!-- Info Cards -->
+          <div>
+            <h2 class="section__title" style="font-size: 22px; margin-bottom: 24px;">Get in touch</h2>
+            <div class="contact-info">
+              <div class="contact-info-card">
+                <div class="contact-info-card__icon">📧</div>
+                <div>
+                  <div class="contact-info-card__title">Email us</div>
+                  <div class="contact-info-card__value">hello@devpath.dev</div>
+                </div>
+              </div>
+              <div class="contact-info-card">
+                <div class="contact-info-card__icon">💬</div>
+                <div>
+                  <div class="contact-info-card__title">Discord community</div>
+                  <div class="contact-info-card__value">discord.gg/devpath · 800+ members</div>
+                </div>
+              </div>
+              <div class="contact-info-card">
+                <div class="contact-info-card__icon">🕐</div>
+                <div>
+                  <div class="contact-info-card__title">Response time</div>
+                  <div class="contact-info-card__value">Within 24 hours, Monday – Saturday</div>
+                </div>
+              </div>
+              <div class="contact-info-card">
+                <div class="contact-info-card__icon">📍</div>
+                <div>
+                  <div class="contact-info-card__title">Based in</div>
+                  <div class="contact-info-card__value">Davao City, Philippines 🇵🇭</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick links terminal card -->
+            <div style="margin-top: 20px; padding: 20px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); line-height: 2.2;">
+              <div style="color: #a3e635; margin-bottom: 8px;"># quick links</div>
+              <div>→ <a href="/docs/student-guide.md" style="color: var(--text-secondary);">Student Guide</a></div>
+              <div>→ <a href="/index.html#faq"        style="color: var(--text-secondary);">FAQ</a></div>
+              <div>→ <a href="/MAIN-TASK.md"           style="color: var(--text-secondary);">Project Task</a></div>
+              <div>→ <a href="/README.md"              style="color: var(--text-secondary);">README</a></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ░░ FOOTER ░░ -->
+  <div data-component="footer" data-src="../components/footer.html"></div>
+
+  <script src="../assets/js/script.js"></script>
 </body>
 </html>

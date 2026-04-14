@@ -1,25 +1,394 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevPath Academy — Learn to Code, Build, and Ship</title>
+  <meta name="description" content="Master modern web development with real-world projects, expert instructors, and a community that keeps you accountable." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+  <!-- ░░ NAVBAR (loaded via JS) ░░ -->
+  <div data-component="navbar" data-src="components/navbar.html"></div>
 
   <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
 
-    <button onclick="showAlert()">Click Me</button>
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__badge">Now enrolling — Batch 2025</div>
+        <div class="hero__code">
+          <span class="prompt">$ </span>git clone devpath.dev/bootcamp
+        </div>
+        <h1 class="hero__title">
+          Learn to <span class="highlight">Code</span>,<br>
+          Build, and Ship.
+        </h1>
+        <p class="hero__desc">
+          Master modern web development with real-world projects,
+          expert instructors, and a community that keeps you accountable.
+        </p>
+        <div class="hero__actions">
+          <a href="#pricing" class="btn btn--primary">Start Learning Free</a>
+          <a href="#courses" class="btn btn--ghost">Browse Courses →</a>
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="stat__value">2,400+</span>
+            <span class="stat__label">Students enrolled</span>
+          </div>
+          <div class="hero__stat">
+            <span class="stat__value">98%</span>
+            <span class="stat__label">Completion rate</span>
+          </div>
+          <div class="hero__stat">
+            <span class="stat__value">40+</span>
+            <span class="stat__label">Projects built</span>
+          </div>
+          <div class="hero__stat">
+            <span class="stat__value">4.9★</span>
+            <span class="stat__label">Average rating</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FEATURES
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section__tag">features</div>
+        <h2 class="section__title">Everything you need to go pro</h2>
+        <p class="section__subtitle">
+          From version control to responsive design — we cover the full modern web development stack.
+        </p>
+        <div class="features__grid">
+          <div class="feat-card animate-on-scroll">
+            <div class="feat-card__icon">⚡</div>
+            <h3 class="feat-card__title">Project-based learning</h3>
+            <p class="feat-card__desc">Build 10+ real projects from scratch. No fluff — just hands-on coding that builds your portfolio.</p>
+          </div>
+          <div class="feat-card animate-on-scroll" style="transition-delay: 0.08s">
+            <div class="feat-card__icon">🔀</div>
+            <h3 class="feat-card__title">Git & version control</h3>
+            <p class="feat-card__desc">Learn branching, pull requests, and team workflows used by real developers every day.</p>
+          </div>
+          <div class="feat-card animate-on-scroll" style="transition-delay: 0.16s">
+            <div class="feat-card__icon">🎓</div>
+            <h3 class="feat-card__title">Expert instructors</h3>
+            <p class="feat-card__desc">Learn from developers with 5+ years of industry experience at top tech companies.</p>
+          </div>
+          <div class="feat-card animate-on-scroll" style="transition-delay: 0.04s">
+            <div class="feat-card__icon">📱</div>
+            <h3 class="feat-card__title">Mobile-first design</h3>
+            <p class="feat-card__desc">Every project is built responsive from the ground up — optimized for every screen size.</p>
+          </div>
+          <div class="feat-card animate-on-scroll" style="transition-delay: 0.12s">
+            <div class="feat-card__icon">🚀</div>
+            <h3 class="feat-card__title">Deploy your work</h3>
+            <p class="feat-card__desc">Push to Vercel, Netlify, or GitHub Pages and get live URLs you can share with anyone.</p>
+          </div>
+          <div class="feat-card animate-on-scroll" style="transition-delay: 0.20s">
+            <div class="feat-card__icon">🤝</div>
+            <h3 class="feat-card__title">Community support</h3>
+            <p class="feat-card__desc">Join a Discord of 800+ learners. Get help, give help, and grow together.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         COURSES
+    ═══════════════════════════════════════════ -->
+    <section class="section section--alt" id="courses">
+      <div class="container">
+        <div class="section__tag">courses</div>
+        <h2 class="section__title">Start with the fundamentals</h2>
+        <p class="section__subtitle">
+          Structured learning paths designed to take you from zero to job-ready.
+        </p>
+        <div class="courses__grid">
+          <div class="course-card animate-on-scroll">
+            <div class="course-card__thumb thumb--html">🌐</div>
+            <div class="course-card__body">
+              <div class="course-card__level">Beginner · 12 Lessons</div>
+              <h3 class="course-card__title">HTML Foundations</h3>
+              <div class="course-card__meta">
+                <span>by J. Mendez</span>
+                <span>4.8 ★</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar__fill" style="width: 72%; background: #f97316;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="course-card animate-on-scroll" style="transition-delay: 0.1s">
+            <div class="course-card__thumb thumb--css">🎨</div>
+            <div class="course-card__body">
+              <div class="course-card__level">Beginner · 18 Lessons</div>
+              <h3 class="course-card__title">CSS & Tailwind</h3>
+              <div class="course-card__meta">
+                <span>by R. Santos</span>
+                <span>4.9 ★</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar__fill" style="width: 45%; background: #3b82f6;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="course-card animate-on-scroll" style="transition-delay: 0.2s">
+            <div class="course-card__thumb thumb--js">⚙️</div>
+            <div class="course-card__body">
+              <div class="course-card__level">Intermediate · 24 Lessons</div>
+              <h3 class="course-card__title">JavaScript Essentials</h3>
+              <div class="course-card__meta">
+                <span>by K. Reyes</span>
+                <span>4.7 ★</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar__fill" style="width: 20%; background: #eab308;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TEAM
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section__tag">instructors</div>
+        <h2 class="section__title">Meet the mentors</h2>
+        <p class="section__subtitle">
+          Industry veterans who've been in the trenches and know what it takes to succeed.
+        </p>
+        <div class="team__grid">
+          <div class="team-card animate-on-scroll">
+            <div class="team-card__avatar av--green">JM</div>
+            <div class="team-card__name">J. Mendez</div>
+            <div class="team-card__role">Frontend Lead</div>
+          </div>
+          <div class="team-card animate-on-scroll" style="transition-delay: 0.08s">
+            <div class="team-card__avatar av--blue">RS</div>
+            <div class="team-card__name">R. Santos</div>
+            <div class="team-card__role">UI/UX Designer</div>
+          </div>
+          <div class="team-card animate-on-scroll" style="transition-delay: 0.16s">
+            <div class="team-card__avatar av--purple">KR</div>
+            <div class="team-card__name">K. Reyes</div>
+            <div class="team-card__role">JS Engineer</div>
+          </div>
+          <div class="team-card animate-on-scroll" style="transition-delay: 0.24s">
+            <div class="team-card__avatar av--amber">AL</div>
+            <div class="team-card__name">A. Lim</div>
+            <div class="team-card__role">Fullstack Dev</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TESTIMONIALS
+    ═══════════════════════════════════════════ -->
+    <section class="section section--alt" id="testimonials">
+      <div class="container">
+        <div class="section__tag">testimonials</div>
+        <h2 class="section__title">What students say</h2>
+        <p class="section__subtitle">
+          Don't take our word for it — hear from people who've been through the program.
+        </p>
+        <div class="testi__grid">
+          <div class="testi-card animate-on-scroll">
+            <div class="testi-card__stars">★★★★★</div>
+            <p class="testi-card__text">
+              "DevPath completely changed how I approach web projects. The Git workflow alone was worth
+              the tuition. I finally feel like a real developer."
+            </p>
+            <div class="testi-card__author">
+              <div class="testi-card__av av--blue">MB</div>
+              <div>
+                <div class="testi-card__name">Maria B.</div>
+                <div class="testi-card__meta">Frontend intern @ Shopify</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card animate-on-scroll" style="transition-delay: 0.1s">
+            <div class="testi-card__stars">★★★★★</div>
+            <p class="testi-card__text">
+              "I went from zero to deploying my own portfolio site in 6 weeks. The projects are actually
+              fun to build and the community is incredibly supportive."
+            </p>
+            <div class="testi-card__author">
+              <div class="testi-card__av av--purple">JC</div>
+              <div>
+                <div class="testi-card__name">Juan C.</div>
+                <div class="testi-card__meta">Freelance web developer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PRICING
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="pricing">
+      <div class="container" style="text-align: center;">
+        <div class="section__tag" style="display: inline-block;">pricing</div>
+        <h2 class="section__title">Simple, transparent pricing</h2>
+        <p class="section__subtitle" style="margin: 0 auto 24px;">
+          No hidden fees. Cancel any time. Start free, upgrade when you're ready.
+        </p>
+
+        <!-- Monthly / Yearly toggle -->
+        <div class="pricing__toggle">
+          <span class="pricing__toggle-label">Monthly</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="billingToggle" />
+          </label>
+          <span class="pricing__toggle-label">Yearly</span>
+          <span class="pricing__badge">Save 25%</span>
+        </div>
+
+        <div class="pricing__grid" style="text-align: left;">
+          <!-- Starter -->
+          <div class="price-card animate-on-scroll">
+            <div class="price-card__plan">Starter</div>
+            <div class="price-card__amount">Free</div>
+            <div class="price-card__period">Forever</div>
+            <ul class="price-card__features">
+              <li class="price-feat"><span class="price-feat__check">✓</span> 3 free courses</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> Community Discord access</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> Basic project templates</li>
+            </ul>
+            <a href="#" class="btn btn--ghost" style="width: 100%;">Get started</a>
+          </div>
+
+          <!-- Pro (featured) -->
+          <div class="price-card price-card--featured animate-on-scroll" style="transition-delay: 0.1s">
+            <div class="price-card__badge">Most popular</div>
+            <div class="price-card__plan">Pro</div>
+            <div class="price-card__amount" data-monthly="₱499" data-yearly="₱374">₱499</div>
+            <div class="price-card__period price-period">/ month</div>
+            <ul class="price-card__features">
+              <li class="price-feat"><span class="price-feat__check">✓</span> All courses unlocked</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> 1-on-1 code review</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> Certificate of completion</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> Priority Discord support</li>
+            </ul>
+            <a href="#" class="btn btn--primary" style="width: 100%;">Start Pro</a>
+          </div>
+
+          <!-- Team -->
+          <div class="price-card animate-on-scroll" style="transition-delay: 0.2s">
+            <div class="price-card__plan">Team</div>
+            <div class="price-card__amount" data-monthly="₱1,999" data-yearly="₱1,499">₱1,999</div>
+            <div class="price-card__period price-period">/ month · up to 5 seats</div>
+            <ul class="price-card__features">
+              <li class="price-feat"><span class="price-feat__check">✓</span> Everything in Pro</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> Team progress dashboard</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> Bulk seat management</li>
+              <li class="price-feat"><span class="price-feat__check">✓</span> Dedicated account manager</li>
+            </ul>
+            <a href="/pages/contact.html" class="btn btn--ghost" style="width: 100%;">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FAQ
+    ═══════════════════════════════════════════ -->
+    <section class="section section--alt" id="faq">
+      <div class="container" style="text-align: center;">
+        <div class="section__tag" style="display: inline-block;">faq</div>
+        <h2 class="section__title">Frequently asked questions</h2>
+        <p class="section__subtitle" style="margin: 0 auto 40px;">Got questions? We've got answers.</p>
+        <div class="faq__list" style="text-align: left;">
+          <div class="faq__item">
+            <button class="faq__question">
+              Do I need prior coding experience?
+              <span class="faq__icon">+</span>
+            </button>
+            <div class="faq__answer">
+              Not at all! Our Starter and HTML courses are designed for absolute beginners.
+              You just need a computer, a browser, and the willingness to learn.
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">
+              How long does the bootcamp take?
+              <span class="faq__icon">+</span>
+            </button>
+            <div class="faq__answer">
+              It depends on your pace. Most students complete the core curriculum in 6–10 weeks
+              studying 1–2 hours per day. The content never expires — go at your own speed.
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">
+              Will I get a certificate?
+              <span class="faq__icon">+</span>
+            </button>
+            <div class="faq__answer">
+              Yes! Pro and Team plan students receive a certificate of completion for each course they finish.
+              Certificates are shareable on LinkedIn and downloadable as PDFs.
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">
+              Can I get a refund if I'm not satisfied?
+              <span class="faq__icon">+</span>
+            </button>
+            <div class="faq__answer">
+              Absolutely. We offer a 14-day money-back guarantee on all paid plans.
+              If you're not happy, just reach out to our support team and we'll process a full refund.
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">
+              What tools do I need to get started?
+              <span class="faq__icon">+</span>
+            </button>
+            <div class="faq__answer">
+              Just a code editor (we recommend VS Code — it's free) and a GitHub account.
+              Everything else — hosting, deployment, and tools — is covered in the course.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CTA BANNER
+    ═══════════════════════════════════════════ -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-section__title">Ready to start <span class="highlight">building?</span></h2>
+        <p class="cta-section__desc">Join 2,400+ students already learning at DevPath Academy.</p>
+        <div class="cta-section__actions">
+          <a href="#pricing" class="btn btn--primary">Enroll for Free</a>
+          <a href="#courses" class="btn btn--ghost" style="color: #9ca3af; border-color: rgba(255,255,255,0.12);">
+            View all courses →
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+  <!-- ░░ FOOTER (loaded via JS) ░░ -->
+  <div data-component="footer" data-src="components/footer.html"></div>
 
   <script src="assets/js/script.js"></script>
 </body>

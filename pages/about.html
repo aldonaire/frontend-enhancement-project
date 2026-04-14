@@ -1,9 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="light">
 <head>
-  <title>About</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — DevPath Academy</title>
+  <meta name="description" content="Learn about the team and story behind DevPath Academy." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <h1>About Page</h1>
+
+  <!-- ░░ NAVBAR ░░ -->
+  <div data-component="navbar" data-src="../components/navbar.html"></div>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         PAGE HERO
+    ═══════════════════════════════════════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="section__tag" style="display: inline-block; margin-bottom: 16px;">about us</div>
+        <h1 class="page-hero__title">
+          Built by developers,<br>for developers.
+        </h1>
+        <p class="page-hero__desc">
+          DevPath Academy started as a passion project by a group of self-taught devs
+          who wanted a better way to learn — and teach.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         STORY
+    ═══════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="about-story-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;">
+          <div>
+            <div class="section__tag">our story</div>
+            <h2 class="section__title">We learned the hard way so you don't have to.</h2>
+            <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">
+              In 2021, a group of developers from the Philippines started meeting every weekend to teach
+              friends how to code. The sessions grew. The community grew. And what started in a Discord
+              server became a full-blown curriculum.
+            </p>
+            <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.8;">
+              Today, DevPath Academy serves thousands of students with structured, project-based courses
+              that mirror real-world development workflows — including Git, deployment, and code review.
+            </p>
+          </div>
+
+          <!-- Timeline terminal card -->
+          <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); line-height: 2.2;">
+            <div style="color: #a3e635; margin-bottom: 12px; font-size: 12px;"># devpath/story.log</div>
+            <div><span style="color: #6b7280;">2021 —</span> First weekend sessions begin</div>
+            <div><span style="color: #6b7280;">2022 —</span> Discord community hits 500 members</div>
+            <div><span style="color: #6b7280;">2023 —</span> First paid cohort launches</div>
+            <div><span style="color: #6b7280;">2024 —</span> 1,000+ students enrolled</div>
+            <div><span style="color: #6b7280;">2025 —</span> DevPath Academy v2.0 launches</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         VALUES
+    ═══════════════════════════════════════════ -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__tag">values</div>
+        <h2 class="section__title">What we stand for</h2>
+        <p class="section__subtitle">
+          Four principles that guide everything we build and teach.
+        </p>
+        <div class="values__grid">
+          <div class="value-card animate-on-scroll">
+            <div class="value-card__num">01</div>
+            <h3 class="value-card__title">Build real things</h3>
+            <p class="value-card__desc">
+              Theory without practice is worthless. Every lesson ends with something you can show —
+              a live URL, a GitHub repo, a deployed app.
+            </p>
+          </div>
+          <div class="value-card animate-on-scroll" style="transition-delay: 0.1s">
+            <div class="value-card__num">02</div>
+            <h3 class="value-card__title">Learn in the open</h3>
+            <p class="value-card__desc">
+              We use Git from day one. Your code lives on GitHub. Code review is part of the
+              curriculum, not an afterthought.
+            </p>
+          </div>
+          <div class="value-card animate-on-scroll" style="transition-delay: 0.05s">
+            <div class="value-card__num">03</div>
+            <h3 class="value-card__title">Community over isolation</h3>
+            <p class="value-card__desc">
+              Learning alone is hard. We built a Discord, a mentor network, and a culture of helping
+              each other — because that's how real teams work.
+            </p>
+          </div>
+          <div class="value-card animate-on-scroll" style="transition-delay: 0.15s">
+            <div class="value-card__num">04</div>
+            <h3 class="value-card__title">Accessible to everyone</h3>
+            <p class="value-card__desc">
+              We keep our free tier genuinely free. Great education shouldn't be gated behind a
+              paywall — it should be earned through effort.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TEAM
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section__tag">the team</div>
+        <h2 class="section__title">The people behind DevPath</h2>
+        <p class="section__subtitle">A small, focused team obsessed with developer education.</p>
+        <div class="team__grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="team-card animate-on-scroll">
+            <div class="team-card__avatar av--green">JM</div>
+            <div class="team-card__name">J. Mendez</div>
+            <div class="team-card__role">Frontend Lead</div>
+          </div>
+          <div class="team-card animate-on-scroll" style="transition-delay: 0.08s">
+            <div class="team-card__avatar av--blue">RS</div>
+            <div class="team-card__name">R. Santos</div>
+            <div class="team-card__role">UI/UX Designer</div>
+          </div>
+          <div class="team-card animate-on-scroll" style="transition-delay: 0.16s">
+            <div class="team-card__avatar av--purple">KR</div>
+            <div class="team-card__name">K. Reyes</div>
+            <div class="team-card__role">JS Engineer</div>
+          </div>
+          <div class="team-card animate-on-scroll" style="transition-delay: 0.24s">
+            <div class="team-card__avatar av--amber">AL</div>
+            <div class="team-card__name">A. Lim</div>
+            <div class="team-card__role">Fullstack Dev</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CTA
+    ═══════════════════════════════════════════ -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-section__title">Ready to join the <span class="highlight">community?</span></h2>
+        <p class="cta-section__desc">Start learning for free. No credit card required.</p>
+        <div class="cta-section__actions">
+          <a href="/index.html#pricing" class="btn btn--primary">Get Started Free</a>
+          <a href="/pages/contact.html" class="btn btn--ghost" style="color: #9ca3af; border-color: rgba(255,255,255,0.12);">
+            Contact us →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ░░ FOOTER ░░ -->
+  <div data-component="footer" data-src="../components/footer.html"></div>
+
+  <script src="../assets/js/script.js"></script>
 </body>
 </html>
