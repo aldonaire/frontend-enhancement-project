@@ -469,7 +469,7 @@ html.light .dark-mode-toggle:hover {
 }
 
 @media (max-width: 768px) {
-  .social-bar {
+  .social-bar, .name-tag {
     display: none;
   }
 }
@@ -576,12 +576,6 @@ html.light .dark-mode-toggle:hover {
   letter-spacing: 0.2em;
   color: var(--text-muted);
   z-index: 100;
-}
-
-@media (max-width: 768px) {
-  .name-tag {
-    display: none;
-  }
 }
 
 /* Destinations - Swipeable Carousel */
