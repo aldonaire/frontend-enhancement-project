@@ -474,7 +474,7 @@ html.light .dark-mode-toggle:hover {
   }
 }
 
-/* ── Sidebar fixed color (matches torii red but subtle) ── */
+/* ── Sidebar fixed color (matches torii red) ── */
 .sidebar {
   transition: color 0.45s ease;
   display: flex;
@@ -486,12 +486,12 @@ html.light .dark-mode-toggle:hover {
 .sidebar-line {
   width: 2px;
   height: 30px;
-  background: rgba(230, 57, 70, 0.25) !important;
+  background: rgba(230, 57, 70, 1) !important;
 }
 
 .sidebar-dash {
   font-size: 14px;
-  color: rgba(230, 57, 70, 0.5) !important;
+  color: rgba(230, 57, 70, 1) !important;
   line-height: 1;
 }
 
@@ -499,42 +499,42 @@ html.light .dark-mode-toggle:hover {
 .sidebar--light a,
 .sidebar--light span,
 .sidebar--light svg {
-  color: rgba(230, 57, 70, 0.65) !important;
-  stroke: rgba(230, 57, 70, 0.65) !important;
+  color: rgba(230, 57, 70, 1) !important;
+  stroke: rgba(230, 57, 70, 1) !important;
 }
 .sidebar--light svg path,
 .sidebar--light svg circle,
 .sidebar--light svg rect {
-  stroke: rgba(230, 57, 70, 0.65) !important;
+  stroke: rgba(230, 57, 70, 1) !important;
   fill: none !important;
 }
 .sidebar--light .sidebar-line {
-  background: rgba(230, 57, 70, 0.2) !important;
-  border-color: rgba(230, 57, 70, 0.2) !important;
+  background: rgba(230, 57, 70, 1) !important;
+  border-color: rgba(230, 57, 70, 1) !important;
 }
 .sidebar--light .sidebar-text {
-  color: rgba(230, 57, 70, 0.55) !important;
+  color: rgba(230, 57, 70, 1) !important;
 }
 
 .sidebar--dark,
 .sidebar--dark a,
 .sidebar--dark span,
 .sidebar--dark svg {
-  color: rgba(230, 57, 70, 0.65) !important;
-  stroke: rgba(230, 57, 70, 0.65) !important;
+  color: rgba(230, 57, 70, 1) !important;
+  stroke: rgba(230, 57, 70, 1) !important;
 }
 .sidebar--dark svg path,
 .sidebar--dark svg circle,
 .sidebar--dark svg rect {
-  stroke: rgba(230, 57, 70, 0.65) !important;
+  stroke: rgba(230, 57, 70, 1) !important;
   fill: none !important;
 }
 .sidebar--dark .sidebar-line {
-  background: rgba(230, 57, 70, 0.2) !important;
-  border-color: rgba(230, 57, 70, 0.2) !important;
+  background: rgba(230, 57, 70, 1) !important;
+  border-color: rgba(230, 57, 70, 1) !important;
 }
 .sidebar--dark .sidebar-text {
-  color: rgba(230, 57, 70, 0.55) !important;
+  color: rgba(230, 57, 70, 1) !important;
 }
 
 /* Name Tag - Right Side */
