@@ -1,25 +1,744 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nexara Studio — Creative digital agency crafting extraordinary web experiences through design, strategy, and code." />
+  <title>Nexara Studio — Creative Digital Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* ── PAGE-SPECIFIC STYLES ── */
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 160px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-blob-1 {
+      width: 600px; height: 600px;
+      top: -100px; left: -200px;
+    }
+
+    .hero-blob-2 {
+      width: 500px; height: 500px;
+      bottom: -100px; right: -150px;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      margin: 0 auto 28px;
+      font-weight: 300;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .hero-sub {
+      font-size: 19px;
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      letter-spacing: 2px;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(180deg, var(--muted), transparent);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* MARQUEE */
+    .marquee-section {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--bg-2);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 60px;
+      animation: marquee 22s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      font-style: italic;
+    }
+
+    .marquee-item::after {
+      content: '✦';
+      color: var(--pink);
+      font-style: normal;
+      font-size: 14px;
+    }
+
+    /* SERVICES */
+    .services-section { background: var(--bg); }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 22px;
+    }
+
+    .icon-purple { background: rgba(80,99,171,0.15); }
+    .icon-magenta { background: rgba(115,31,85,0.2); }
+    .icon-mint { background: rgba(143,191,185,0.1); }
+    .icon-pink { background: rgba(189,106,158,0.15); }
+
+    .service-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .service-card p { font-size: 14px; }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    /* WORK/PORTFOLIO */
+    .work-section { background: var(--bg-3); }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+
+    .work-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+
+    .work-card:nth-child(1) { grid-row: span 2; aspect-ratio: unset; min-height: 440px; }
+
+    .work-img {
+      width: 100%; height: 100%;
+      transition: transform 0.6s ease;
+    }
+
+    .work-card:hover .work-img { transform: scale(1.05); }
+
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,9,13,0.9) 0%, transparent 60%);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .work-card:hover .work-overlay { opacity: 1; }
+
+    .work-info h4 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .work-info p { font-size: 13px; color: var(--mint); margin: 0; }
+
+    /* PROCESS */
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 32px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+      transition: var(--transition);
+    }
+
+    .process-step:last-child { border-bottom: none; }
+
+    .process-step:hover { padding-left: 8px; }
+
+    .step-num-lg {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--border-2);
+      line-height: 1;
+      min-width: 60px;
+      transition: color var(--transition);
+    }
+
+    .process-step:hover .step-num-lg { color: var(--pink); }
+
+    .step-body h3 { font-size: 24px; color: var(--white); margin-bottom: 10px; }
+    .step-body p { font-size: 14px; margin: 0; }
+
+    /* STATS */
+    .stats-section {
+      background: var(--bg-2);
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 40px 20px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    /* TESTIMONIALS */
+    .testimonials-section { background: var(--bg); }
+
+    .testimonial-card {
+      padding: 36px;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--off-white);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .avatar-purple { background: rgba(80,99,171,0.3); color: var(--purple-lt); }
+    .avatar-magenta { background: rgba(115,31,85,0.3); color: var(--pink); }
+    .avatar-mint { background: rgba(143,191,185,0.15); color: var(--mint); }
+
+    .author-name { font-weight: 600; font-size: 15px; color: var(--white); }
+    .author-role { font-size: 13px; color: var(--muted); }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 72px 60px;
+      position: relative;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 20%; right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+    }
+
+    .cta-box h2 { margin-bottom: 16px; }
+    .cta-box p { font-size: 18px; max-width: 420px; margin: 0 auto 40px; }
+
+    @media (max-width: 900px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card:nth-child(1) { grid-row: span 1; min-height: 280px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-bottom: 1px solid var(--border); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-actions { flex-direction: column; align-items: center; }
+      .cta-box { padding: 48px 28px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Nex<span>ara</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob blob-purple hero-blob-1" data-parallax="0.15"></div>
+    <div class="blob blob-magenta hero-blob-2" data-parallax="-0.1"></div>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="badge badge-mint badge-dot">Now accepting projects</span>
+      </div>
+      <h1>
+        We design futures.<br/>
+        We build <em>experiences.</em>
+      </h1>
+      <p class="hero-sub text-muted">
+        Nexara is a boutique creative studio at the intersection of design, technology, and human intuition.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">View Our Work</a>
+        <a href="contact.html" class="btn btn-outline">Start a Project</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item">Web Design</span>
+      <span class="marquee-item">Brand Identity</span>
+      <span class="marquee-item">Frontend Development</span>
+      <span class="marquee-item">UI/UX Strategy</span>
+      <span class="marquee-item">Motion Design</span>
+      <span class="marquee-item">Digital Experience</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="marquee-item">Web Design</span>
+      <span class="marquee-item">Brand Identity</span>
+      <span class="marquee-item">Frontend Development</span>
+      <span class="marquee-item">UI/UX Strategy</span>
+      <span class="marquee-item">Motion Design</span>
+      <span class="marquee-item">Digital Experience</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section-pad services-section" id="services">
+    <div class="container">
+      <div class="flex-between mb-48" style="flex-wrap:wrap; gap:24px;">
+        <div>
+          <div class="label">What We Do</div>
+          <h2>Services built<br/>for impact.</h2>
+        </div>
+        <a href="contact.html" class="btn btn-outline">See All Services</a>
+      </div>
+
+      <div class="grid-2" style="gap:20px;">
+        <div class="card card-glow service-card reveal">
+          <div class="service-num">01</div>
+          <div class="service-icon icon-purple">⬡</div>
+          <h3>Web Design</h3>
+          <p>Visually striking, conversion-focused websites that marry aesthetics with performance. Every pixel intentional, every interaction deliberate.</p>
+          <div class="service-tags">
+            <span class="tag">Figma</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">Responsive</span>
+          </div>
+        </div>
+
+        <div class="card card-glow service-card reveal reveal-delay-1">
+          <div class="service-num">02</div>
+          <div class="service-icon icon-magenta">◈</div>
+          <h3>Brand Identity</h3>
+          <p>From logo to full visual system — we craft brands that communicate personality, build trust, and endure through time.</p>
+          <div class="service-tags">
+            <span class="tag">Logo Design</span>
+            <span class="tag">Style Guides</span>
+            <span class="tag">Typography</span>
+          </div>
+        </div>
+
+        <div class="card card-glow service-card reveal reveal-delay-2">
+          <div class="service-num">03</div>
+          <div class="service-icon icon-mint">⟨/⟩</div>
+          <h3>Frontend Development</h3>
+          <p>Clean, performant code that brings designs to life. We build with HTML, CSS, JavaScript, and modern frameworks — no shortcuts.</p>
+          <div class="service-tags">
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+          </div>
+        </div>
+
+        <div class="card card-glow service-card reveal reveal-delay-3">
+          <div class="service-num">04</div>
+          <div class="service-icon icon-pink">◎</div>
+          <h3>Digital Strategy</h3>
+          <p>Strategy rooted in real data and human behavior. We align your digital presence with business goals that actually matter.</p>
+          <div class="service-tags">
+            <span class="tag">UX Audit</span>
+            <span class="tag">Analytics</span>
+            <span class="tag">Roadmapping</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section-pad work-section" id="work">
+    <div class="container">
+      <div class="label">Selected Work</div>
+      <h2 style="margin-bottom:48px;">Projects we're<br/>proud of.</h2>
+
+      <div class="work-grid">
+        <!-- Large card -->
+        <div class="work-card reveal" style="background: linear-gradient(135deg, #0b262d 0%, #1a1040 100%);">
+          <div class="work-img" style="display:flex; align-items:center; justify-content:center; height:100%; background: linear-gradient(135deg, rgba(80,99,171,0.3) 0%, rgba(115,31,85,0.3) 100%);">
+            <div style="text-align:center; padding:40px;">
+              <div style="font-family:var(--font-display); font-size:72px; font-weight:300; color:rgba(255,255,255,0.08); line-height:1;">HALO</div>
+              <div style="font-size:14px; color:var(--muted); font-family:var(--font-mono); letter-spacing:3px;">BRAND IDENTITY</div>
+            </div>
+          </div>
+          <div class="work-overlay">
+            <div class="work-info">
+              <h4>Halo Finance</h4>
+              <p>Brand Identity & Web Design</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Small card 1 -->
+        <div class="work-card reveal reveal-delay-1" style="background: linear-gradient(135deg, #0f1e24, #1b0f1a);">
+          <div class="work-img" style="display:flex; align-items:center; justify-content:center; height:100%; background: rgba(189,106,158,0.1);">
+            <div style="text-align:center; padding:24px;">
+              <div style="font-family:var(--font-display); font-size:44px; font-weight:300; color:rgba(189,106,158,0.3); line-height:1;">VAULT</div>
+              <div style="font-size:11px; color:var(--muted); font-family:var(--font-mono); letter-spacing:3px;">UI/UX DESIGN</div>
+            </div>
+          </div>
+          <div class="work-overlay">
+            <div class="work-info">
+              <h4>Vault Studio</h4>
+              <p>UI/UX Design System</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Small card 2 -->
+        <div class="work-card reveal reveal-delay-2" style="background: linear-gradient(135deg, #08090d, #0b262d);">
+          <div class="work-img" style="display:flex; align-items:center; justify-content:center; height:100%; background: rgba(143,191,185,0.08);">
+            <div style="text-align:center; padding:24px;">
+              <div style="font-family:var(--font-display); font-size:44px; font-weight:300; color:rgba(143,191,185,0.3); line-height:1;">ECHO</div>
+              <div style="font-size:11px; color:var(--muted); font-family:var(--font-mono); letter-spacing:3px;">DEVELOPMENT</div>
+            </div>
+          </div>
+          <div class="work-overlay">
+            <div class="work-info">
+              <h4>Echo Platform</h4>
+              <p>Frontend Development</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section-pad" id="process">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:80px; align-items:start;">
+        <div style="position:sticky; top:120px;">
+          <div class="label">How We Work</div>
+          <h2>A process built<br/>on clarity.</h2>
+          <p style="margin-top:20px;">From first call to final handoff, every step is transparent, collaborative, and focused on delivering real value.</p>
+          <a href="contact.html" class="btn btn-primary mt-32">Start a Project</a>
+        </div>
+        <div class="process-steps">
+          <div class="process-step reveal">
+            <div class="step-num-lg">01</div>
+            <div class="step-body">
+              <h3>Discovery</h3>
+              <p>We start by listening. Deep-dive sessions to understand your goals, audience, and competitive landscape before a single pixel is placed.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-num-lg">02</div>
+            <div class="step-body">
+              <h3>Strategy</h3>
+              <p>Insights become a roadmap. We define the design direction, content architecture, and technical stack that best serves your objectives.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-num-lg">03</div>
+            <div class="step-body">
+              <h3>Design</h3>
+              <p>Where vision becomes visual. We create high-fidelity designs, interactive prototypes, and a complete design system for your project.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-num-lg">04</div>
+            <div class="step-body">
+              <h3>Build & Launch</h3>
+              <p>Pixel-perfect development with clean, maintainable code. We handle QA, performance optimization, and a smooth launch process.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-num" data-counter>120+</div>
+          <p class="stat-label">Projects Delivered</p>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-num" data-counter>98%</div>
+          <p class="stat-label">Client Satisfaction</p>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-num" data-counter>6+</div>
+          <p class="stat-label">Years of Craft</p>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+          <div class="stat-num" data-counter>40+</div>
+          <p class="stat-label">Global Clients</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-pad testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="label mb-16">Kind Words</div>
+      <h2 style="margin-bottom:48px;">Clients who trust<br/>our craft.</h2>
+
+      <div class="grid-3">
+        <div class="card testimonial-card reveal">
+          <p class="testimonial-quote">"Nexara transformed our brand completely. What they delivered went far beyond what we imagined was possible."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar avatar-purple">MR</div>
+            <div>
+              <div class="author-name">Maya Reyes</div>
+              <div class="author-role">CEO, Halo Finance</div>
+            </div>
+          </div>
+        </div>
+        <div class="card testimonial-card reveal reveal-delay-1">
+          <p class="testimonial-quote">"The attention to detail is unreal. Our conversion rate jumped 34% after the redesign. Worth every peso."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar avatar-magenta">JC</div>
+            <div>
+              <div class="author-name">Jonas Cruz</div>
+              <div class="author-role">Founder, Vault Studio</div>
+            </div>
+          </div>
+        </div>
+        <div class="card testimonial-card reveal reveal-delay-2">
+          <p class="testimonial-quote">"Working with Nexara felt like having a co-founder who genuinely understood our product. Exceptional team."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar avatar-mint">SA</div>
+            <div>
+              <div class="author-name">Sara Aquino</div>
+              <div class="author-role">CPO, Echo Platform</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="blob blob-purple" style="width:400px;height:400px;top:50%;left:10%;transform:translateY(-50%);"></div>
+    <div class="blob blob-magenta" style="width:400px;height:400px;top:50%;right:10%;transform:translateY(-50%);"></div>
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="label" style="justify-content:center;">Let's Create Together</div>
+        <h2>Ready to build<br/>something <em style="color:var(--pink)">extraordinary?</em></h2>
+        <p>Tell us about your project. We're always excited to meet the right people.</p>
+        <div class="flex-center gap-16">
+          <a href="contact.html" class="btn btn-primary">Start a Project</a>
+          <a href="about.html" class="btn btn-outline">Learn About Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Nex<span>ara</span></h3>
+          <p>We craft digital experiences that leave a mark. Strategy, design, and code — fused into one seamless studio.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">Gh</a>
+            <a href="#" class="social-link">Dr</a>
+            <a href="#" class="social-link">Li</a>
+            <a href="#" class="social-link">X</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Web Design</a></li>
+            <li><a href="#services">Brand Identity</a></li>
+            <li><a href="#services">Development</a></li>
+            <li><a href="#services">Strategy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#work">Our Work</a></li>
+            <li><a href="contact.html">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nexara.studio">hello@nexara.studio</a></li>
+            <li><a href="contact.html">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="text-muted">© 2025 Nexara Studio. All rights reserved.</p>
+        <div class="flex gap-24">
+          <a href="#" style="font-size:13px;color:var(--muted);">Privacy</a>
+          <a href="#" style="font-size:13px;color:var(--muted);">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="assets/js/script.js"></script>
 </body>
