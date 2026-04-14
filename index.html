@@ -5,18 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Enhancement Project</title>
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Navbar -->
   <div id="navbar"></div>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg-text">ENHANCE</div>
+    <div class="hero-content">
+      <span class="hero-badge">✦ Frontend Enhancement Project</span>
+      <h1 class="hero-title">Build.<br><em>Design.</em><br>Ship.</h1>
+      <p class="hero-subtitle">A collaborative space to push frontend boundaries — better UI, better UX, better everything.</p>
+      <div class="hero-actions">
+        <a href="pages/about.html" class="btn-primary">Explore Project</a>
+        <a href="pages/contact.html" class="btn-ghost">Get in Touch ↗</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card card-1">
+        <span class="card-icon">⚡</span>
+        <span>Fast & Responsive</span>
+      </div>
+      <div class="floating-card card-2">
+        <span class="card-icon">🎨</span>
+        <span>Beautiful UI</span>
+      </div>
+      <div class="floating-card card-3">
+        <span class="card-icon">♿</span>
+        <span>Accessible</span>
+      </div>
+      <div class="hero-blob"></div>
+    </div>
+  </section>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+  <!-- Features Section -->
+  <section class="features">
+    <div class="section-header">
+      <p class="section-label">What We Improve</p>
+      <h2>Every Detail <em>Matters</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <div class="feature-icon">🖥️</div>
+        <h3>UI/UX Enhancements</h3>
+        <p>Refined layouts, thoughtful spacing, and interactions that feel natural and delightful.</p>
+      </div>
+      <div class="feature-card featured">
+        <div class="feature-num">02</div>
+        <div class="feature-icon">📱</div>
+        <h3>Responsive Design</h3>
+        <p>Seamlessly adapts from mobile to desktop — every screen size gets the full experience.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <div class="feature-icon">🧩</div>
+        <h3>New Components</h3>
+        <p>Modular, reusable building blocks that make the codebase scalable and consistent.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">04</div>
+        <div class="feature-icon">✨</div>
+        <h3>Better Styling</h3>
+        <p>A cohesive visual language with purposeful typography, color, and motion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to contribute?</h2>
+      <p>Fork the repo, create your branch, and start building something great.</p>
+      <button onclick="showAlert()" class="btn-primary">Get Started</button>
+    </div>
+  </section>
 
   <!-- Footer -->
   <div id="footer"></div>
