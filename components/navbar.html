@@ -1,3 +1,38 @@
-<nav>
-  <h2>My Website</h2>
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    Nexus
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#features">Features</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+
+  <div class="nav-cta">
+    <a href="/contact.html" class="btn-ghost" style="padding:8px 18px;font-size:13px;">Get started</a>
+  </div>
+
+  <button class="nav-menu-btn" aria-label="Toggle menu" onclick="
+    const links = document.querySelector('.nav-links');
+    const isOpen = links.style.display === 'flex';
+    links.style.display = isOpen ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'rgba(8,8,16,0.98)';
+    links.style.padding = '20px 24px';
+    links.style.borderBottom = '1px solid rgba(255,255,255,0.07)';
+    links.style.gap = '20px';
+  ">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
 </nav>

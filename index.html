@@ -1,26 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Future of Interfaces</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+  <div id="navbar-placeholder"></div>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-badge">
+          <span class="badge-dot"></span>
+          Now available — v2.0
+        </span>
+        <h1 class="hero-title">
+          The next<br />
+          <span class="accent">dimension</span><br />
+          of design.
+        </h1>
+        <p class="hero-sub">
+          A platform built for teams who refuse to settle.
+          Ship faster, design bolder, and build things
+          the world hasn't seen yet.
+        </p>
+        <div class="hero-actions">
+          <a href="/about.html" class="btn-primary">Explore platform</a>
+          <a href="/contact.html" class="btn-ghost">Get in touch <span class="arrow">→</span></a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">12k+</span>
+            <span class="stat-label">developers</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">99.9%</span>
+            <span class="stat-label">uptime</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">4.9★</span>
+            <span class="stat-label">rated</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-3d">
+        <div id="canvas-container">
+          <canvas id="three-canvas"></canvas>
+          <div class="canvas-glow"></div>
+        </div>
+        <p class="drag-hint">drag to rotate</p>
+      </div>
+    </div>
+    <div class="hero-scroll-line"></div>
+  </section>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">what we offer</span>
+        <h2 class="section-title">Built for the <span class="accent">bold</span></h2>
+        <p class="section-sub">Every feature was designed with one goal: to make you unstoppable.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card" data-delay="0">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3>3D-first design</h3>
+          <p>Immersive interfaces that go beyond flat screens. Real depth, real presence, real impact on your users.</p>
+        </div>
+        <div class="feature-card" data-delay="100">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </div>
+          <h3>Lightning performance</h3>
+          <p>Optimized rendering pipeline delivers 60fps experiences on any device, anywhere in the world.</p>
+        </div>
+        <div class="feature-card" data-delay="200">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <h3>Cross-platform ready</h3>
+          <p>Deploy once, run everywhere. From desktop browsers to mobile — the experience stays consistent.</p>
+        </div>
+        <div class="feature-card" data-delay="300">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Enterprise security</h3>
+          <p>End-to-end encryption, SOC 2 compliant, and built-in access controls for teams of any size.</p>
+        </div>
+        <div class="feature-card" data-delay="400">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Team collaboration</h3>
+          <p>Real-time multiplayer editing, comments, version history, and granular role management baked in.</p>
+        </div>
+        <div class="feature-card" data-delay="500">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3>Real-time analytics</h3>
+          <p>Deep insights into how users interact with your 3D content, with actionable data and live dashboards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+  <!-- Showcase -->
+  <section class="showcase">
+    <div class="container showcase-inner">
+      <div class="showcase-text">
+        <span class="section-tag">showcase</span>
+        <h2 class="section-title">See it. <span class="accent">Feel it.</span><br />Ship it.</h2>
+        <p class="section-sub">
+          Your ideas deserve more than a flat mockup.
+          With Nexus, your product comes alive in three dimensions — interactive, immersive, and unforgettable.
+        </p>
+        <ul class="showcase-list">
+          <li><span class="check">✓</span> Import any .glb or .gltf model</li>
+          <li><span class="check">✓</span> Custom lighting and environment maps</li>
+          <li><span class="check">✓</span> Scroll-linked animations</li>
+          <li><span class="check">✓</span> Works in any browser, no plugins</li>
+        </ul>
+        <a href="/about.html" class="btn-primary" style="display:inline-block;margin-top:2rem;">Learn more</a>
+      </div>
+      <div class="showcase-visual">
+        <div class="showcase-card">
+          <div class="showcase-screen">
+            <div class="screen-bar">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <div class="screen-content">
+              <div class="code-line"><span class="kw">import</span> <span class="fn">{ Scene }</span> <span class="kw">from</span> <span class="str">'nexus-3d'</span></div>
+              <div class="code-line"></div>
+              <div class="code-line"><span class="kw">const</span> <span class="fn">scene</span> = <span class="kw">new</span> <span class="fn">Scene</span>({ <span class="str">theme</span>: <span class="str">'dark'</span> })</div>
+              <div class="code-line"><span class="fn">scene</span>.<span class="kw">load</span>(<span class="str">'laptop.glb'</span>)</div>
+              <div class="code-line"><span class="fn">scene</span>.<span class="kw">animate</span>()</div>
+              <div class="code-line code-comment">// That's it. Seriously.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container cta-inner">
+      <h2 class="cta-title">Ready to build<br /><span class="accent">something remarkable?</span></h2>
+      <p class="cta-sub">Join thousands of developers already shipping the future.</p>
+      <div class="cta-actions">
+        <a href="/contact.html" class="btn-primary btn-lg">Start for free</a>
+        <a href="/about.html" class="btn-ghost btn-lg">Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="assets/js/script.js"></script>
 </body>
 </html>
