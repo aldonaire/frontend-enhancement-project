@@ -1,26 +1,376 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Enhancement Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-  <!-- Navbar -->
   <div id="navbar"></div>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">▸ CS Course · Git + Frontend Development</div>
+    <h1 class="fade-up">Frontend Enhancement<br><em>Using Git Branching</em></h1>
+    <p class="hero-desc fade-up delay-1">Simulate real-world development workflows. Create your branch, enhance the UI, and submit a pull request — just like a professional dev team.</p>
+    <div class="hero-actions fade-up delay-2">
+      <button class="btn btn-primary" onclick="openModal('modal-start')">🚀 Get Started</button>
+      <button class="btn btn-secondary" onclick="document.getElementById('steps').scrollIntoView({behavior:'smooth'})">View Steps ↓</button>
+    </div>
+    <div class="hero-stats fade-up delay-3">
+      <div>
+        <div class="hero-stat-num" style="color:var(--accent2)">100</div>
+        <div class="hero-stat-label">Total points</div>
+      </div>
+      <div>
+        <div class="hero-stat-num" style="color:var(--green)">6</div>
+        <div class="hero-stat-label">Steps to complete</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3+</div>
+        <div class="hero-stat-label">Improvements required</div>
+      </div>
+      <div>
+        <div class="hero-stat-num" style="color:var(--amber)">3</div>
+        <div class="hero-stat-label">Bonus challenges</div>
+      </div>
+    </div>
+  </section>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+  <!-- STEPS SECTION -->
+  <section class="steps-section" id="steps">
+    <div class="container">
+      <p class="section-label">Workflow</p>
+      <h2 class="section-title" data-animate>Six steps to complete</h2>
+      <p class="section-desc" data-animate>Follow these steps carefully to successfully complete the project and submit your pull request.</p>
 
-  <!-- Footer -->
+      <div class="steps-grid" data-animate>
+        <div class="step-card">
+          <div class="step-num">STEP 01</div>
+          <h3>Clone the repository</h3>
+          <p>Download the project to your local machine using Git.</p>
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn">copy</button>
+            </div>
+            <pre><span class="kw">git</span> clone &lt;repo-url&gt;
+<span class="kw">cd</span> &lt;repo-name&gt;</pre>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 02</div>
+          <h3>Create your branch</h3>
+          <p>Use the format: <code style="font-family:var(--mono);font-size:11px;color:var(--accent2)">feature/&lt;lastname&gt;-frontend-enhancement</code></p>
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn">copy</button>
+            </div>
+            <pre><span class="kw">git</span> checkout -b <span class="str">feature/donaire-ui-improvement</span></pre>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 03</div>
+          <h3>Make enhancements</h3>
+          <p>Implement at least 3 improvements — UI/UX, functional, or optimization.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 04</div>
+          <h3>Commit changes</h3>
+          <p>Use the <code style="font-family:var(--mono);font-size:11px;color:var(--accent2)">feat:</code> prefix for meaningful commits.</p>
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn">copy</button>
+            </div>
+            <pre><span class="kw">git</span> add .
+<span class="kw">git</span> commit -m <span class="str">"feat: improved navbar responsiveness"</span></pre>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 05</div>
+          <h3>Push your branch</h3>
+          <p>Upload changes to the remote repository.</p>
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn">copy</button>
+            </div>
+            <pre><span class="kw">git</span> push origin <span class="str">feature/&lt;branch-name&gt;</span></pre>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 06</div>
+          <h3>Create a pull request</h3>
+          <p>Submit a PR to <code style="font-family:var(--mono);font-size:11px;color:var(--green)">main</code> with a summary, before/after screenshots, and features list.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section id="requirements">
+    <div class="container">
+      <p class="section-label">Requirements</p>
+      <h2 class="section-title" data-animate>Implement at least 3 improvements</h2>
+      <p class="section-desc" data-animate>Choose from any combination of the categories below to meet the minimum requirement.</p>
+
+      <div class="req-grid" data-animate>
+        <div class="card req-card">
+          <div class="req-header">
+            <div class="req-icon" style="background:var(--blue-bg)">🎨</div>
+            <h3>UI / UX improvements</h3>
+            <span class="req-pts">25 pts</span>
+          </div>
+          <ul class="req-list">
+            <li>Improve layout — spacing, alignment</li>
+            <li>Add responsive / mobile-friendly design</li>
+            <li>Enhance typography and color palette</li>
+            <li>Add animations or transitions</li>
+          </ul>
+        </div>
+
+        <div class="card req-card">
+          <div class="req-header">
+            <div class="req-icon" style="background:var(--green-bg)">⚙️</div>
+            <h3>Functional enhancements</h3>
+            <span class="req-pts">20 pts</span>
+          </div>
+          <ul class="req-list">
+            <li>Add an interactive component (modal, dropdown)</li>
+            <li>Improve navigation (navbar, sidebar)</li>
+            <li>Add form validation</li>
+            <li>Improve loading or feedback indicators</li>
+          </ul>
+        </div>
+
+        <div class="card req-card">
+          <div class="req-header">
+            <div class="req-icon" style="background:var(--amber-bg)">🔧</div>
+            <h3>Optimization</h3>
+            <span class="req-pts">15 pts</span>
+          </div>
+          <ul class="req-list">
+            <li>Clean and organize code structure</li>
+            <li>Reduce redundant CSS and JS</li>
+            <li>Improve performance (basic)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUBRIC -->
+  <section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <p class="section-label">Grading</p>
+      <h2 class="section-title" data-animate>Rubric — 100 points</h2>
+
+      <div class="rubric-list">
+        <div class="card rubric-item" data-animate>
+          <div class="rubric-left">
+            <h4>Git usage</h4>
+            <p>Branching, commit messages, pull request</p>
+            <div class="bar-outer"><div class="bar-inner" data-width="100%" style="background:var(--accent2)"></div></div>
+          </div>
+          <div class="rubric-pts" style="color:var(--accent2)">25<small>pts</small></div>
+        </div>
+        <div class="card rubric-item" data-animate>
+          <div class="rubric-left">
+            <h4>UI/UX improvements</h4>
+            <p>Visual design, responsiveness, typography, animations</p>
+            <div class="bar-outer"><div class="bar-inner" data-width="100%" style="background:var(--blue)"></div></div>
+          </div>
+          <div class="rubric-pts" style="color:var(--blue)">25<small>pts</small></div>
+        </div>
+        <div class="card rubric-item" data-animate>
+          <div class="rubric-left">
+            <h4>Functionality enhancements</h4>
+            <p>Interactive components, navigation, validation</p>
+            <div class="bar-outer"><div class="bar-inner" data-width="80%" style="background:var(--green)"></div></div>
+          </div>
+          <div class="rubric-pts" style="color:var(--green)">20<small>pts</small></div>
+        </div>
+        <div class="card rubric-item" data-animate>
+          <div class="rubric-left">
+            <h4>Code quality &amp; organization</h4>
+            <p>Clean, readable, well-structured code</p>
+            <div class="bar-outer"><div class="bar-inner" data-width="60%" style="background:var(--amber)"></div></div>
+          </div>
+          <div class="rubric-pts" style="color:var(--amber)">15<small>pts</small></div>
+        </div>
+        <div class="card rubric-item" data-animate>
+          <div class="rubric-left">
+            <h4>Documentation</h4>
+            <p>README update, features list, tools used, challenges encountered</p>
+            <div class="bar-outer"><div class="bar-inner" data-width="60%" style="background:var(--red)"></div></div>
+          </div>
+          <div class="rubric-pts" style="color:var(--red)">15<small>pts</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section id="checklist">
+    <div class="container">
+      <p class="section-label">Track your progress</p>
+      <h2 class="section-title" data-animate>My submission checklist</h2>
+
+      <div class="checklist-progress" data-animate>
+        <div class="checklist-progress-top">
+          <span class="clabel">Progress</span>
+          <span class="ccount">0 / 9 completed</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="progress-pct">0%</div>
+      </div>
+
+      <div class="check-items" data-animate>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Cloned the repository to my local machine</span>
+          <span class="check-cat">STEP 1</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Created my branch: <code style="font-family:var(--mono);font-size:11px;color:var(--accent2)">feature/&lt;lastname&gt;-frontend-enhancement</code></span>
+          <span class="check-cat">STEP 2</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Implemented UI/UX improvement #1</span>
+          <span class="check-cat">STEP 3</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Implemented UI/UX improvement #2</span>
+          <span class="check-cat">STEP 3</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Implemented a functional enhancement</span>
+          <span class="check-cat">STEP 3</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Used correct commit message format: <code style="font-family:var(--mono);font-size:11px;color:var(--green)">feat: ...</code></span>
+          <span class="check-cat">STEP 4</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Pushed branch to the remote repository</span>
+          <span class="check-cat">STEP 5</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Created a Pull Request with before/after screenshots</span>
+          <span class="check-cat">STEP 6</span>
+        </div>
+        <div class="check-item">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-label">Submitted documentation (README update or separate file)</span>
+          <span class="check-cat">DOCS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ ACCORDION -->
+  <section style="background:var(--surface);border-top:1px solid var(--border)">
+    <div class="container">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title" data-animate>Common questions</h2>
+
+      <div class="accordion" data-animate>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            <span>Can I push directly to main?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">No. You must always work on your own feature branch. Pushing directly to main is against the rules and will result in a deduction.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            <span>What should I include in my Pull Request?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">Your PR must include: a summary of changes, before and after screenshots, and a list of all features you added. Clear documentation makes it easier to review your work.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            <span>What counts as a "meaningful" commit message?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">Use the <code style="font-family:var(--mono);font-size:12px;color:var(--accent2)">feat:</code> prefix followed by a short, specific description — e.g., "feat: added responsive navbar" or "feat: implemented contact form validation". Avoid vague messages like "update file" or "changes".</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            <span>Are the bonus challenges required?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">No. The bonus challenges (dark mode toggle, API integration, frontend framework) are optional. However, they can earn you extra credit and demonstrate advanced skills.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            <span>What if I encounter a merge conflict?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">Basic merge conflict resolution is part of the learning objectives. Open the conflicting file, look for the conflict markers (&lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt;), decide which version to keep, remove the markers, then stage and commit the resolved file.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET STARTED MODAL -->
+  <div class="modal-overlay" id="modal-start">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Ready to start?</h3>
+        <button class="modal-close" onclick="closeModal('modal-start')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:18px;">Make sure you have Git installed and access to the repository before beginning. Here's a quick checklist:</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:13px;"><span style="color:var(--green)">✓</span> Git installed on your machine</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:13px;"><span style="color:var(--green)">✓</span> GitHub account created</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:13px;"><span style="color:var(--green)">✓</span> Repository URL from your instructor</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:13px;"><span style="color:var(--green)">✓</span> A code editor (VS Code recommended)</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-start')">Close</button>
+        <button class="btn btn-primary" onclick="closeModal('modal-start'); document.getElementById('steps').scrollIntoView({behavior:'smooth'})">View Steps →</button>
+      </div>
+    </div>
+  </div>
+
   <div id="footer"></div>
 
   <script src="assets/js/script.js"></script>
+  <script>
+    loadComponent('navbar', 'components/navbar.html');
+    loadComponent('footer', 'components/footer.html');
+  </script>
 </body>
 </html>

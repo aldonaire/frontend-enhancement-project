@@ -1,9 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
-  <title>Contact</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Frontend Enhancement Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-  <h1>Contact Page</h1>
+
+  <div id="navbar"></div>
+
+  <section class="hero" style="padding-bottom:40px">
+    <div class="hero-badge">▸ Get in touch</div>
+    <h1 class="fade-up">Contact <em>Us</em></h1>
+    <p class="hero-desc fade-up delay-1">Have a question about the project? Want to report an issue with the repository? Send us a message.</p>
+  </section>
+
+  <section style="background:var(--surface);border-top:1px solid var(--border)">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start" class="contact-grid">
+        <div data-animate>
+          <h2 class="section-title" style="margin-bottom:16px">Let's talk</h2>
+          <p style="font-size:14px;color:var(--text2);font-weight:300;line-height:1.75;margin-bottom:32px">Fill in the form and we'll get back to you. For urgent matters, reach out to your instructor directly.</p>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:38px;height:38px;border-radius:10px;background:var(--accent-bg);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📧</div><div><div style="font-size:12px;color:var(--muted);font-weight:400;margin-bottom:3px;letter-spacing:0.04em">EMAIL</div><div style="font-size:14px;color:var(--text)">kentbalalio@school.edu</div></div></div>
+            <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:38px;height:38px;border-radius:10px;background:var(--green-bg);border:1px solid var(--green-border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🐙</div><div><div style="font-size:12px;color:var(--muted);font-weight:400;margin-bottom:3px;letter-spacing:0.04em">GITHUB</div><div style="font-size:14px;color:var(--text)">github.com/course-repo</div></div></div>
+            <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:38px;height:38px;border-radius:10px;background:var(--blue-bg);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🕐</div><div><div style="font-size:12px;color:var(--muted);font-weight:400;margin-bottom:3px;letter-spacing:0.04em">RESPONSE TIME</div><div style="font-size:14px;color:var(--text)">Within 24 hours</div></div></div>
+          </div>
+          <div style="margin-top:36px;padding:18px 20px;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--radius-sm)"><div style="font-size:12px;font-weight:500;color:var(--amber);margin-bottom:6px">⚠ Repository issues?</div><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">If you're having trouble with the repository or Git, open a GitHub Issue directly on the repo — your instructor will be notified automatically.</p></div>
+        </div>
+        <div class="card" style="padding:32px" data-animate>
+          <form data-validate id="contact-form">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="name-grid">
+              <div class="form-group"><label for="firstName">First name</label><input type="text" id="firstName" name="firstName" placeholder="Juan" required data-min-length="2"><span class="field-error"></span></div>
+              <div class="form-group"><label for="lastName">Last name</label><input type="text" id="lastName" name="lastName" placeholder="Dela Cruz" required data-min-length="2"><span class="field-error"></span></div>
+            </div>
+            <div class="form-group"><label for="email">Email address</label><input type="email" id="email" name="email" placeholder="juan@student.edu" required><span class="field-error"></span></div>
+            <div class="form-group"><label for="subject">Subject</label><select id="subject" name="subject"><option value="" disabled selected>Select a topic…</option><option value="git">Git / branching issue</option><option value="requirements">Project requirements question</option><option value="grading">Grading / rubric question</option><option value="technical">Technical problem</option><option value="other">Other</option></select></div>
+            <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Describe your question or issue in detail…" required data-min-length="20"></textarea><span class="field-error"></span></div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><button type="submit" class="btn btn-primary" style="flex:1;justify-content:center">Send message →</button><button type="button" class="btn btn-secondary" onclick="document.getElementById('contact-form').reset(); document.querySelectorAll('input,textarea').forEach(f=>{f.classList.remove('valid','error')})">Clear</button></div>
+          </form>
+        </div>
+      </div>
+      <style>@media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr !important; } .name-grid { grid-template-columns: 1fr !important; } }</style>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="section-label">Before you write</p>
+      <h2 class="section-title" data-animate>Common answers</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:28px" data-animate>
+        <div class="card" style="padding:20px 22px"><div style="font-size:13px;font-weight:500;margin-bottom:8px">Can I push to main?</div><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">No. Always create a feature branch first using the naming convention provided.</p></div>
+        <div class="card" style="padding:20px 22px"><div style="font-size:13px;font-weight:500;margin-bottom:8px">How do I format commit messages?</div><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Use <code style="font-family:var(--mono);font-size:11px;color:var(--accent2)">feat:</code> prefix followed by a short, specific description of the change.</p></div>
+        <div class="card" style="padding:20px 22px"><div style="font-size:13px;font-weight:500;margin-bottom:8px">What goes in a pull request?</div><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Summary of changes, before/after screenshots, and a list of all features added.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="../assets/js/script.js"></script>
+  <script>
+    loadComponent('navbar', '../components/navbar.html');
+    loadComponent('footer', '../components/footer.html');
+  </script>
 </body>
 </html>

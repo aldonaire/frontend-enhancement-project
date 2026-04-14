@@ -1,9 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
-  <title>About</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Frontend Enhancement Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-  <h1>About Page</h1>
+
+  <div id="navbar"></div>
+
+  <section class="hero" style="padding-bottom:40px">
+    <div class="hero-badge">▸ About this project</div>
+    <h1 class="fade-up">About the <em>Project</em></h1>
+    <p class="hero-desc fade-up delay-1">This project is designed to bridge the gap between classroom learning and real-world software development workflows.</p>
+  </section>
+
+  <section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <p class="section-label">Project overview</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start" class="about-grid">
+        <div data-animate>
+          <h2 class="section-title">What you'll learn</h2>
+          <p style="font-size:15px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:24px">Students collaborate using Git by creating their own branches from a central repository. Each student enhances the frontend of an existing website by adding new features, improving UI/UX, or optimizing design.</p>
+          <p style="font-size:15px;color:var(--text2);font-weight:300;line-height:1.8">This project simulates real-world development workflows, giving you hands-on experience with version control, code reviews, and collaborative development.</p>
+        </div>
+        <div data-animate style="display:flex;flex-direction:column;gap:12px">
+          <div class="card" style="padding:18px 20px">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-family:var(--mono);letter-spacing:0.06em">VERSION CONTROL</div>
+            <p style="font-size:13px;color:var(--text2);line-height:1.6;font-weight:300">Master Git branching, commits, and pull requests in a real collaborative setting.</p>
+          </div>
+          <div class="card" style="padding:18px 20px">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-family:var(--mono);letter-spacing:0.06em">FRONTEND SKILLS</div>
+            <p style="font-size:13px;color:var(--text2);line-height:1.6;font-weight:300">Apply HTML, CSS, and JavaScript to build real, functional improvements.</p>
+          </div>
+          <div class="card" style="padding:18px 20px">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-family:var(--mono);letter-spacing:0.06em">CODE REVIEW</div>
+            <p style="font-size:13px;color:var(--text2);line-height:1.6;font-weight:300">Practice reviewing code and giving constructive feedback through pull requests.</p>
+          </div>
+        </div>
+      </div>
+      <style>@media (max-width: 720px) { .about-grid { grid-template-columns: 1fr !important; } }</style>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="section-label">Learning objectives</p>
+      <h2 class="section-title" data-animate>By the end of this project,<br>you will be able to:</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:32px" data-animate>
+        <div class="card" style="padding:22px"><div style="font-size:24px;margin-bottom:12px">🌿</div><h4 style="font-family:var(--display);font-size:15px;font-weight:700;margin-bottom:8px">Use Git branching effectively</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Create feature branches, switch contexts, and merge code without breaking the main branch.</p></div>
+        <div class="card" style="padding:22px"><div style="font-size:24px;margin-bottom:12px">💻</div><h4 style="font-family:var(--display);font-size:15px;font-weight:700;margin-bottom:8px">Apply frontend dev skills</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Write well-structured HTML, CSS, and JavaScript to build real improvements.</p></div>
+        <div class="card" style="padding:22px"><div style="font-size:24px;margin-bottom:12px">🎨</div><h4 style="font-family:var(--display);font-size:15px;font-weight:700;margin-bottom:8px">Improve UI/UX design</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Enhance the visual design and user experience of an existing system.</p></div>
+        <div class="card" style="padding:22px"><div style="font-size:24px;margin-bottom:12px">🔍</div><h4 style="font-family:var(--display);font-size:15px;font-weight:700;margin-bottom:8px">Perform code reviews</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Submit and review pull requests, giving and receiving constructive feedback.</p></div>
+        <div class="card" style="padding:22px"><div style="font-size:24px;margin-bottom:12px">⚡</div><h4 style="font-family:var(--display);font-size:15px;font-weight:700;margin-bottom:8px">Resolve merge conflicts</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Understand and resolve basic merge conflicts that arise in collaborative development.</p></div>
+        <div class="card" style="padding:22px"><div style="font-size:24px;margin-bottom:12px">📝</div><h4 style="font-family:var(--display);font-size:15px;font-weight:700;margin-bottom:8px">Document your work</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.6">Write clear documentation covering features added, tools used, and challenges faced.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <p class="section-label">Tech stack</p>
+      <h2 class="section-title" data-animate>Tools you'll use</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:28px" data-animate>
+        <span class="tag tag-blue">HTML5</span><span class="tag tag-blue">CSS3</span><span class="tag tag-blue">JavaScript</span>
+        <span class="tag tag-purple">Git</span><span class="tag tag-purple">GitHub</span><span class="tag tag-green">VS Code</span>
+        <span class="tag tag-green">Chrome DevTools</span><span class="tag tag-amber">Optional: React / Vue</span><span class="tag tag-amber">Optional: Public APIs</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="section-label">Optional challenges</p>
+      <h2 class="section-title" data-animate>Bonus challenges</h2>
+      <p class="section-desc" data-animate>Go beyond the minimum requirements and demonstrate advanced skills.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px" data-animate>
+        <div class="card" style="padding:26px;position:relative;overflow:hidden"><div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(124,106,247,0.1),transparent 70%);pointer-events:none"></div><div style="font-family:var(--mono);font-size:9px;color:var(--accent2);letter-spacing:0.1em;margin-bottom:14px">BONUS 01</div><h4 style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px">Dark mode toggle 🌙</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.65;margin-bottom:14px">Implement a light/dark theme switcher that persists the user's preference using localStorage.</p><span class="tag tag-purple">UI/UX</span></div>
+        <div class="card" style="padding:26px;position:relative;overflow:hidden"><div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(61,214,140,0.08),transparent 70%);pointer-events:none"></div><div style="font-family:var(--mono);font-size:9px;color:var(--green);letter-spacing:0.1em;margin-bottom:14px">BONUS 02</div><h4 style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px">API integration 🌐</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.65;margin-bottom:14px">Fetch and display live data — a weather widget, random quote generator, or any public API.</p><span class="tag tag-green">JavaScript</span></div>
+        <div class="card" style="padding:26px;position:relative;overflow:hidden"><div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(245,166,35,0.07),transparent 70%);pointer-events:none"></div><div style="font-family:var(--mono);font-size:9px;color:var(--amber);letter-spacing:0.1em;margin-bottom:14px">BONUS 03</div><h4 style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px">Frontend framework ⚛️</h4><p style="font-size:13px;color:var(--text2);font-weight:300;line-height:1.65;margin-bottom:14px">Rebuild part of the project using React or Vue as an advanced challenge.</p><span class="tag tag-amber">Advanced</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="../assets/js/script.js"></script>
+  <script>
+    loadComponent('navbar', '../components/navbar.html');
+    loadComponent('footer', '../components/footer.html');
+  </script>
 </body>
 </html>
