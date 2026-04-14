@@ -1,26 +1,832 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frontend Enhancement · Git Branching Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:   #ffffff;
+      --off:     #f7f6f3;
+      --light:   #eeecea;
+      --border:  #e0ddd8;
+      --text:    #1a1916;
+      --muted:   #6b6860;
+      --accent:  #2563eb;
+      --green:   #16a34a;
+      --warn:    #dc2626;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      max-width: 1160px; margin: 0 auto;
+      padding: 0 32px;
+      display: flex; align-items: center;
+      height: 64px; gap: 32px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+      font-family: 'Fraunces', serif;
+      font-weight: 700; font-size: 1.1rem;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .brand-box {
+      width: 32px; height: 32px; border-radius: 7px;
+      background: var(--text); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+    }
+    .nav-links { display: flex; gap: 2px; flex: 1; }
+    .nav-links a {
+      padding: 6px 14px; border-radius: 6px;
+      text-decoration: none; font-size: .875rem;
+      font-weight: 500; color: var(--muted);
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover { background: var(--off); color: var(--text); }
+    .nav-actions { display: flex; gap: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 20px; border-radius: 8px;
+      font-size: .875rem; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all .18s; white-space: nowrap; font-family: inherit;
+    }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--text); background: var(--off); }
+    .btn-dark { background: var(--text); color: #fff; }
+    .btn-dark:hover { background: #333; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+
+    /* HERO */
+    .hero-wrap {
+      max-width: 1160px; margin: 0 auto;
+      padding: 80px 32px 72px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #eff6ff; border: 1px solid #bfdbfe;
+      border-radius: 100px; padding: 5px 14px 5px 9px;
+      font-size: .76rem; font-weight: 600; color: var(--accent);
+      letter-spacing: .03em; margin-bottom: 22px;
+    }
+    .kicker .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .hero-wrap h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-weight: 900; line-height: 1.08;
+      letter-spacing: -.03em; margin-bottom: 20px;
+    }
+    .hero-wrap h1 em { font-style: italic; color: var(--accent); }
+    .hero-wrap > div > p {
+      font-size: 1.02rem; color: var(--muted);
+      line-height: 1.75; max-width: 460px; margin-bottom: 34px;
+    }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* hero card */
+    .repo-card {
+      background: var(--off);
+      border: 1px solid var(--border);
+      border-radius: 18px; overflow: hidden;
+    }
+    .repo-card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .repo-card-header .repo-name {
+      font-weight: 700; font-size: .88rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .repo-card-header .repo-name span { color: var(--muted); font-weight: 400; }
+    .repo-badge { font-size: .7rem; font-weight: 600; padding: 3px 9px; border-radius: 100px; }
+    .rb-gray   { background: var(--light); color: var(--muted); }
+    .rb-blue   { background: #dbeafe; color: var(--accent); }
+    .rb-green  { background: #dcfce7; color: var(--green); }
+    .rb-red    { background: #fee2e2; color: var(--warn); }
+
+    .branch-list { padding: 8px 0; }
+    .branch-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .branch-item:last-child { border-bottom: none; }
+    .branch-item:hover { background: #fff; }
+    .bi-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .bi-main   { background: var(--text); }
+    .bi-blue   { background: var(--accent); }
+    .bi-green  { background: var(--green); }
+    .bi-red    { background: var(--warn); }
+    .bi-info { flex: 1; }
+    .bi-name { font-family: 'Courier New', monospace; font-size: .78rem; font-weight: 700; }
+    .bi-msg  { font-size: .76rem; color: var(--muted); margin-top: 2px; }
+
+    .repo-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+      display: flex; gap: 16px;
+      font-size: .78rem; color: var(--muted);
+    }
+    .repo-footer strong { color: var(--text); }
+
+    /* STATS */
+    .stats-bar { background: var(--text); }
+    .stats-inner {
+      max-width: 1160px; margin: 0 auto;
+      padding: 0 32px;
+      display: flex; flex-wrap: wrap;
+    }
+    .stat-item {
+      flex: 1; min-width: 140px;
+      padding: 32px 36px;
+      border-right: 1px solid rgba(255,255,255,.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.4rem; font-weight: 900; line-height: 1;
+      letter-spacing: -.03em; color: #fff;
+    }
+    .stat-label { font-size: .8rem; color: rgba(255,255,255,.45); margin-top: 5px; font-weight: 500; }
+
+    /* SECTION */
+    .section {
+      max-width: 1160px; margin: 0 auto;
+      padding: 96px 32px;
+    }
+    .bg-off { background: var(--off); }
+    .bg-off .section { padding: 96px 32px; }
+
+    .eyebrow {
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    h2.sh {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800; letter-spacing: -.025em; line-height: 1.15;
+    }
+    .sub {
+      font-size: .97rem; color: var(--muted);
+      max-width: 500px; line-height: 1.7; margin-top: 10px;
+    }
+    .header-block { margin-bottom: 52px; }
+    .header-center { text-align: center; }
+    .header-center .sub { margin: 10px auto 0; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; }
+    .step {
+      display: grid; grid-template-columns: 52px 1fr;
+      gap: 0 28px; padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-l { display: flex; flex-direction: column; align-items: center; }
+    .step-circle {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--text); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: .95rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-line {
+      width: 2px; flex: 1; background: var(--border); margin-top: 10px;
+    }
+    .step:last-child .step-line { display: none; }
+    .step h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -.015em;
+      margin-bottom: 8px;
+    }
+    .step p { color: var(--muted); font-size: .9rem; line-height: 1.7; max-width: 560px; }
+    .codeblk {
+      display: inline-block; margin-top: 14px;
+      background: #1a1916; color: #e2e8f7;
+      border-radius: 10px; padding: 14px 20px;
+      font-family: 'Courier New', monospace;
+      font-size: .76rem; line-height: 1.9; max-width: 100%;
+    }
+    .cg { color: #86efac; }
+    .cb { color: #93c5fd; }
+    .cy { color: #fde68a; }
+    .cm { color: #94a3b8; }
+
+    /* ENHANCEMENTS */
+    .enh-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      gap: 18px;
+    }
+    .enh-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 16px; padding: 30px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .enh-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,.09); transform: translateY(-3px); }
+    .enh-icon-box {
+      width: 46px; height: 46px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .ib-blue   { background: #dbeafe; }
+    .ib-green  { background: #dcfce7; }
+    .ib-orange { background: #ffedd5; }
+    .ib-purple { background: #ede9fe; }
+    .enh-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem; font-weight: 700; letter-spacing: -.01em;
+    }
+    .enh-tag {
+      display: inline-block; font-size: .68rem; font-weight: 700;
+      padding: 3px 9px; border-radius: 100px; letter-spacing: .03em;
+    }
+    .enh-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .enh-list li {
+      font-size: .85rem; color: var(--muted); line-height: 1.5;
+      display: flex; gap: 9px; align-items: flex-start;
+    }
+    .enh-list li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--border); flex-shrink: 0; margin-top: 7px;
+    }
+
+    /* RUBRIC */
+    .rubric-wrap { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .rubric-head {
+      display: grid; grid-template-columns: 2fr 3fr 120px 80px;
+      gap: 16px; padding: 14px 24px;
+      background: var(--text); color: rgba(255,255,255,.55);
+      font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .rubric-row {
+      display: grid; grid-template-columns: 2fr 3fr 120px 80px;
+      gap: 16px; padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      align-items: center; transition: background .15s;
+    }
+    .rubric-row:last-child { border-bottom: none; }
+    .rubric-row:hover { background: var(--off); }
+    .rubric-row .rl { font-weight: 600; font-size: .88rem; }
+    .rubric-row .rd { color: var(--muted); font-size: .83rem; line-height: 1.45; }
+    .prog { height: 6px; background: var(--light); border-radius: 100px; }
+    .prog-bar { height: 100%; border-radius: 100px; background: var(--accent); }
+    .rubric-row .pts {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem; font-weight: 800; color: var(--accent);
+      text-align: right;
+    }
+    .rubric-total {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 24px; background: #eff6ff; border-top: 2px solid #bfdbfe;
+    }
+    .rubric-total span { font-weight: 700; font-size: .9rem; }
+    .rubric-total .tot {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem; font-weight: 900; color: var(--accent);
+    }
+
+    /* TWO COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+    /* DELIVERABLES */
+    .del-list { display: flex; flex-direction: column; gap: 14px; }
+    .del-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 24px;
+      display: grid; grid-template-columns: 46px 1fr;
+      gap: 14px; align-items: start;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .del-card:hover { border-color: #bfdbfe; box-shadow: 0 4px 18px rgba(0,0,0,.07); }
+    .del-icon {
+      width: 46px; height: 46px; border-radius: 11px;
+      background: #eff6ff; display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .del-card h4 {
+      font-family: 'Fraunces', serif;
+      font-size: .93rem; font-weight: 700; margin-bottom: 4px;
+    }
+    .del-card p { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+    code.inline {
+      font-family: 'Courier New', monospace;
+      font-size: .8em; background: var(--off);
+      padding: 2px 6px; border-radius: 4px;
+    }
+
+    /* RULES */
+    .rules-list { display: flex; flex-direction: column; gap: 10px; }
+    .rule-row {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 16px 18px; background: #fff;
+      border: 1px solid var(--border); border-radius: 11px;
+      transition: border-color .18s;
+    }
+    .rule-row:hover { border-color: var(--text); }
+    .rule-n {
+      width: 26px; height: 26px; border-radius: 6px;
+      background: var(--text); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .68rem; font-weight: 800; flex-shrink: 0;
+    }
+    .rule-row h4 { font-size: .86rem; font-weight: 600; margin-bottom: 2px; }
+    .rule-row p  { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* BONUS */
+    .bonus-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px; margin-top: 16px;
+    }
+    .bonus-card {
+      border: 1.5px dashed var(--border); border-radius: 13px;
+      padding: 26px 22px; text-align: center;
+      transition: border-color .2s, background .2s;
+    }
+    .bonus-card:hover { border-color: var(--accent); background: #eff6ff; }
+    .bonus-card .bi { font-size: 1.8rem; margin-bottom: 10px; }
+    .bonus-card h4 {
+      font-family: 'Fraunces', serif;
+      font-size: .93rem; font-weight: 700; margin-bottom: 5px;
+    }
+    .bonus-card p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* FOOTER */
+    footer { background: var(--text); color: rgba(255,255,255,.5); }
+    .footer-inner {
+      max-width: 1160px; margin: 0 auto;
+      padding: 56px 32px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 12px;
+    }
+    .footer-inner > div > p { font-size: .86rem; line-height: 1.65; max-width: 300px; }
+    .fc h5 {
+      font-size: .72rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px;
+    }
+    .fc a {
+      display: block; color: rgba(255,255,255,.55); text-decoration: none;
+      font-size: .86rem; margin-bottom: 10px; transition: color .15s;
+    }
+    .fc a:hover { color: #fff; }
+    .footer-btm {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 18px 32px;
+      max-width: 1160px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .78rem; color: rgba(255,255,255,.3);
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .hero-wrap { grid-template-columns: 1fr; gap: 36px; padding: 48px 20px; }
+      .two-col { grid-template-columns: 1fr; gap: 48px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .nav-links, .nav-actions { display: none; }
+      .rubric-head, .rubric-row { grid-template-columns: 1fr 100px; }
+      .rubric-head .rh2, .rubric-head .rh3, .rubric-row .rd, .rubric-row .prog { display: none; }
+    }
+    @media (max-width: 640px) {
+      .section { padding: 60px 20px; }
+      nav { padding: 0 20px; }
+      .stats-inner { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); padding: 20px 20px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+<header>
+  <nav>
+    <a href="#" class="nav-brand">
+      <div class="brand-box">⎇</div>
+      GitEnhance
+    </a>
+    <div class="nav-links">
+      <a href="#steps">Workflow</a>
+      <a href="#enhancements">Enhancements</a>
+      <a href="#rubric">Rubric</a>
+      <a href="#deliverables">Submit</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#rubric" class="btn btn-ghost">View Rubric</a>
+      <a href="#steps" class="btn btn-dark">Get Started →</a>
+    </div>
+  </nav>
+</header>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+<main>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+<!-- HERO -->
+<div class="hero-wrap">
+  <div>
+    <div class="kicker"><span class="dot"></span> CS · Frontend Development Project</div>
+    <h1>Frontend Enhancement<br>Using <em>Git Branching</em></h1>
+    <p>Collaborate like real developers. Create branches, ship features, open pull requests, and experience the complete modern development workflow — from fork to final merge.</p>
+    <div class="hero-btns">
+      <a href="#steps" class="btn btn-dark" style="font-size:.9rem; padding:12px 26px;">View Workflow →</a>
+      <a href="#rubric" class="btn btn-ghost" style="font-size:.9rem; padding:12px 26px;">See Rubric</a>
+    </div>
+  </div>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+  <div class="repo-card">
+    <div class="repo-card-header">
+      <div class="repo-name">⎇ <span>aldonaire /</span> frontend-enhancement-project</div>
+      <span class="repo-badge rb-gray">public</span>
+    </div>
+    <div class="branch-list">
+      <div class="branch-item">
+        <div class="bi-dot bi-main"></div>
+        <div class="bi-info">
+          <div class="bi-name">main</div>
+          <div class="bi-msg">Initial project setup · base</div>
+        </div>
+        <span class="repo-badge rb-gray">protected</span>
+      </div>
+      <div class="branch-item">
+        <div class="bi-dot bi-blue"></div>
+        <div class="bi-info">
+          <div class="bi-name">feature/reyes-frontend-enhancement</div>
+          <div class="bi-msg">feat: improved navbar responsiveness</div>
+        </div>
+        <span class="repo-badge rb-blue">open PR</span>
+      </div>
+      <div class="branch-item">
+        <div class="bi-dot bi-green"></div>
+        <div class="bi-info">
+          <div class="bi-name">feature/santos-frontend-enhancement</div>
+          <div class="bi-msg">feat: add dark mode toggle</div>
+        </div>
+        <span class="repo-badge rb-green">merged ✓</span>
+      </div>
+      <div class="branch-item">
+        <div class="bi-dot bi-red"></div>
+        <div class="bi-info">
+          <div class="bi-name">feature/cruz-frontend-enhancement</div>
+          <div class="bi-msg">fix: form validation errors</div>
+        </div>
+        <span class="repo-badge rb-red">needs review</span>
+      </div>
+    </div>
+    <div class="repo-footer">
+      <span><strong>3</strong> open PRs</span>
+      <span><strong>1</strong> merged</span>
+      <span><strong>0</strong> conflicts</span>
+    </div>
+  </div>
+</div>
 
-  <script src="assets/js/script.js"></script>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Steps to complete</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Enhancements required</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100</div>
+      <div class="stat-label">Total points possible</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Deliverables to submit</div>
+    </div>
+  </div>
+</div>
+
+<!-- STEPS -->
+<div class="section" id="steps">
+  <div class="header-block reveal">
+    <div class="eyebrow">Workflow</div>
+    <h2 class="sh">Project Steps</h2>
+    <p class="sub">Follow these 7 steps in order. Each one mirrors a real Git development cycle.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-l"><div class="step-circle">1</div><div class="step-line"></div></div>
+      <div>
+        <h3>Fork the Repository</h3>
+        <p>Go to the GitHub project repo and click <strong>Fork</strong> (top-right corner). This creates a personal copy of the repository under your own GitHub account.</p>
+        <div class="codeblk"><span class="cm"># Your fork lives at:</span><br>github.com/<span class="cy">yourname</span>/frontend-enhancement-project</div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-l"><div class="step-circle">2</div><div class="step-line"></div></div>
+      <div>
+        <h3>Clone Your Fork</h3>
+        <p>Download your forked repository to your local machine so you can start coding in your editor.</p>
+        <div class="codeblk">git clone https://github.com/<span class="cy">yourname</span>/frontend-enhancement-project.git<br>cd frontend-enhancement-project</div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-l"><div class="step-circle">3</div><div class="step-line"></div></div>
+      <div>
+        <h3>Create Your Branch</h3>
+        <p>Never work on <code class="inline">main</code> directly. Create a feature branch using your last name in the branch name.</p>
+        <div class="codeblk">git checkout -b <span class="cb">feature/&lt;lastname&gt;-frontend-enhancement</span></div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-l"><div class="step-circle">4</div><div class="step-line"></div></div>
+      <div>
+        <h3>Implement Enhancements</h3>
+        <p>Add at least <strong>3 improvements</strong> from the categories listed below — UI/UX, functionality, or optimization. You can also attempt the optional bonus challenges.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-l"><div class="step-circle">5</div><div class="step-line"></div></div>
+      <div>
+        <h3>Commit Your Changes</h3>
+        <p>Write clear, descriptive commit messages. Every commit should explain what changed and why. No vague messages like "update file".</p>
+        <div class="codeblk">git add .<br>git commit -m <span class="cg">"feat: improved navbar responsiveness"</span><br>git commit -m <span class="cg">"feat: add modal component"</span><br>git commit -m <span class="cg">"fix: corrected form validation"</span></div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-l"><div class="step-circle">6</div><div class="step-line"></div></div>
+      <div>
+        <h3>Push Your Branch</h3>
+        <p>Upload your local branch to your GitHub fork so it's available online and ready for a pull request.</p>
+        <div class="codeblk">git push origin <span class="cb">feature/&lt;branch-name&gt;</span></div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-l"><div class="step-circle">7</div><div class="step-line"></div></div>
+      <div>
+        <h3>Open a Pull Request</h3>
+        <p>Go to your fork on GitHub and click <strong>Compare &amp; pull request</strong>. Make sure you're targeting the correct base repository and branch.</p>
+        <div class="codeblk">base repo:   <span class="cg">aldonaire/frontend-enhancement-project</span><br>base branch: <span class="cg">main</span><br>head repo:   <span class="cy">yourname</span>/frontend-enhancement-project<br>compare:     <span class="cb">feature/&lt;your-branch&gt;</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENHANCEMENTS -->
+<div class="bg-off">
+  <div class="section" id="enhancements">
+    <div class="header-block header-center reveal">
+      <div class="eyebrow">Requirements</div>
+      <h2 class="sh">Enhancement Categories</h2>
+      <p class="sub">Pick at least 3 improvements from any category below. Mix and match freely.</p>
+    </div>
+    <div class="enh-grid">
+      <div class="enh-card reveal">
+        <div class="enh-icon-box ib-blue">🎨</div>
+        <div><span class="enh-tag" style="background:#dbeafe;color:var(--accent);">UI / UX</span></div>
+        <h3>Visual &amp; Layout Improvements</h3>
+        <ul class="enh-list">
+          <li>Improve spacing, alignment, and visual hierarchy</li>
+          <li>Add responsive / mobile-friendly design</li>
+          <li>Enhance typography and color system</li>
+          <li>Add smooth animations or CSS transitions</li>
+        </ul>
+      </div>
+      <div class="enh-card reveal">
+        <div class="enh-icon-box ib-green">⚙️</div>
+        <div><span class="enh-tag" style="background:#dcfce7;color:var(--green);">Functional</span></div>
+        <h3>Interactive Functionality</h3>
+        <ul class="enh-list">
+          <li>Add interactive component — modal, dropdown, accordion</li>
+          <li>Improve navigation — navbar, sidebar, breadcrumbs</li>
+          <li>Add real-time form validation with feedback</li>
+          <li>Improve loading states and user indicators</li>
+        </ul>
+      </div>
+      <div class="enh-card reveal">
+        <div class="enh-icon-box ib-orange">⚡</div>
+        <div><span class="enh-tag" style="background:#ffedd5;color:#c2410c;">Optimization</span></div>
+        <h3>Code Quality &amp; Performance</h3>
+        <ul class="enh-list">
+          <li>Clean and organize code structure</li>
+          <li>Remove redundant CSS and JavaScript</li>
+          <li>Improve basic performance — lazy loading, minify</li>
+          <li>Use semantic HTML for better accessibility</li>
+        </ul>
+      </div>
+      <div class="enh-card reveal" style="border-style:dashed; border-color:#c4b5fd;">
+        <div class="enh-icon-box ib-purple">⭐</div>
+        <div><span class="enh-tag" style="background:#ede9fe;color:#7c3aed;">Bonus · Optional</span></div>
+        <h3>Extra Credit Challenges</h3>
+        <ul class="enh-list">
+          <li>Implement a dark mode toggle</li>
+          <li>Integrate a public API — weather, quotes, etc.</li>
+          <li>Use a frontend framework like React or Vue</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RUBRIC -->
+<div class="section" id="rubric">
+  <div class="header-block reveal">
+    <div class="eyebrow">Grading</div>
+    <h2 class="sh">Rubric — 100 Points</h2>
+    <p class="sub">Each criterion is graded on quality, correctness, and completeness.</p>
+  </div>
+  <div class="rubric-wrap reveal">
+    <div class="rubric-head">
+      <div>Criterion</div>
+      <div class="rh2">Description</div>
+      <div class="rh3">Weight</div>
+      <div style="text-align:right;">Points</div>
+    </div>
+    <div class="rubric-row">
+      <div class="rl">⎇ Git Usage</div>
+      <div class="rd">Branching strategy, commit quality, pull request</div>
+      <div class="prog"><div class="prog-bar" style="width:100%"></div></div>
+      <div class="pts">25 pts</div>
+    </div>
+    <div class="rubric-row">
+      <div class="rl">🎨 UI/UX Improvements</div>
+      <div class="rd">Visual design, responsiveness, layout quality</div>
+      <div class="prog"><div class="prog-bar" style="width:100%"></div></div>
+      <div class="pts">25 pts</div>
+    </div>
+    <div class="rubric-row">
+      <div class="rl">⚙️ Functionality</div>
+      <div class="rd">Interactive features, components, validation</div>
+      <div class="prog"><div class="prog-bar" style="width:80%"></div></div>
+      <div class="pts">20 pts</div>
+    </div>
+    <div class="rubric-row">
+      <div class="rl">🧹 Code Quality</div>
+      <div class="rd">Organization, readability, no redundancy</div>
+      <div class="prog"><div class="prog-bar" style="width:60%"></div></div>
+      <div class="pts">15 pts</div>
+    </div>
+    <div class="rubric-row">
+      <div class="rl">📄 Documentation</div>
+      <div class="rd">README: features, tools used, challenges</div>
+      <div class="prog"><div class="prog-bar" style="width:60%"></div></div>
+      <div class="pts">15 pts</div>
+    </div>
+    <div class="rubric-total">
+      <span>Total Score</span>
+      <span class="tot">100 pts</span>
+    </div>
+  </div>
+</div>
+
+<!-- DELIVERABLES + RULES -->
+<div class="bg-off">
+  <div class="section" id="deliverables">
+    <div class="two-col">
+      <div>
+        <div class="header-block reveal">
+          <div class="eyebrow">Submit</div>
+          <h2 class="sh">Deliverables</h2>
+          <p class="sub">All three items are required for a complete grade.</p>
+        </div>
+        <div class="del-list">
+          <div class="del-card reveal">
+            <div class="del-icon">⎇</div>
+            <div>
+              <h4>GitHub Branch</h4>
+              <p>Named <code class="inline">feature/&lt;lastname&gt;-frontend-enhancement</code> with all commits pushed to your fork.</p>
+            </div>
+          </div>
+          <div class="del-card reveal">
+            <div class="del-icon">🔀</div>
+            <div>
+              <h4>Pull Request</h4>
+              <p>Opened against the original repo's <code class="inline">main</code> branch with a clear title and description of your changes.</p>
+            </div>
+          </div>
+          <div class="del-card reveal">
+            <div class="del-icon">📄</div>
+            <div>
+              <h4>Documentation</h4>
+              <p>A README update or separate file listing: features added, tools used, and challenges you encountered.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="header-block reveal">
+          <div class="eyebrow">Rules</div>
+          <h2 class="sh">Guidelines</h2>
+          <p class="sub">Follow these rules throughout the whole project.</p>
+        </div>
+        <div class="rules-list">
+          <div class="rule-row reveal">
+            <div class="rule-n">01</div>
+            <div><h4>Never push to main</h4><p>All changes must go through a feature branch and a pull request.</p></div>
+          </div>
+          <div class="rule-row reveal">
+            <div class="rule-n">02</div>
+            <div><h4>Work only on your branch</h4><p>Stay on your assigned feature branch throughout the entire project.</p></div>
+          </div>
+          <div class="rule-row reveal">
+            <div class="rule-n">03</div>
+            <div><h4>Write meaningful commits</h4><p>Describe what changed and why. No "update file" or "changes" messages.</p></div>
+          </div>
+          <div class="rule-row reveal">
+            <div class="rule-n">04</div>
+            <div><h4>Don't break existing features</h4><p>Your additions should improve the project — not break what already works.</p></div>
+          </div>
+          <div class="rule-row reveal">
+            <div class="rule-n">05</div>
+            <div><h4>Test before pushing</h4><p>Always run your code locally and verify it works before pushing to GitHub.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">GitEnhance</div>
+      <p>A frontend development project for students learning Git branching, team collaboration, and UI/UX improvement through hands-on practice.</p>
+    </div>
+    <div class="fc">
+      <h5>Navigate</h5>
+      <a href="#steps">Workflow Steps</a>
+      <a href="#enhancements">Enhancements</a>
+      <a href="#rubric">Grading Rubric</a>
+      <a href="#deliverables">Deliverables</a>
+    </div>
+    <div class="fc">
+      <h5>Resources</h5>
+      <a href="https://docs.github.com" target="_blank">GitHub Docs</a>
+      <a href="https://git-scm.com/doc" target="_blank">Git Reference</a>
+      <a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a>
+    </div>
+  </div>
+  <div class="footer-btm">
+    <span>Frontend Enhancement · Git Branching Project</span>
+    <span>100 pts · 3+ enhancements required</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    const parent = el.closest('.enh-grid, .del-list, .rules-list, .steps');
+    if (parent) {
+      const siblings = [...parent.querySelectorAll('.reveal')];
+      el.style.transitionDelay = (siblings.indexOf(el) * 75) + 'ms';
+    }
+    io.observe(el);
+  });
+</script>
 </body>
 </html>
