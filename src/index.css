@@ -474,6 +474,14 @@ html.light .dark-mode-toggle:hover {
   }
 }
 
+/* Extra small devices - 320px and below */
+@media (max-width: 320px) {
+  .social-bar,
+  .name-tag {
+    display: none !important;
+  }
+}
+
 /* ── Sidebar fixed color (matches torii red) ── */
 .sidebar {
   transition: color 0.45s ease;
