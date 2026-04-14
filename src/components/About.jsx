@@ -35,7 +35,6 @@ export default function About() {
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <span className="about-chapter__number">01</span>
         <span className="about-chapter__label">About Torii</span>
       </motion.div>
 

@@ -26,7 +26,6 @@ export default function Contact() {
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <span className="contact-chapter__number">04</span>
         <span className="contact-chapter__label">Write to Us</span>
       </motion.div>
 
