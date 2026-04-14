@@ -1,17 +1,29 @@
-function showAlert() {
-  alert("Button clicked!");
+// MODAL
+function openModal() {
+  document.getElementById("modal").style.display = "block";
 }
 
-// Optional: Load components (basic simulation)
-document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("navbar", "components/navbar.html");
-  loadComponent("footer", "components/footer.html");
-});
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
 
-function loadComponent(id, file) {
-  fetch(file)
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById(id).innerHTML = data;
-    });
+// FORM VALIDATION
+function validateForm() {
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let error = document.getElementById("error");
+
+  if (!name || !email) {
+    error.textContent = "All fields are required!";
+    return false;
+  }
+
+  error.style.color = "lightgreen";
+  error.textContent = "Form submitted successfully!";
+  return false;
+}
+
+// MOBILE MENU
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("active");
 }
