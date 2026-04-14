@@ -1,25 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luminary — Frontend Excellence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+  <!-- Navbar injected here -->
+  <div id="navbar-container"></div>
 
   <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
 
-    <button onclick="showAlert()">Click Me</button>
+    <!-- ═══════════════════════════════════════════
+         HERO SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="home" class="hero">
+      <div class="hero__bg-grid"></div>
+      <div class="hero__orb hero__orb--1"></div>
+      <div class="hero__orb hero__orb--2"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <span class="hero__eyebrow reveal-up">Crafted with Precision</span>
+          <h1 class="hero__title reveal-up" style="--delay: 0.1s">
+            Where Design<br />
+            <em>Meets Mastery</em>
+          </h1>
+          <p class="hero__subtitle reveal-up" style="--delay: 0.2s">
+            We craft immersive digital experiences that blend elegant design with
+            flawless functionality — built to inspire, built to last.
+          </p>
+          <div class="hero__actions reveal-up" style="--delay: 0.3s">
+            <a href="#features" class="btn btn--primary">Explore Work</a>
+            <a href="#contact" class="btn btn--ghost">Get in Touch</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal-right" style="--delay: 0.2s">
+          <div class="hero__card-stack">
+            <div class="hero__card hero__card--back">
+              <div class="hero__card-line"></div>
+              <div class="hero__card-line short"></div>
+              <div class="hero__card-dot"></div>
+            </div>
+            <div class="hero__card hero__card--mid">
+              <div class="hero__card-badge">UI/UX</div>
+              <div class="hero__card-line"></div>
+              <div class="hero__card-line short"></div>
+            </div>
+            <div class="hero__card hero__card--front">
+              <div class="hero__card-header">
+                <span class="hero__card-tag">Live Preview</span>
+                <span class="hero__card-status"></span>
+              </div>
+              <div class="hero__card-stat">
+                <span class="hero__card-num">98%</span>
+                <span class="hero__card-label">Performance Score</span>
+              </div>
+              <div class="hero__card-bar">
+                <div class="hero__card-bar-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll-hint">
+        <span>Scroll to discover</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         ABOUT SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="about" class="about section">
+      <div class="container about__inner">
+        <div class="about__media reveal-left">
+          <div class="about__img-wrapper">
+            <div class="about__img-block about__img-block--1">
+              <div class="about__img-inner">
+                <div class="about__img-text">2019</div>
+                <div class="about__img-sub">Founded</div>
+              </div>
+            </div>
+            <div class="about__img-block about__img-block--2">
+              <div class="about__img-inner">
+                <div class="about__img-text">200+</div>
+                <div class="about__img-sub">Projects Delivered</div>
+              </div>
+            </div>
+            <div class="about__img-block about__img-block--3">
+              <div class="about__img-inner">
+                <div class="about__img-text">40+</div>
+                <div class="about__img-sub">Happy Clients</div>
+              </div>
+            </div>
+            <div class="about__accent-ring"></div>
+          </div>
+        </div>
+
+        <div class="about__body reveal-right">
+          <div class="section-label">Who We Are</div>
+          <h2 class="section-title">
+            A Studio Built on<br /><em>Creative Ambition</em>
+          </h2>
+          <p class="about__text">
+            Luminary is a boutique frontend studio where craftsmanship meets
+            strategy. We believe every pixel is intentional, every interaction
+            meaningful, and every project a canvas for innovation.
+          </p>
+          <p class="about__text">
+            Our multidisciplinary team merges deep technical expertise with a
+            refined aesthetic sensibility to deliver experiences that feel truly
+            alive.
+          </p>
+          <div class="about__pills">
+            <span class="pill">React & Next.js</span>
+            <span class="pill">Motion Design</span>
+            <span class="pill">Design Systems</span>
+            <span class="pill">Accessibility</span>
+          </div>
+          <a href="#contact" class="btn btn--primary btn--sm">Start a Project</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FEATURES SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="features" class="features section">
+      <div class="features__bg-glow"></div>
+      <div class="container">
+        <div class="section-header reveal-up">
+          <div class="section-label">What We Offer</div>
+          <h2 class="section-title">
+            Services Crafted for<br /><em>Exceptional Outcomes</em>
+          </h2>
+          <p class="section-desc">
+            We offer a focused suite of services designed to bring your vision
+            to life with precision, elegance, and lasting impact.
+          </p>
+        </div>
+
+        <div class="features__grid">
+
+          <article class="feature-card reveal-up" style="--delay: 0s">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 21h18M6.75 10.5h.008v.008H6.75V10.5zM12 4.5v.01"/><rect x="3" y="6" width="18" height="14" rx="2"/></svg>
+            </div>
+            <h3 class="feature-card__title">UI/UX Design</h3>
+            <p class="feature-card__text">
+              Research-driven interfaces that balance visual beauty with
+              intuitive usability. We design for real humans, not trends.
+            </p>
+            <div class="feature-card__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </div>
+          </article>
+
+          <article class="feature-card reveal-up" style="--delay: 0.08s">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+            </div>
+            <h3 class="feature-card__title">Frontend Development</h3>
+            <p class="feature-card__text">
+              Performant, accessible, and beautifully structured code. We build
+              scalable frontends that stand the test of time.
+            </p>
+            <div class="feature-card__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </div>
+          </article>
+
+          <article class="feature-card reveal-up" style="--delay: 0.16s">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+            </div>
+            <h3 class="feature-card__title">Motion & Animation</h3>
+            <p class="feature-card__text">
+              Purposeful motion that guides attention, communicates meaning, and
+              transforms static pages into dynamic experiences.
+            </p>
+            <div class="feature-card__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </div>
+          </article>
+
+          <article class="feature-card reveal-up" style="--delay: 0.24s">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3"/></svg>
+            </div>
+            <h3 class="feature-card__title">Design Systems</h3>
+            <p class="feature-card__text">
+              Comprehensive, maintainable component libraries that ensure
+              consistency and speed up every future iteration.
+            </p>
+            <div class="feature-card__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </div>
+          </article>
+
+          <article class="feature-card reveal-up" style="--delay: 0.32s">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+            </div>
+            <h3 class="feature-card__title">Responsive Engineering</h3>
+            <p class="feature-card__text">
+              Pixel-perfect across every device and viewport. We build mobile-first
+              with graceful enhancements at every breakpoint.
+            </p>
+            <div class="feature-card__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </div>
+          </article>
+
+          <article class="feature-card reveal-up" style="--delay: 0.4s">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+            </div>
+            <h3 class="feature-card__title">Performance & SEO</h3>
+            <p class="feature-card__text">
+              Lighthouse-optimized builds with semantic structure, fast load
+              times, and technical SEO foundations baked in from the start.
+            </p>
+            <div class="feature-card__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         STATS BAND
+    ═══════════════════════════════════════════ -->
+    <section class="stats section--sm">
+      <div class="container stats__inner">
+        <div class="stat reveal-up" style="--delay: 0s">
+          <span class="stat__num" data-target="200">0</span><span class="stat__plus">+</span>
+          <span class="stat__label">Projects Completed</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat reveal-up" style="--delay: 0.1s">
+          <span class="stat__num" data-target="40">0</span><span class="stat__plus">+</span>
+          <span class="stat__label">Global Clients</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat reveal-up" style="--delay: 0.2s">
+          <span class="stat__num" data-target="98">0</span><span class="stat__plus">%</span>
+          <span class="stat__label">Client Satisfaction</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat reveal-up" style="--delay: 0.3s">
+          <span class="stat__num" data-target="5">0</span><span class="stat__plus">★</span>
+          <span class="stat__label">Average Rating</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="contact" class="contact section">
+      <div class="container contact__inner">
+        <div class="contact__left reveal-left">
+          <div class="section-label">Let's Talk</div>
+          <h2 class="section-title">
+            Ready to Build<br /><em>Something Brilliant?</em>
+          </h2>
+          <p class="contact__desc">
+            Whether you have a clear vision or just a spark of an idea, we'd
+            love to hear from you. Let's create something extraordinary together.
+          </p>
+          <ul class="contact__info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              hello@luminary.studio
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+              +1 (555) 000-1234
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+              San Francisco, CA
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact__right reveal-right">
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="jane@email.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Project Inquiry" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">
+              <span>Send Message</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+            </button>
+            <div class="form-success" id="form-success">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Message sent! We'll be in touch shortly.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+  <!-- Footer injected here Sabanal Gwapo -->
+  <div id="footer-container"></div>
 
   <script src="assets/js/script.js"></script>
 </body>
