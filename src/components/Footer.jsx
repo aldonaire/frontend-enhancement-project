@@ -97,7 +97,7 @@ function Footer() {
 
         <div className="footer-bottom">
           <p>&copy; 2026 Torii. All rights reserved.</p>
-          <p>Made with love for Japan</p>
+          <p>Made with love for Charles</p>
         </div>
       </div>
     </footer>

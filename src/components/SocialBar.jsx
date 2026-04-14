@@ -1,11 +1,47 @@
+import { useEffect, useState } from 'react';
+
 function SocialBar() {
+  const [sidebarDark, setSidebarDark] = useState(false);
+
+  useEffect(() => {
+    const darkSections = ['hero'];
+    const lightSections = ['destinations', 'about', 'contact'];
+
+    const handleIntersect = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+          const id = entry.target.id;
+          if (darkSections.includes(id)) {
+            setSidebarDark(false);
+          } else if (lightSections.includes(id)) {
+            setSidebarDark(true);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.3,
+    });
+
+    const allSections = [...darkSections, ...lightSections];
+    allSections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="social-bar">
-      <div className="social-line social-line-top"></div>
+    <div className={`sidebar ${sidebarDark ? 'sidebar--dark' : 'sidebar--light'}`}>
+      <div className="sidebar-line"></div>
       
       <a href="https://instagram.com" className="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
         </svg>
       </a>
       
@@ -21,15 +57,47 @@ function SocialBar() {
         </svg>
       </a>
       
-      <div className="social-line social-line-bottom"></div>
+      <div className="sidebar-line"></div>
     </div>
   );
 }
 
 function NameTag() {
+  const [sidebarDark, setSidebarDark] = useState(false);
+
+  useEffect(() => {
+    const darkSections = ['hero'];
+    const lightSections = ['destinations', 'about', 'contact'];
+
+    const handleIntersect = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+          const id = entry.target.id;
+          if (darkSections.includes(id)) {
+            setSidebarDark(false);
+          } else if (lightSections.includes(id)) {
+            setSidebarDark(true);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.3,
+    });
+
+    const allSections = [...darkSections, ...lightSections];
+    allSections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="name-tag">
-      — charles
+    <div className={`sidebar ${sidebarDark ? 'sidebar--dark' : 'sidebar--light'}`}>
+      <span className="sidebar-text">— charles</span>
     </div>
   );
 }
