@@ -1,26 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Enhancement Project</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SkyWings ✈ | Experience The Magic Of Flight</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+    <!-- Navigation Bar with mobile toggle (improved navigation) -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">✈ UUXSHUVO</div>
+                <div class="hamburger" id="hamburgerBtn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#">ABOUT</a>
+                    <a href="#">TOUR</a>
+                    <a href="#">PACKAGE</a>
+                    <a href="#">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h4 class="hero-subtitle">Elevate Your Travel Journey</h4>
+                <h1 class="hero-title">Experience The Magic Of Flight!</h1>
+                <button class="btn-primary pulse-btn" id="bookNowBtn">Book A Trip Now →</button>
+            </div>
+        </div>
+    </section>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+    <!-- Know More + Social Logos (enhanced layout & spacing) -->
+    <section class="know-more">
+        <div class="container">
+            <div class="know-wrapper">
+                <div class="know-text">
+                    <h3>Know More</h3>
+                    <h2>Awesome Places</h2>
+                    <p>Discover The World One Adventure At A Time!</p>
+                </div>
+                <div class="social-icons">
+                    <i class="fab fa-airbnb"></i>
+                    <i class="fas fa-hotel"></i>
+                    <i class="fab fa-tripadvisor"></i>
+                    <i class="fab fa-expedia"></i>
+                    <span class="custom-text">Booking.com</span>
+                    <i class="fab fa-trivago"></i>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+    <!-- Popular Destination Section (dynamic cards + hover animations) -->
+    <section class="popular">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Destination</h2>
+                <p class="tagline">Unleash Your Wanderlust With SkyWings</p>
+            </div>
+            <div class="destination-cards" id="destinationsContainer">
+                <!-- JS will populate cards -->
+            </div>
+        </div>
+    </section>
 
-  <script src="assets/js/script.js"></script>
+    <!-- Journey To The Skies Made Simple (improved cards & transitions) -->
+    <section class="journey">
+        <div class="container">
+            <div class="journey-header">
+                <h2>Journey To The Skies Made Simple!</h2>
+                <p>Traveling is A Wonderful Way To Explore New Places, Learn About Different Cultures, And Gain Unique Experiences.</p>
+            </div>
+            <div class="journey-cards">
+                <div class="journey-card">
+                    <div class="icon"><i class="fas fa-plane-departure"></i></div>
+                    <h3>Find Your Destination</h3>
+                    <button class="card-btn" id="openModalBtn">Book A Ticket</button>
+                    <p class="card-desc">Traveling is A Wonderful Way To Explore New Places, Learn About Different Cultures, And Gain Unique Experiences.</p>
+                </div>
+                <div class="journey-card">
+                    <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3>LEARN MORE</h3>
+                    <button class="card-btn alt" id="learnJourneyBtn">Pay & Start Journey</button>
+                    <p class="card-desc">Plan your adventure with confidence, explore hidden gems and unforgettable routes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNLEASH WANDERLUST WITH SKYWINGS + OFFER BANNER -->
+    <section class="offer-banner">
+        <div class="container offer-container">
+            <div class="offer-content">
+                <h2>UNLEASH WANDERLUST WITH SKYWINGS</h2>
+                <p>Traveling is A Wonderful Way To Explore New Places, Learn About Different Cultures, And Gain Unique Experiences.</p>
+                <div class="offer-badge">
+                    <span class="discount">20% OFF</span>
+                    <span class="date">18-28 September, 2023</span>
+                </div>
+                <button class="btn-flight" id="flightNowBtn">Book A Flight Now →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Component (Interactive Component: Modal for booking) -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>✈ Plan Your Escape</h2>
+            <p>Fill the details and our travel expert will reach out!</p>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" placeholder="Your name" required>
+                    <small class="error-msg" id="nameError"></small>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                    <small class="error-msg" id="emailError"></small>
+                </div>
+                <div class="form-group">
+                    <label>Destination (optional)</label>
+                    <input type="text" id="destination" placeholder="e.g., Forest Wild Life, Paris">
+                </div>
+                <button type="submit" class="modal-submit">Request a Callback ✈</button>
+                <div id="formFeedback" class="form-feedback"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification (feedback indicator) -->
+    <div id="toastMsg" class="toast-message">✨ Welcome to SkyWings!</div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 SkyWings | Experience the magic. All journeys inspired. 🌍</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
