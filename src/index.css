@@ -477,6 +477,22 @@ html.light .dark-mode-toggle:hover {
 /* ── Sidebar fixed color (matches torii red but subtle) ── */
 .sidebar {
   transition: color 0.45s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-line {
+  width: 2px;
+  height: 30px;
+  background: rgba(230, 57, 70, 0.25) !important;
+}
+
+.sidebar-dash {
+  font-size: 14px;
+  color: rgba(230, 57, 70, 0.5) !important;
+  line-height: 1;
 }
 
 .sidebar--light,
