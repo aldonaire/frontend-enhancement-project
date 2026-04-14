@@ -1,3 +1,39 @@
-<nav>
-  <h2>My Website</h2>
+<!--
+  NEXARA STUDIO — Navbar Component
+  Usage: include via JS fetch or copy-paste into each page.
+  Adjust href paths (../../ prefix) when used from /pages/ subdirectory.
+-->
+
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">Nex<span>ara</span></a>
+
+    <!-- Desktop Links -->
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+    </ul>
+
+    <!-- Hamburger -->
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#work">Work</a>
+  <a href="contact.html">Contact</a>
+</div>
