@@ -5,6 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Enhancement Project</title>
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Enhancements: Internal CSS -->
+  <style>
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background-color: #2980b9;
+    }
+
+    .form-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .form-section input {
+      display: block;
+      margin: 10px auto;
+      padding: 8px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .error {
+      color: red;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      margin: 15% auto;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .close {
+      float: right;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      main {
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -16,11 +83,66 @@
     <p>Enhance this frontend!</p>
 
     <button onclick="showAlert()">Click Me</button>
+
+    <!-- Enhancements Start -->
+    <br>
+
+    <!-- Animated Button -->
+    <button class="btn" onclick="openModal()">Open Modal</button>
+
+    <!-- Form -->
+    <div class="form-section">
+      <h2>Contact Form</h2>
+      <form onsubmit="return validateForm()">
+        <input type="text" id="name" placeholder="Enter your name">
+        <input type="email" id="email" placeholder="Enter your email">
+        <p id="error-msg" class="error"></p>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+    <!-- Enhancements End -->
+
   </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Hello 👋</h2>
+      <p>This is an interactive modal!</p>
+    </div>
+  </div>
 
   <!-- Footer -->
   <div id="footer"></div>
 
   <script src="assets/js/script.js"></script>
+
+  <!-- Enhancements: Internal JS -->
+  <script>
+    function openModal() {
+      document.getElementById("modal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function validateForm() {
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let errorMsg = document.getElementById("error-msg");
+
+      if (name === "" || email === "") {
+        errorMsg.textContent = "All fields are required!";
+        return false;
+      }
+
+      errorMsg.textContent = "";
+      alert("Form submitted successfully!");
+      return true;
+    }
+  </script>
+
 </body>
 </html>
