@@ -9,17 +9,53 @@
 <body>
 
   <!-- Navbar -->
-  <div id="navbar"></div>
+  <header id="navbar">
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <!-- Main Content -->
   <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+    <section id="home">
+      <h1>Welcome to the Project</h1>
+      <p>Enhance this frontend with modern web technologies and good UX practices!</p>
+      <button onclick="showAlert()">Click Me</button>
+    </section>
 
-    <button onclick="showAlert()">Click Me</button>
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Us</h2>
+      <p>This is a project designed to showcase frontend enhancements. Here, we demonstrate various techniques to improve usability, performance, and design.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <h2>Our Services</h2>
+      <ul>
+        <li>Frontend Development</li>
+        <li>UI/UX Design</li>
+        <li>Web Performance Optimization</li>
+        <li>SEO Optimization</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>If you'd like to collaborate or have any questions, feel free to reach out to us.</p>
+    </section>
   </main>
 
   <!-- Footer -->
-  <div id="footer"></div>
+  <footer id="footer">
+    <p>&copy; 2026 Frontend Enhancement Project. All Rights Reserved.</p>
+  </footer>
 
   <script src="assets/js/script.js"></script>
 </body>
