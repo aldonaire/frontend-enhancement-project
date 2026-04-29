@@ -1,3 +1,16 @@
-<nav>
-  <h2>My Website</h2>
+<nav class="nav-wrapper" aria-label="Main navigation">
+  <div class="nav-container container">
+    <a href="index.html" class="brand">Frontend<span>Pro</span></a>
+
+    <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="hamburger" aria-hidden="true"></span>
+    </button>
+
+    <ul id="primary-navigation" class="nav-links" role="menubar">
+      <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+      <li role="none"><a role="menuitem" href="pages/about.html">About</a></li>
+      <li role="none"><a role="menuitem" href="pages/contact.html">Contact</a></li>
+    </ul>
+    <button id="themeToggle" class="btn" aria-pressed="false" title="Toggle dark mode" style="margin-left:12px">🌙</button>
+  </div>
 </nav>

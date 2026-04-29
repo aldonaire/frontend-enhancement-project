@@ -4,22 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Enhancement Project</title>
+  <meta name="description" content="A clean, responsive frontend template showcasing a professional layout.">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" href="assets/favicon.ico">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+  <header id="navbar" role="banner"></header>
 
-    <button onclick="showAlert()">Click Me</button>
+  <main id="main" class="container" role="main">
+    <section class="hero">
+      <h1>Welcome to the Project</h1>
+      <p class="lead">A polished, responsive frontend starter you can extend.</p>
+      <button class="btn primary" id="demoButton">Get Started</button>
+      <div id="quoteApp" style="margin-top:18px;max-width:720px;margin-left:auto;margin-right:auto"></div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+  <footer id="footer" role="contentinfo"></footer>
 
   <script src="assets/js/script.js"></script>
 </body>
