@@ -1,9 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Contact</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — FrontendPro</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-  <h1>Contact Page</h1>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="navbar" role="banner"></header>
+
+  <main id="main" class="container">
+    <section style="max-width:720px;margin:40px auto;padding:36px;background:var(--card);border-radius:12px;box-shadow:var(--shadow);text-align:center">
+      <h1>Contact</h1>
+      <p class="lead">Have a question or feedback? Send a short message and we'll get back to you.</p>
+
+      <form id="contactForm" style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+        <input id="name" name="name" type="text" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid #e6e9ef">
+        <input id="email" name="email" type="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid #e6e9ef">
+        <textarea id="message" name="message" rows="5" placeholder="Message" required style="padding:10px;border-radius:8px;border:1px solid #e6e9ef"></textarea>
+        <div style="text-align:center;margin-top:6px"><button type="submit" class="btn primary">Send</button></div>
+      </form>
+      <div style="margin-top:12px;text-align:center">
+        <a href="../index.html" class="btn secondary">Back to Home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" role="contentinfo"></footer>
+  <script src="../assets/js/script.js"></script>
 </body>
 </html>
