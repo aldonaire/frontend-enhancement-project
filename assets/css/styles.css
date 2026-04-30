@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -13,3 +14,114 @@ button {
   padding: 10px 15px;
   cursor: pointer;
 }
+=======
+:root{
+  --ig-start:#f58529;
+  --ig-mid:#dd2a7b;
+  --ig-end:#515bd4;
+  --gradient: linear-gradient(135deg,var(--ig-start),var(--ig-mid),var(--ig-end));
+  --surface:#ffffff;
+  --muted:#7a7a7a;
+  --max-width:980px;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin:0;padding:0;background:linear-gradient(180deg,#fbf7fb 0%, #fff 60%);
+  color:#111;line-height:1.45;-webkit-font-smoothing:antialiased
+}
+
+/* Nav / Header */
+.site-nav{background:transparent;position:sticky;top:0;z-index:50}
+.nav-container{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.brand{font-weight:700;text-decoration:none;font-size:1.05rem;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.nav-menu{list-style:none;margin:0;display:flex;gap:18px;padding:0;align-items:center}
+.nav-menu li a{color:#111;text-decoration:none;padding:8px 10px;border-radius:6px;font-weight:500}
+.nav-menu li a:hover{background:rgba(0,0,0,0.04)}
+
+.nav-toggle{display:none;background:transparent;border:0;padding:8px;cursor:pointer}
+.hamburger, .hamburger:before, .hamburger:after{display:block;width:20px;height:2px;background:#222;position:relative}
+.hamburger:before{content:"";position:absolute;top:-6px}
+.hamburger:after{content:"";position:absolute;top:6px}
+
+@media (max-width:760px){
+  .nav-toggle{display:block}
+  .nav-menu{position:absolute;right:18px;top:64px;flex-direction:column;background:var(--surface);padding:12px;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.12);display:none}
+  .nav-menu.open{display:flex}
+}
+
+/* Profile card (Instagram-like) */
+.profile-card{max-width:620px;margin:28px auto;background:var(--surface);border-radius:16px;overflow:visible;box-shadow:0 14px 40px rgba(2,6,23,0.08);text-align:center;padding:24px 28px;position:relative}
+.card-header{height:110px;border-radius:14px;background:var(--gradient);margin:-24px -28px 12px -28px}
+.avatar{width:140px;height:140px;border-radius:50%;border:8px solid #fff;margin:-72px auto 10px;display:block;object-fit:cover;background:#eee}
+.profile-card h1{margin:8px 0 0;font-size:2.6rem;letter-spacing:0.4px}
+.handle{color:var(--muted);margin:8px 0;font-weight:700;font-size:1.05rem}
+.bio{color:var(--muted);font-size:1rem;margin-top:8px}
+
+.follow-btn{margin-top:18px;padding:14px 26px;border-radius:999px;border:0;cursor:pointer;background:var(--gradient);color:#fff;font-weight:700;box-shadow:0 10px 30px rgba(81,91,212,0.18)}
+.follow-btn:active{transform:translateY(1px)}
+
+/* Emphasis / highlight */
+.profile-card{border:6px solid rgba(81,91,212,0.08)}
+.profile-card:hover{transform:translateY(-4px);transition:transform .18s ease}
+
+main{padding:20px}
+
+/* Weather card */
+.weather-card{max-width:420px;margin:18px auto 48px;background:linear-gradient(180deg, rgba(255,255,255,0.95), #fff);border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.06);overflow:hidden}
+.weather-header{padding:12px 16px;background:linear-gradient(90deg,var(--ig-mid),var(--ig-end));color:#fff;font-weight:700}
+.weather-body{display:flex;gap:12px;align-items:center;padding:14px}
+.weather-icon{font-size:40px;width:84px;height:84px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.9));box-shadow:inset 0 -6px 18px rgba(0,0,0,0.03)}
+.weather-info{flex:1;text-align:left}
+.weather-info .temp{font-size:1.6rem;font-weight:700}
+.weather-info .desc{color:var(--muted);margin-top:4px}
+.weather-info .loc{color:var(--muted);font-size:0.9rem;margin-top:6px}
+
+@media(min-width:900px){
+  /* Place profile and weather side-by-side on wide screens */
+  main{display:flex;gap:24px;justify-content:center;align-items:flex-start}
+  .profile-card{margin-top:40px}
+  .weather-card{margin-top:40px}
+}
+
+/* Navbar weather */
+.nav-weather{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.8),rgba(255,255,255,0.6));box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+.nav-weather-icon{font-size:18px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.9)}
+.nav-weather-info{display:flex;flex-direction:column;font-size:0.85rem}
+.nav-weather-temp{font-weight:700}
+.nav-weather-loc{color:var(--muted);font-size:0.75rem}
+
+@media(min-width:900px){
+  .nav-weather{margin-left:12px}
+}
+
+/* Page container and cards */
+.page-container{max-width:860px;margin:28px auto;padding:20px}
+.about-card, .contact-card{background:var(--surface);border-radius:14px;padding:22px;box-shadow:0 14px 40px rgba(2,6,23,0.06)}
+.about-hero{height:80px;border-radius:10px;background:var(--gradient);margin:-22px -22px 12px -22px}
+.lead{color:var(--muted);font-size:1rem;margin:8px 0 16px}
+.features{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+.feature-item{padding:10px 12px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.9));font-weight:600}
+.cta{color:var(--muted);margin-top:14px}
+
+/* Contact form */
+.contact-form{display:flex;flex-direction:column;gap:12px}
+.contact-form label{display:flex;flex-direction:column;font-weight:600;color:#222}
+.contact-form input,.contact-form textarea{margin-top:6px;padding:10px 12px;border-radius:10px;border:1px solid rgba(2,6,23,0.06);font-size:0.95rem}
+.contact-form input:focus,.contact-form textarea:focus{outline:3px solid rgba(81,91,212,0.12)}
+.form-actions{display:flex;justify-content:flex-end;margin-top:6px}
+
+@media(min-width:760px){
+  .features{flex-direction:row}
+  .feature-item{flex:1}
+  .page-container{padding:28px}
+}
+
+/* Footer */
+footer{padding:18px 20px;text-align:center;color:var(--muted);font-size:0.95rem}
+
+/* Accessibility focus */
+a:focus,button:focus{outline:3px solid rgba(81,91,212,0.18);outline-offset:3px}
+>>>>>>> 7ef74c7 (feat: initial frontend enhancement project setup)
