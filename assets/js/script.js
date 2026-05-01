@@ -14,7 +14,8 @@ function loadComponent(id, file, cb) {
   fetch(file)
     .then(res => res.text())
     .then(data => {
-      document.getElementById(id).innerHTML = data;
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = data;
       if (typeof cb === 'function') cb();
     })
     .catch(err => {
@@ -49,3 +50,4 @@ function attachNavHandlers(){
     })
   });
 }
+
