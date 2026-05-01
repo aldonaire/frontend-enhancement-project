@@ -1,15 +1,90 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --accent-600:#1e40af;
+  --radius:12px;
 }
 
-main {
-  padding: 20px;
-  text-align: center;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-button {
-  padding: 10px 15px;
-  cursor: pointer;
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:1rem 1.25rem;
 }
+
+/* Navbar */
+nav.site-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  background:transparent;
+  padding:0.75rem 0;
+}
+.brand{font-weight:700;color:var(--accent)}
+.nav-links{display:flex;gap:1rem;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;padding:0.4rem 0.6rem;border-radius:8px;transition:all .15s}
+.nav-links a:hover{background:rgba(37,99,235,0.08);color:var(--accent-600)}
+.nav-toggle{display:none;background:none;border:0;font-size:1.25rem}
+
+/* Hero */
+.hero{background:linear-gradient(180deg, rgba(37,99,235,0.06), transparent);padding:4rem 0}
+.hero h1{font-size:2.1rem;margin:0 0 .5rem}
+.lead{color:var(--muted);margin:0 0 1.2rem}
+.hero-cta{display:flex;gap:0.75rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--accent);cursor:pointer}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,0.12)}
+
+.hero-wave{display:block;width:100%;height:60px;transform:translateY(2px)}
+
+/* Main content */
+.main-content{padding:2rem 0}
+section{background:var(--card);padding:1.25rem;border-radius:var(--radius);box-shadow:0 6px 20px rgba(2,6,23,0.04)}
+
+/* Intro card (professional) */
+.intro-card{margin-top:1.25rem;display:flex;justify-content:center}
+.card-inner{max-width:880px;padding:1.6rem;border-radius:14px;background:linear-gradient(180deg,#ffffff,#fbfdff);box-shadow:0 10px 30px rgba(2,6,23,0.06);text-align:center}
+.intro-card h2{margin:0 0 .5rem;font-size:1.5rem}
+.intro-card .text-muted{margin:0 0 1rem;color:var(--muted)}
+.intro-card .hero-cta{justify-content:center;margin-top:.75rem}
+
+@media (max-width:700px){
+  .card-inner{padding:1.1rem}
+  .intro-card h2{font-size:1.25rem}
+}
+
+/* Footer */
+footer.site-footer{margin-top:2rem;padding:2rem 0;color:var(--muted)}
+.footer-grid{display:flex;gap:2rem;flex-wrap:wrap}
+.footer-col{min-width:160px}
+
+/* Utilities */
+.text-muted{color:var(--muted)}
+
+/* Responsive */
+@media (max-width:800px){
+  .hero h1{font-size:1.6rem}
+  .nav-links{display:none}
+  .nav-toggle{display:block}
+}
+
+@media (max-width:480px){
+  .container{padding:1rem}
+  .hero{padding:2.5rem 0}
+}
+
+/* Small interactive touches */
+a{transition:color .12s}
+button:focus, a:focus{outline:2px solid rgba(37,99,235,0.15);outline-offset:2px}
