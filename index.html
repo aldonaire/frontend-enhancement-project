@@ -4,23 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Enhancement Project</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar"></div>
+<canvas id="fireworks"></canvas>
 
-  <main>
-    <h1>Welcome to the Project</h1>
-    <p>Enhance this frontend!</p>
+<nav>
+  <h1>Frontend Enhancement</h1>
+</nav>
 
-    <button onclick="showAlert()">Click Me</button>
-  </main>
+<main class="container">
+  <section class="card">
+    <h2 class="jump-text">Welcome!</h2>
+    <p>Enhanced Front-end Design</p>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+    <button onclick="openModal()">Open Modal</button>
+  </section>
+</main>
 
-  <script src="assets/js/script.js"></script>
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>Amazing</h3>
+    <p>You triggered a modern front-end design.</p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Frontend Enhancement Project</p>
+</footer>
+
+<script src="assets/js/script.js"></script>
 </body>
 </html>
