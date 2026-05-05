@@ -1,7 +1,9 @@
+/* ================= OLD BASE STYLES ================= */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  transition: 0.3s ease;
 }
 
 main {
@@ -12,4 +14,56 @@ main {
 button {
   padding: 10px 15px;
   cursor: pointer;
+  margin: 5px;
+}
+
+/* ================= DARK MODE (NEW) ================= */
+body.dark {
+  background: #121212;
+  color: white;
+}
+
+/* ================= MODAL (NEW) ================= */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ================= NAVBAR (OLD) ================= */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: #222;
+  color: white;
+}
+
+/* ================= RESPONSIVE DESIGN (NEW) ================= */
+@media (max-width: 600px) {
+  main {
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }

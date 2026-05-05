@@ -1,17 +1,26 @@
-function showAlert() {
-  alert("Button clicked!");
-}
+// Dark mode toggle
+const darkBtn = document.getElementById("darkModeBtn");
 
-// Optional: Load components (basic simulation)
-document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("navbar", "components/navbar.html");
-  loadComponent("footer", "components/footer.html");
+darkBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
 });
 
-function loadComponent(id, file) {
-  fetch(file)
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById(id).innerHTML = data;
-    });
-}
+// Modal elements
+const modal = document.getElementById("modal");
+const openBtn = document.getElementById("openModalBtn");
+const closeBtn = document.getElementById("closeModalBtn");
+
+// Open modal
+openBtn.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+});
+
+// Close modal
+closeBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+// Extra button
+document.getElementById("clickBtn").addEventListener("click", () => {
+  alert("Button clicked!");
+});
